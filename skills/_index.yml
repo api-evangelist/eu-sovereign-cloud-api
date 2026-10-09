@@ -1,0 +1,78 @@
+generated: '2026-10-09'
+method: generated
+source: Packaged Agent Skills generated from the SECA OpenAPI files under openapi/. No provider-published skills or AGENTS.md
+  exist (raw.githubusercontent.com/eu-sovereign-cloud/spec/main/AGENTS.md returned 404 on 2026-10-09).
+skills:
+- file: eu-sovereign-cloud-api-seca-create-a-workspace.md
+  name: seca-create-a-workspace
+  api: openapi/eu-sovereign-cloud-api-foundation-workspace-v1-openapi.yml
+  operations:
+  - listWorkspaces
+  - createOrUpdateWorkspace
+  - getWorkspace
+  - deleteWorkspace
+- file: eu-sovereign-cloud-api-seca-build-a-workspace-network.md
+  name: seca-build-a-workspace-network
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  operations:
+  - listSkus
+  - createOrUpdateNetwork
+  - getNetwork
+  - createOrUpdateRoute-Table
+  - createOrUpdateInternetGateway
+  - createOrUpdateSubnet
+  - createOrUpdateSecurityGroup
+  - createOrUpdateSecurityGroupRule
+  - createOrUpdatePublicIp
+  - createOrUpdateNic
+  - getNic
+- file: eu-sovereign-cloud-api-seca-provision-block-storage-and-image.md
+  name: seca-provision-block-storage-and-image
+  api: openapi/eu-sovereign-cloud-api-foundation-storage-v1-openapi.yml
+  operations:
+  - listSkus
+  - listImages
+  - createOrUpdateBlock-Storage
+  - getBlock-Storage
+  - createOrUpdateImage
+  - getImage
+- file: eu-sovereign-cloud-api-seca-manage-instance-lifecycle.md
+  name: seca-manage-instance-lifecycle
+  api: openapi/eu-sovereign-cloud-api-foundation-compute-v1-openapi.yml
+  operations:
+  - listSkus
+  - createOrUpdateInstance
+  - getInstance
+  - StopInstance
+  - StartInstance
+  - RestartInstance
+  - listInstances
+  - deleteInstance
+- file: eu-sovereign-cloud-api-seca-provision-kubernetes-cluster.md
+  name: seca-provision-kubernetes-cluster
+  api: openapi/eu-sovereign-cloud-api-extensions-kubernetes-v1beta1-openapi.yml
+  operations:
+  - createOrUpdateCluster
+  - getCluster
+  - createOrUpdateNode-Pool
+  - getNode-Pool
+  - listNode-Pools
+  - deleteNode-Pool
+  - deleteCluster
+- file: eu-sovereign-cloud-api-seca-grant-role-based-access.md
+  name: seca-grant-role-based-access
+  api: openapi/eu-sovereign-cloud-api-foundation-authorization-v1-openapi.yml
+  operations:
+  - listRoles
+  - createOrUpdateRole
+  - getRole
+  - createOrUpdateRoleAssignment
+  - getRoleAssignment
+  - listRoleAssignments
+  - deleteRoleAssignment
+- file: eu-sovereign-cloud-api-seca-discover-regions.md
+  name: seca-discover-regions
+  api: openapi/eu-sovereign-cloud-api-foundation-region-v1-openapi.yml
+  operations:
+  - listRegions
+  - getRegion

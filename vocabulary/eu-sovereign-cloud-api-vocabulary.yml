@@ -1,0 +1,438 @@
+generated: '2026-10-09'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml
+- openapi/eu-sovereign-cloud-api-extensions-kubernetes-v1beta1-openapi.yml
+- openapi/eu-sovereign-cloud-api-extensions-loadbalancer-v1beta1-openapi.yml
+- openapi/eu-sovereign-cloud-api-extensions-natgateway-v1beta1-openapi.yml
+- openapi/eu-sovereign-cloud-api-extensions-objectstorage-v1beta1-openapi.yml
+vocabulary:
+  name: Sovereign European Cloud API (SECA) Domain Vocabulary
+  description: 'Terms declared by Sovereign European Cloud API (SECA)''s own API contract: its resource groups, objects and enumerations, with
+    the contract''s definitions. Derived, not authored.'
+  version: '2026-10-09'
+  terms:
+  - term: Activity Log
+    definition: Activity Log management
+    tags:
+    - Resource Group
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml
+  - term: Cluster
+    definition: Cluster management
+    tags:
+    - Resource Group
+    source: openapi/eu-sovereign-cloud-api-extensions-kubernetes-v1beta1-openapi.yml
+  - term: Node-Pool
+    definition: Node-Pool management
+    tags:
+    - Resource Group
+    source: openapi/eu-sovereign-cloud-api-extensions-kubernetes-v1beta1-openapi.yml
+  - term: Network Load Balancer
+    definition: Network Load Balancer management
+    tags:
+    - Resource Group
+    source: openapi/eu-sovereign-cloud-api-extensions-loadbalancer-v1beta1-openapi.yml
+  - term: Internet Nat Gateway Instance
+    definition: Internet Nat Gateway Instance management
+    tags:
+    - Resource Group
+    source: openapi/eu-sovereign-cloud-api-extensions-natgateway-v1beta1-openapi.yml
+  - term: Account
+    definition: Account management
+    tags:
+    - Resource Group
+    source: openapi/eu-sovereign-cloud-api-extensions-objectstorage-v1beta1-openapi.yml
+  - term: Wellknown
+    definition: Wellknown management
+    tags:
+    - Resource Group
+    source: openapi/eu-sovereign-cloud-api-extensions-wellknown-v1-openapi.yml
+  - term: Role
+    definition: Role management
+    tags:
+    - Resource Group
+    source: openapi/eu-sovereign-cloud-api-foundation-authorization-v1-openapi.yml
+  - term: Role Assignment
+    definition: Role Assignment management
+    tags:
+    - Resource Group
+    source: openapi/eu-sovereign-cloud-api-foundation-authorization-v1-openapi.yml
+  - term: Sku
+    definition: Sku management
+    tags:
+    - Resource Group
+    source: openapi/eu-sovereign-cloud-api-foundation-compute-v1-openapi.yml
+  - term: Instance
+    definition: Instance management
+    tags:
+    - Resource Group
+    source: openapi/eu-sovereign-cloud-api-foundation-compute-v1-openapi.yml
+  - term: Security Group
+    definition: Security Group management
+    tags:
+    - Resource Group
+    source: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  - term: Security Group Rule
+    definition: Security Group Rule management
+    tags:
+    - Resource Group
+    source: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  - term: Nic
+    definition: Nic management
+    tags:
+    - Resource Group
+    source: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  - term: Public Ip
+    definition: Public Ip management
+    tags:
+    - Resource Group
+    source: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  - term: Network
+    definition: Network management
+    tags:
+    - Resource Group
+    source: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  - term: Internet Gateway
+    definition: Internet Gateway management
+    tags:
+    - Resource Group
+    source: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  - term: Subnet
+    definition: Subnet management
+    tags:
+    - Resource Group
+    source: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  - term: Route-Table
+    definition: Route-Table management
+    tags:
+    - Resource Group
+    source: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  - term: Region
+    definition: Region management
+    tags:
+    - Resource Group
+    source: openapi/eu-sovereign-cloud-api-foundation-region-v1-openapi.yml
+  - term: Image
+    definition: Image management
+    tags:
+    - Resource Group
+    source: openapi/eu-sovereign-cloud-api-foundation-storage-v1-openapi.yml
+  - term: Block-Storage
+    definition: Block-Storage management
+    tags:
+    - Resource Group
+    source: openapi/eu-sovereign-cloud-api-foundation-storage-v1-openapi.yml
+  - term: Workspace
+    definition: Workspace management
+    tags:
+    - Resource Group
+    source: openapi/eu-sovereign-cloud-api-foundation-workspace-v1-openapi.yml
+  - term: ActivityLogIterator
+    definition: Iterator for activity logs
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/ActivityLogIterator
+  - term: NameMetadata
+    definition: Metadata for resource names
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/NameMetadata
+  - term: PermissionMetadata
+    definition: Metadata for permission management
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/PermissionMetadata
+  - term: ModificationMetadata
+    definition: Base metadata for all resources with optional region references
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/ModificationMetadata
+  - term: ReferenceURN
+    definition: 'A unique resource name (URN) used to identify and reference this resource. The URN is NOT a URL — it does not contain a protocol
+      scheme (http/https), a host, or any endpoint-specific prefix. It is a portable, transport-agnostic identifier. A configured SDK client —
+      which knows the provider''s base URL and endpoint mapping — can derive a URL from a URN, but the URN alone cannot be turned into a URL '
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/ReferenceURN
+  - term: TypeMetadata
+    definition: Metadata for all resources with type information.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/TypeMetadata
+  - term: TenantMetadata
+    definition: Metadata for resources with tenant constraints
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/TenantMetadata
+  - term: WorkspaceMetadata
+    definition: Metadata for resources with workspace constraints
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/WorkspaceMetadata
+  - term: RegionalMetadata
+    definition: Metadata for regional resources
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/RegionalMetadata
+  - term: RegionalWorkspaceResourceMetadata
+    definition: Metadata for regional resources with name, permission, modification, type, tenant and workspace and region information.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/RegionalWorkspaceResourceMetadata
+  - term: Reference
+    definition: A reference to a resource using an object. The object contains the same information as the ReferenceURN, but is represented as
+      a structured object. The advantage of this representation is that it can be used to reference resources in different workspaces or regions
+      without the need to specify the full URN.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/Reference
+  - term: BlockStorageSpec
+    definition: References the SKU used for this block. If a reference to the source image is used as the base for creating this block storage.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/BlockStorageSpec
+  - term: InstanceSkuGpuSpec
+    definition: Specification of the GPU(s) attached to an instance SKU.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/InstanceSkuGpuSpec
+  - term: InstanceSkuSpec
+    definition: Specification of the instance SKU, including its capabilities and extensions.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/InstanceSkuSpec
+  - term: Zone
+    definition: Reference to a specific zone within a region
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/Zone
+  - term: VolumeReference
+    definition: Represents a connection between a Block Storage and an a user of the block storage.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/VolumeReference
+  - term: InstanceSpec
+    definition: Specification of the instance, including its SKU, network configuration, and storage options.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/InstanceSpec
+  - term: NetworkLoadBalancerPort
+    definition: Load Balancer port to receive or forward the traffic
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/NetworkLoadBalancerPort
+  - term: LoadBalancerHealthCheck
+    definition: Optional port health check. It probes the port with protocol.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/LoadBalancerHealthCheck
+  - term: LoadBalancerTarget
+    definition: The target of the LoadBalancer. It can be a set of instances nics. The port can be different from the frontend port, if omitted
+      it will be the same. If no health check is specified, the LoadBalancer will not check the health of the backend instances.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/LoadBalancerTarget
+  - term: NetworkLoadBalancerFrontend
+    definition: Represents the frontend configuration of the LoadBalancer. Each frontend can have multiple targets, but the combination of port
+      and protocol must be unique to ensure proper routing.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/NetworkLoadBalancerFrontend
+  - term: NetworkLoadBalancerSpec
+    definition: Defines the specification for a Network Load Balancer. A Load Balancer can have multiple frontends, where each frontend may target
+      multiple backend instances. Frontend ports and protocols must be unique to ensure proper routing. The NIC associated with the proxy determines
+      whether the Load Balancer is internal or external.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/NetworkLoadBalancerSpec
+  - term: NetworkSkuSpec
+    definition: Specification of the network SKU, including its bandwidth and packets per second.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/NetworkSkuSpec
+  - term: cidr
+    definition: 'Combined IPv4 and IPv6 CIDR block for a subnet. Depending on the network configuration, either the IPv4 or IPv6 range can be
+      omitted. So the following combinations are possible: * IPv4 only * IPv6 only * IPv4 and IPv6 (Dual Stack)'
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/cidr
+  - term: NetworkSpec
+    definition: 'A Network represents a virtual network that can be used to isolate resources. Key network concepts: * Defines a range of IP addresses
+      for compute resources (e.g. instances) * Enables network segmentation and isolation * Provides common performance configuration across the
+      network using a SKU The `cidr` is the base CIDR block for the network. Additional CIDR blocks can be added to the network using'
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/NetworkSpec
+  - term: NicIp
+    definition: IP address for the NIC. The IP is either IPv4 or IPv6. The IP can be `0.0.0.0` or `::` to indicate that the IP needs to be assigned
+      automatically. The IP can also be a specific IP address. If not provided, the mutate admission controller will populate this value using
+      the default values for ipv4 and ipv6.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/NicIp
+  - term: NicSpec
+    definition: Specification of the Network Interface Card The referenced SKU overwrites the default. In case of different network SKU references
+      the highest possible network SKU reference is used. The network SKU reference might be restricted by the instance size.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/NicSpec
+  - term: ObjectStorageAccountSpec
+    definition: The specification of an object storage account, including the region and zone.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/ObjectStorageAccountSpec
+  - term: IPVersion
+    definition: IP version of the address
+    tags:
+    - Enumeration
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/IPVersion
+  - term: PublicIpSpec
+    definition: Specification of the public IP.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/PublicIpSpec
+  - term: RoleAssignmentScope
+    definition: Role assignment scope, including the workspaces, regions and tenants.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/RoleAssignmentScope
+  - term: RoleAssignmentSpec
+    definition: Role assignment for a user account. The role is assigned to the user account in the context of the specified scopes.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/RoleAssignmentSpec
+  - term: Permission
+    definition: Permission specification, including providers, resources, and verbs. Permissions are used to define access control policies for
+      user accounts.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/Permission
+  - term: RoleSpec
+    definition: Role specification defined as a list of permissions. Roles are used to define access control policies for a user account using
+      a role assignment.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/RoleSpec
+  - term: Annotations
+    definition: User-defined key/value pairs that are mutable and can be used to add annotations. The number of annotations is eventually limited
+      by the CSP.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/Annotations
+  - term: Port
+    definition: A valid network port number. The port number is a 16-bit unsigned integer ranging from 1 to 65535.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/Port
+  - term: Ports
+    definition: 'Defines a specific port list or port range for the rule. The configuration allows specifying individual ports, ranges, or a combination
+      of both. Behavior: - If only `from` is specified, the range is interpreted as a single port: `from` to `from`. - If only `to` is specified,
+      the range is interpreted as a single port: `to` to `to`. - If both `from` and `to` are specified, the range spans from `from'
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/Ports
+  - term: IcmpConfig
+    definition: ICMP specific rule configuration
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/IcmpConfig
+  - term: SecurityGroupRuleSpec
+    definition: Specification of a security group rule defining network access permissions. If no version is specified, any IP version will be
+      allowed. If no protocol is specified, any network protocol will be allowed.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/SecurityGroupRuleSpec
+  - term: SecurityGroupSpec
+    definition: Specification of the security group
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/SecurityGroupSpec
+  - term: StorageSkuSpec
+    definition: Specification of the storage SKU, including its capabilities and extensions.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/StorageSkuSpec
+  - term: SubnetSpec
+    definition: Detailed specification of the subnet. Automatic address assignment is supported, similar to the network configuration. The subnet's
+      prefix length must be smaller than the network's prefix length, ensuring proper subdivision of the address space. The first and last IP
+      addresses in the subnet are reserved the network address and broadcast address, respectively. Most CSP will not allow to use a diffe
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/SubnetSpec
+  - term: WorkspaceSpec
+    definition: Specification of the workspace, including its capabilities and extensions.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/WorkspaceSpec
+  - term: RequestObject
+    definition: Request object
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/RequestObject
+  - term: ResponseObject
+    definition: Response object
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/ResponseObject
+  - term: ActivityLogSpec
+    definition: Activity log specification
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/ActivityLogSpec
+  - term: ActivityLog
+    definition: Activity log resource
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/ActivityLog
+  - term: ResponseMetadata
+    definition: Metadata for response objects.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/ResponseMetadata
+  - term: ErrorSource
+    definition: An object containing references to the source of the error.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/ErrorSource
+  - term: Error
+    definition: A detailed error response see https://datatracker.ietf.org/doc/html/rfc7807.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/Error
+  - term: Error400
+    definition: A 400 Bad Request error response
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/Error400
+  - term: Error401
+    definition: A 401 Unauthorized error response
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/Error401
+  - term: Error403
+    definition: A 403 Forbidden error response
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/Error403
+  - term: Error500
+    definition: A 500 Internal Server Error error response
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/Error500
+  - term: ClusterIterator
+    definition: Iterator for clusters
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-kubernetes-v1beta1-openapi.yml#/components/schemas/ClusterIterator
+  - term: Node-PoolIterator
+    definition: Iterator for node-pools
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-kubernetes-v1beta1-openapi.yml#/components/schemas/Node-PoolIterator
+  - term: Labels
+    definition: User-defined key/value pairs that are mutable and can be used to organize and categorize resources. They can be used to filter
+      resources. The number of labels is eventually limited by the CSP.
+    tags:
+    - Object
+    source: openapi/eu-sovereign-cloud-api-extensions-kubernetes-v1beta1-openapi.yml#/components/schemas/Labels

@@ -1,0 +1,36 @@
+generated: '2026-10-09'
+method: searched
+source: https://spec.secapi.cloud/docs/content/Conventions/http-semantics
+name: SECA Conformance
+standards:
+- id: rfc7807
+  conforms: true
+  evidence: 'HTTP Semantics docs: "This model is outlined in RFC 7807 - Problem Details"; every contract components.schemas.Error is "A detailed
+    error response see https://datatracker.ietf.org/doc/html/rfc7807" (type,title,status,detail,instance).'
+  url: https://spec.secapi.cloud/docs/content/Conventions/http-semantics
+- id: jwt
+  conforms: true
+  evidence: 'API Security docs: "APIs must support authentication using the JSON Web Token (JWT) standard."; contracts declare components.securitySchemes.bearerAuth
+    {type: http, scheme: bearer, bearerFormat: JWT}.'
+  url: https://spec.secapi.cloud/docs/content/Conventions/api-security
+- id: seca
+  conforms: true
+  kind: domain-standard
+  evidence: The contracts ARE the SECA open standard for European IaaS (info.title per API, e.g. foundation.compute.v1 bundled from eu-sovereign-cloud/spec
+    v1.x); a first-party conformance suite (github.com/eu-sovereign-cloud/conformance, secatest) validates provider implementations.
+  url: https://github.com/eu-sovereign-cloud/conformance
+- id: openapi-3.0
+  conforms: true
+  evidence: the document declares 3.0.3
+- id: oauth2
+  conforms: false
+  evidence: 'securitySchemes: bearerAuth (http)'
+- id: rfc9457
+  conforms: false
+  evidence: no response declares application/problem+json
+- id: idempotency
+  conforms: false
+  evidence: no idempotency key parameter on mutating operations
+- id: pagination
+  conforms: true
+  evidence: list operations take limit

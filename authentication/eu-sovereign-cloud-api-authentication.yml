@@ -1,0 +1,34 @@
+generated: '2026-10-09'
+method: searched
+source: https://spec.secapi.cloud/docs/content/Conventions/api-security
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: 'Use a JWT token for authentication. The token identifies the user,
+
+    and policies (RBAC, ABAC, or hybrid) determine authorization.'
+  sources:
+  - openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml
+  - openapi/eu-sovereign-cloud-api-extensions-kubernetes-v1beta1-openapi.yml
+  - openapi/eu-sovereign-cloud-api-extensions-loadbalancer-v1beta1-openapi.yml
+  - openapi/eu-sovereign-cloud-api-extensions-natgateway-v1beta1-openapi.yml
+  - openapi/eu-sovereign-cloud-api-extensions-objectstorage-v1beta1-openapi.yml
+  - openapi/eu-sovereign-cloud-api-extensions-wellknown-v1-openapi.yml
+  - openapi/eu-sovereign-cloud-api-foundation-authorization-v1-openapi.yml
+  - openapi/eu-sovereign-cloud-api-foundation-compute-v1-openapi.yml
+  - openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  - openapi/eu-sovereign-cloud-api-foundation-region-v1-openapi.yml
+  - openapi/eu-sovereign-cloud-api-foundation-storage-v1-openapi.yml
+  - openapi/eu-sovereign-cloud-api-foundation-workspace-v1-openapi.yml
+docs: https://spec.secapi.cloud/docs/content/Conventions/api-security
+notes: 'Docs: "APIs must support authentication using the JSON Web Token (JWT) standard." Authorization is role-based
+  (RBAC suggested; ABAC/PBAC alternatives) and evaluated by the control plane independent of token data. Token issuance
+  is implementer-specific; github.com/eu-sovereign-cloud/iam is a first-party self-hosted JWT issuer.'
+related_docs:
+- https://spec.secapi.cloud/docs/content/Architecture/api-access-control
+- https://spec.secapi.cloud/docs/content/Other/tenant-and-token

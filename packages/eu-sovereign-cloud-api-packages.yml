@@ -1,0 +1,52 @@
+generated: '2026-10-09'
+method: searched
+source: https://api.github.com/orgs/eu-sovereign-cloud/repos; https://proxy.golang.org; https://registry.terraform.io/v1/providers/eu-sovereign-cloud/seca
+name: SECA Packages
+packages:
+- name: github.com/eu-sovereign-cloud/go-sdk
+  registry: go
+  url: https://pkg.go.dev/github.com/eu-sovereign-cloud/go-sdk
+  language: Go
+  official: true
+  version: v0.4.3
+  published: '2026-06-30'
+  note: proxy.golang.org @latest; latest GitHub Release object is v0.4.0 (2026-04-22). Spec release v1.8 (2026-09-24)
+    postdates the latest SDK tag.
+  repository: https://github.com/eu-sovereign-cloud/go-sdk
+- name: eu-sovereign-cloud/seca
+  registry: terraform
+  url: https://registry.terraform.io/providers/eu-sovereign-cloud/seca
+  language: HCL/Go
+  official: true
+  version: 0.3.2
+  published: '2026-10-09'
+  note: Terraform Registry provider; registry published_at 2026-10-09 (Go module proxy records the v0.3.2 tag at
+    2026-09-18).
+  repository: https://github.com/eu-sovereign-cloud/terraform-provider-seca
+- name: github.com/eu-sovereign-cloud/conformance
+  registry: go
+  url: https://pkg.go.dev/github.com/eu-sovereign-cloud/conformance
+  language: Go
+  official: true
+  version: v0.2.0
+  published: '2026-08-19'
+  note: Conformance test suite; builds the secatest CLI.
+  repository: https://github.com/eu-sovereign-cloud/conformance
+- name: github.com/eu-sovereign-cloud/iam
+  registry: go
+  url: https://pkg.go.dev/github.com/eu-sovereign-cloud/iam
+  language: Go
+  official: true
+  version: v0.1.2
+  published: '2026-10-08'
+  note: Self-hosted identity service issuing JWTs for SECA/ecp deployments.
+  repository: https://github.com/eu-sovereign-cloud/iam
+- name: ecp
+  registry: helm
+  url: https://eu-sovereign-cloud.github.io/ecp/
+  language: Go
+  official: true
+  version: 0.0.4-alpha
+  published: '2026-10-01'
+  note: European Control Plane Helm chart, from the chart repository index.yaml (pre-release).
+  repository: https://github.com/eu-sovereign-cloud/ecp

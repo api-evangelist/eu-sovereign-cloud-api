@@ -1,0 +1,1317 @@
+openapi: 3.2.0
+info:
+  title: Eu Sovereign Cloud Sku API
+  version: v1
+  description: 'Operations tagged Sku across 6 of this provider''s published API definitions: foundation.compute.v1.yaml, foundation.network.v1.yaml, foundation.storage.v1.yaml, eu-sovereign-cloud-api-foundation-compute-v1-openapi.yml, eu-sovereign-cloud-api-foundation-network-v1-openapi.yml, eu-sovereign-cloud-api-foundation-storage-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://demo.secapi.cloud/providers/seca.compute
+  description: Path Schema
+- url: https://compute.seca.demo.secapi.cloud
+  description: DNS Schema
+- url: https://demo.secapi.cloud/providers/seca.network
+  description: Path Schema
+- url: https://network.seca.demo.secapi.cloud
+  description: DNS Schema
+- url: https://demo.secapi.cloud/providers/seca.storage
+  description: Path Schema
+- url: https://storage.seca.demo.secapi.cloud
+  description: DNS Schema
+security:
+- bearerAuth: []
+tags:
+- name: Sku
+  description: Sku management
+paths:
+  /v1/tenants/{tenant}/skus:
+    get:
+      tags:
+      - Sku
+      security:
+      - bearerAuth: []
+      summary: List skus
+      description: 'Retrieves a list of available SKU (Stock Keeping Unit) configurations for compute instances.
+
+
+        ## Available SECA SKUs with their capabilities.
+
+        Seca-Resources don"t have mandatory parameters and extensions.
+
+        (Provider may have more SKUs available.)
+
+
+        | Tier | vCPU | RAM (GiB) | Architecture | GPU | benchmarkPoints |
+
+        |-|-|-|-|-|-|
+
+        | D2XS | 1 | 1 | amd64 | - | min 500 |
+
+        | DXS | 1 | 2 | amd64 | - | min 750 |
+
+        | DS | 2 | 4 | amd64 | - | min 2200 |
+
+        | DM | 4 | 8 | amd64 | - | min 3500 |
+
+        | DL | 8 | 16 | amd64 | - | min 6000 |
+
+        | DXL | 16 | 32 | amd64 | - | min 9000 |
+
+        | D2XL | 32 | 64 | amd64 | - | min 13000 |
+
+        | S2XS | 1 | 1 | amd64 | - | min 500 |
+
+        | SXS | 1 | 2 | amd64 | - | min 700 |
+
+        | SS | 2 | 4 | amd64 | - | min 2000 |
+
+        | SM | 4 | 8 | amd64 | - | min 3000 |
+
+        | SL | 8 | 16 | amd64 | - | min 5500 |
+
+        | SXL | 16 | 32 | amd64 | - | min 8000 |
+
+        | S2XL | 32 | 64 | amd64 | - | min 9000 |
+
+        | GXS | 8 | 64 | amd64 | 1x NVIDIA L40S (48 GiB) | min 6000 |
+
+        | GXL | 16 | 128 | amd64 | 1x NVIDIA H100 (80 GiB) | min 9000 |
+
+        | G2XL | 32 | 256 | amd64 | 2x NVIDIA H100 (80 GiB) | min 13000 |'
+      operationId: listSkus
+      parameters:
+      - $ref: '#/components/parameters/tenantPathParam'
+      - $ref: '#/components/parameters/labelSelector'
+      - $ref: '#/components/parameters/limitParam'
+      - $ref: '#/components/parameters/skipTokenParam'
+      - $ref: '#/components/parameters/acceptHeader'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SkuIterator'
+              example:
+                items:
+                - labels:
+                    architecture: amd64
+                    provider: seca
+                    tier: D2XS
+                  metadata:
+                    apiVersion: v1
+                    kind: instance-sku
+                    name: seca.d2xs
+                    provider: seca.compute/v1
+                    ref: seca.compute/v1/tenants/tn-1/skus/seca.d2xs
+                    region: eu-central-1
+                    resource: tenants/tn-1/skus/seca.d2xs
+                    tenant: ts-1
+                    verb: get
+                  spec:
+                    cpuArchitecture: amd64
+                    ram: 1
+                    vCPU: 1
+                - labels:
+                    architecture: amd64
+                    provider: seca
+                    tier: DXS
+                  metadata:
+                    apiVersion: v1
+                    kind: instance-sku
+                    name: seca.dxs
+                    provider: seca.compute/v1
+                    ref: seca.compute/v1/tenants/tn-1/skus/seca.dxs
+                    region: eu-central-1
+                    resource: tenants/tn-1/skus/seca.dxs
+                    tenant: ts-1
+                    verb: get
+                  spec:
+                    cpuArchitecture: amd64
+                    ram: 2
+                    vCPU: 1
+                - labels:
+                    architecture: amd64
+                    provider: seca
+                    tier: DS
+                  metadata:
+                    apiVersion: v1
+                    kind: instance-sku
+                    name: seca.ds
+                    provider: seca.compute/v1
+                    ref: seca.compute/v1/tenants/tn-1/skus/seca.ds
+                    region: eu-central-1
+                    resource: tenants/tn-1/skus/seca.ds
+                    tenant: ts-1
+                    verb: get
+                  spec:
+                    cpuArchitecture: amd64
+                    ram: 4
+                    vCPU: 2
+                - labels:
+                    architecture: amd64
+                    provider: seca
+                    tier: DM
+                  metadata:
+                    apiVersion: v1
+                    kind: instance-sku
+                    name: seca.dm
+                    provider: seca.compute/v1
+                    ref: seca.compute/v1/tenants/tn-1/skus/seca.dm
+                    region: eu-central-1
+                    resource: tenants/tn-1/skus/seca.dm
+                    tenant: ts-1
+                    verb: get
+                  spec:
+                    cpuArchitecture: amd64
+                    ram: 8
+                    vCPU: 4
+                - labels:
+                    architecture: amd64
+                    provider: seca
+                    tier: DL
+                  metadata:
+                    apiVersion: v1
+                    kind: instance-sku
+                    name: seca.dl
+                    provider: seca.compute/v1
+                    ref: seca.compute/v1/tenants/tn-1/skus/seca.dl
+                    region: eu-central-1
+                    resource: tenants/tn-1/skus/seca.dl
+                    tenant: ts-1
+                    verb: get
+                  spec:
+                    cpuArchitecture: amd64
+                    ram: 16
+                    vCPU: 8
+                - labels:
+                    architecture: amd64
+                    provider: seca
+                    tier: DXL
+                  metadata:
+                    apiVersion: v1
+                    kind: instance-sku
+                    name: seca.dxl
+                    provider: seca.compute/v1
+                    ref: seca.compute/v1/tenants/tn-1/skus/seca.dxl
+                    region: eu-central-1
+                    resource: tenants/tn-1/skus/seca.dxl
+                    tenant: ts-1
+                    verb: get
+                  spec:
+                    cpuArchitecture: amd64
+                    ram: 32
+                    vCPU: 16
+                - labels:
+                    architecture: amd64
+                    provider: seca
+                    tier: D2XL
+                  metadata:
+                    apiVersion: v1
+                    kind: instance-sku
+                    name: seca.d2xl
+                    provider: seca.compute/v1
+                    ref: seca.compute/v1/tenants/tn-1/skus/seca.d2xl
+                    region: eu-central-1
+                    resource: tenants/tn-1/skus/seca.d2xl
+                    tenant: ts-1
+                    verb: get
+                  spec:
+                    cpuArchitecture: amd64
+                    ram: 64
+                    vCPU: 32
+                - labels:
+                    architecture: amd64
+                    provider: seca
+                    tier: S2XS
+                  metadata:
+                    apiVersion: v1
+                    kind: instance-sku
+                    name: seca.s2xs
+                    provider: seca.compute/v1
+                    ref: seca.compute/v1/tenants/tn-1/skus/seca.s2xs
+                    region: eu-central-1
+                    resource: tenants/tn-1/skus/seca.s2xs
+                    tenant: ts-1
+                    verb: get
+                  spec:
+                    cpuArchitecture: amd64
+                    ram: 1
+                    vCPU: 1
+                - labels:
+                    architecture: amd64
+                    provider: seca
+                    tier: SXS
+                  metadata:
+                    apiVersion: v1
+                    kind: instance-sku
+                    name: seca.sxs
+                    provider: seca.compute/v1
+                    ref: seca.compute/v1/tenants/tn-1/skus/seca.sxs
+                    region: eu-central-1
+                    resource: tenants/tn-1/skus/seca.sxs
+                    tenant: ts-1
+                    verb: get
+                  spec:
+                    cpuArchitecture: amd64
+                    ram: 2
+                    vCPU: 1
+                - labels:
+                    architecture: amd64
+                    provider: seca
+                    tier: SS
+                  metadata:
+                    apiVersion: v1
+                    kind: instance-sku
+                    name: seca.ss
+                    provider: seca.compute/v1
+                    ref: seca.compute/v1/tenants/tn-1/skus/seca.ss
+                    region: eu-central-1
+                    resource: tenants/tn-1/skus/seca.ss
+                    tenant: ts-1
+                    verb: get
+                  spec:
+                    cpuArchitecture: amd64
+                    ram: 4
+                    vCPU: 2
+                - labels:
+                    architecture: amd64
+                    provider: seca
+                    tier: SM
+                  metadata:
+                    apiVersion: v1
+                    kind: instance-sku
+                    name: seca.sm
+                    provider: seca.compute/v1
+                    ref: seca.compute/v1/tenants/tn-1/skus/seca.sm
+                    region: eu-central-1
+                    resource: tenants/tn-1/skus/seca.sm
+                    tenant: ts-1
+                    verb: get
+                  spec:
+                    cpuArchitecture: amd64
+                    ram: 8
+                    vCPU: 4
+                - labels:
+                    architecture: amd64
+                    provider: seca
+                    tier: SL
+                  metadata:
+                    apiVersion: v1
+                    kind: instance-sku
+                    name: seca.sl
+                    provider: seca.compute/v1
+                    ref: seca.compute/v1/tenants/tn-1/skus/seca.sl
+                    region: eu-central-1
+                    resource: tenants/tn-1/skus/seca.sl
+                    tenant: ts-1
+                    verb: get
+                  spec:
+                    cpuArchitecture: amd64
+                    ram: 16
+                    vCPU: 8
+                - labels:
+                    architecture: amd64
+                    provider: seca
+                    tier: SXL
+                  metadata:
+                    apiVersion: v1
+                    kind: instance-sku
+                    name: seca.sxl
+                    provider: seca.compute/v1
+                    ref: seca.compute/v1/tenants/tn-1/skus/seca.sxl
+                    region: eu-central-1
+                    resource: tenants/tn-1/skus/seca.sxl
+                    tenant: ts-1
+                    verb: get
+                  spec:
+                    cpuArchitecture: amd64
+                    ram: 32
+                    vCPU: 16
+                - labels:
+                    architecture: amd64
+                    provider: seca
+                    tier: S2XL
+                  metadata:
+                    apiVersion: v1
+                    kind: instance-sku
+                    name: seca.s2xl
+                    provider: seca.compute/v1
+                    ref: seca.compute/v1/tenants/tn-1/skus/seca.s2xl
+                    region: eu-central-1
+                    resource: tenants/tn-1/skus/seca.s2xl
+                    tenant: ts-1
+                    verb: get
+                  spec:
+                    cpuArchitecture: amd64
+                    ram: 64
+                    vCPU: 32
+                - labels:
+                    architecture: amd64
+                    gpu: nvidia
+                    provider: seca
+                    tier: GXS
+                  metadata:
+                    apiVersion: v1
+                    kind: instance-sku
+                    name: seca.gxs
+                    provider: seca.compute/v1
+                    ref: seca.compute/v1/tenants/tn-1/skus/seca.gxs
+                    region: eu-central-1
+                    resource: tenants/tn-1/skus/seca.gxs
+                    tenant: ts-1
+                    verb: get
+                  spec:
+                    cpuArchitecture: amd64
+                    gpu:
+                      count: 1
+                      model: L40S
+                      ram: 48
+                      vendor: nvidia
+                    ram: 64
+                    vCPU: 8
+                - labels:
+                    architecture: amd64
+                    gpu: nvidia
+                    provider: seca
+                    tier: GXL
+                  metadata:
+                    apiVersion: v1
+                    kind: instance-sku
+                    name: seca.gxl
+                    provider: seca.compute/v1
+                    ref: seca.compute/v1/tenants/tn-1/skus/seca.gxl
+                    region: eu-central-1
+                    resource: tenants/tn-1/skus/seca.gxl
+                    tenant: ts-1
+                    verb: get
+                  spec:
+                    cpuArchitecture: amd64
+                    gpu:
+                      count: 1
+                      model: H100
+                      ram: 80
+                      vendor: nvidia
+                    ram: 128
+                    vCPU: 16
+                - labels:
+                    architecture: amd64
+                    gpu: nvidia
+                    provider: seca
+                    tier: G2XL
+                  metadata:
+                    apiVersion: v1
+                    kind: instance-sku
+                    name: seca.g2xl
+                    provider: seca.compute/v1
+                    ref: seca.compute/v1/tenants/tn-1/skus/seca.g2xl
+                    region: eu-central-1
+                    resource: tenants/tn-1/skus/seca.g2xl
+                    tenant: ts-1
+                    verb: get
+                  spec:
+                    cpuArchitecture: amd64
+                    gpu:
+                      count: 2
+                      model: H100
+                      ram: 80
+                      vendor: nvidia
+                    ram: 256
+                    vCPU: 32
+                metadata:
+                  provider: seca.compute/v1
+                  resource: tenants/1/skus
+                  verb: list
+        '400':
+          $ref: '#/components/responses/Error400'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '403':
+          $ref: '#/components/responses/Error403'
+        '500':
+          $ref: '#/components/responses/Error500'
+    servers:
+    - url: https://demo.secapi.cloud/providers/seca.compute
+      description: Path Schema
+    - url: https://compute.seca.demo.secapi.cloud
+      description: DNS Schema
+  /v1/tenants/{tenant}/skus/{name}:
+    get:
+      tags:
+      - Sku
+      security:
+      - bearerAuth: []
+      summary: Get sku
+      description: 'Get a specific sku, useful for polling status updates of resources.
+
+        A `404` response without proper schema has to be ignored and must be
+
+        understood as server being unavailable. Only a response with proper schema
+
+        can be trusted.'
+      operationId: getSku
+      parameters:
+      - $ref: '#/components/parameters/tenantPathParam'
+      - $ref: '#/components/parameters/resourcePathParam'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceSku'
+        '400':
+          $ref: '#/components/responses/Error400'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '403':
+          $ref: '#/components/responses/Error403'
+        '404':
+          $ref: '#/components/responses/Error404'
+        '500':
+          $ref: '#/components/responses/Error500'
+    servers:
+    - url: https://demo.secapi.cloud/providers/seca.compute
+      description: Path Schema
+    - url: https://compute.seca.demo.secapi.cloud
+      description: DNS Schema
+components:
+  schemas:
+    Labels:
+      x-go-type-skip-optional-pointer: true
+      type: object
+      description: 'User-defined key/value pairs that are mutable and can be used to
+
+        organize and categorize resources. They can be used to filter resources.
+
+        The number of labels is eventually limited by the CSP.
+
+        '
+      additionalProperties:
+        type: string
+        maxLength: 63
+      example:
+        env: production
+    InstanceSkuGpuSpec:
+      type: object
+      description: 'Specification of the GPU(s) attached to an instance SKU.
+
+        '
+      required:
+      - count
+      - vendor
+      - model
+      - ram
+      properties:
+        count:
+          type: integer
+          description: 'The number of GPUs allocated to the instance SKU.
+
+            '
+          minimum: 1
+          maximum: 16
+          example: 1
+          x-oapi-codegen-extra-tags:
+            x-kubebuilder-validation-minimum: '1'
+            x-kubebuilder-validation-maximum: '16'
+        vendor:
+          type: string
+          description: 'The GPU vendor. An instance created with this SKU can only use images
+
+            and drivers built for the same vendor.
+
+            '
+          enum:
+          - nvidia
+          - amd
+          - intel
+          x-enumNames:
+          - InstanceSkuGpuSpecVendorNvidia
+          - InstanceSkuGpuSpecVendorAmd
+          - InstanceSkuGpuSpecVendorIntel
+          example: nvidia
+          x-oapi-codegen-extra-tags:
+            x-kubebuilder-validation-enum: nvidia;amd;intel
+        model:
+          type: string
+          description: 'The GPU model name, as reported by the vendor (e.g. "H100", "MI300X",
+
+            "L40S"). Free-form, since GPU model names change frequently as new
+
+            hardware is released, unlike vendor, which is a small, stable set.
+
+            '
+          minLength: 1
+          maxLength: 64
+          example: H100
+          x-oapi-codegen-extra-tags:
+            x-kubebuilder-validation-min-length: '1'
+            x-kubebuilder-validation-max-length: '64'
+        ram:
+          type: integer
+          description: 'The amount of dedicated video memory (VRAM) per GPU, in GiB (gibibytes).
+
+            '
+          minimum: 1
+          maximum: 256
+          example: 80
+          x-oapi-codegen-extra-tags:
+            x-kubebuilder-validation-minimum: '1'
+            x-kubebuilder-validation-maximum: '256'
+      example:
+        count: 1
+        vendor: nvidia
+        model: H100
+        ram: 80
+    Error403:
+      allOf:
+      - $ref: '#/components/schemas/Error'
+      description: A 403 Forbidden error response
+      example:
+        status: 403
+        type: http://secapi.cloud/errors/forbidden
+        title: Forbidden
+        detail: The request was valid, but the server is refusing action.
+        instance: /errors/403
+        sources: []
+    NameMetadata:
+      type: object
+      readOnly: true
+      required:
+      - name
+      description: Metadata for resource names
+      properties:
+        name:
+          type: string
+          description: 'Resource identifier in dash-case (kebab-case) format. Must start and end with an alphanumeric character.
+
+            Can contain lowercase letters, numbers, and hyphens. Multiple segments can be joined with dots.
+
+            Each segment follows the same rules.
+
+            '
+          minLength: 1
+          maxLength: 128
+          pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
+          example: resource-name
+    Extensions:
+      x-go-type-skip-optional-pointer: true
+      type: object
+      description: 'User-defined key/value pairs that are mutable and can be used to add extensions.
+
+        Extensions are subject to validation by the CSP, and any value that is not accepted will be rejected during admission.
+
+        '
+      additionalProperties:
+        type: string
+    PermissionMetadata:
+      type: object
+      readOnly: true
+      description: Metadata for permission management
+      required:
+      - provider
+      - resource
+      - verb
+      properties:
+        provider:
+          type: string
+          minLength: 1
+          maxLength: 64
+          example: seca.compute/v1
+        resource:
+          type: string
+          minLength: 1
+          maxLength: 256
+          example: tenants/tn-1/workspaces/ws-1/instances/my-server
+        verb:
+          type: string
+          minLength: 1
+          maxLength: 7
+          example: get
+      example:
+        provider: seca.compute/v1
+        resource: tenants/tn-1/workspaces/ws-1/instances/my-server
+        verb: get
+    Error:
+      type: object
+      description: 'A detailed error response see https://datatracker.ietf.org/doc/html/rfc7807.
+
+        '
+      required:
+      - type
+      - title
+      - status
+      - detail
+      - instance
+      - sources
+      properties:
+        type:
+          type: string
+          description: The type of error, expressed as a URI.
+          minLength: 1
+          maxLength: 4000
+          example: https://httpstatuses.io/400
+        title:
+          type: string
+          description: 'A short, human-readable summary of the problem
+
+            type.  It SHOULD NOT change from occurrence to occurrence of the
+
+            problem, except for purposes of localization (e.g., using
+
+            proactive content negotiation; see [RFC7231], Section 3.4).
+
+            '
+          minLength: 1
+          maxLength: 1024
+        status:
+          type: number
+          description: 'The HTTP status type ([http://secapi.cloud/errors/-rfc7231], Section 6)
+
+            generated by the origin server for this occurrence of the problem.
+
+            '
+          minimum: 100
+          maximum: 599
+          example: 400
+        detail:
+          type: string
+          description: A human-readable explanation specific to this occurrence of the problem.
+          minLength: 1
+          maxLength: 32768
+        instance:
+          type: string
+          description: 'A URI reference that identifies the specific occurrence of the problem.
+
+            It may or may not yield further information if dereferenced.
+
+            '
+          minLength: 1
+          maxLength: 256
+        sources:
+          type: array
+          maxItems: 32
+          items:
+            $ref: '#/components/schemas/ErrorSource'
+        meta:
+          type: object
+          description: A meta object containing non-standard meta-information about the error.
+    ResponseMetadata:
+      description: 'Metadata for response objects.
+
+        '
+      allOf:
+      - $ref: '#/components/schemas/PermissionMetadata'
+      - type: object
+        readOnly: true
+        properties:
+          skipToken:
+            type: string
+            description: Opaque cursor to get the next page. Field is omitted when there are no more pages available.
+            maxLength: 5
+      example:
+        skipToken: 'false'
+        provider: seca.compute/v1
+        resource: tenants/tn-1/workspaces/ws-1/instances/my-server
+        verb: get
+    Error500:
+      allOf:
+      - $ref: '#/components/schemas/Error'
+      description: A 500 Internal Server Error error response
+      example:
+        status: 500
+        type: http://secapi.cloud/errors/internal-server-error
+        title: Internal Server Error
+        detail: The server encountered an unexpected condition that prevented it from fulfilling the request.
+        instance: /errors/500
+        sources: []
+    SkuIterator:
+      description: Iterator for skus
+      type: object
+      required:
+      - items
+      - metadata
+      properties:
+        items:
+          description: List of skus
+          type: array
+          items:
+            $ref: '#/components/schemas/InstanceSku'
+        metadata:
+          $ref: '#/components/schemas/ResponseMetadata'
+    InstanceSku:
+      description: 'Represents a Stock Keeping Unit (SKU) for compute instances.
+
+        '
+      allOf:
+      - $ref: '#/components/schemas/SystemResourceMetadata'
+      - type: object
+        properties:
+          metadata:
+            $ref: '#/components/schemas/SkuResourceMetadata'
+          spec:
+            $ref: '#/components/schemas/InstanceSkuSpec'
+    InstanceSkuSpec:
+      type: object
+      description: 'Specification of the instance SKU, including its capabilities and extensions.
+
+        '
+      required:
+      - vCPU
+      - ram
+      - cpuArchitecture
+      properties:
+        vCPU:
+          type: integer
+          description: 'The number of virtual CPUs (vCPUs) allocated to the instance SKU.
+
+            This value represents the number of cores visible to the operating system.
+
+            It does not specify the number of physical processors or hyper-threads available.
+
+            '
+          minimum: 1
+          maximum: 60
+          example: 2
+          x-oapi-codegen-extra-tags:
+            x-kubebuilder-validation-minimum: '1'
+            x-kubebuilder-validation-maximum: '60'
+        ram:
+          type: integer
+          description: 'The amount of RAM (Random Access Memory) allocated to the instance SKU in GiB (gibibytes).
+
+            This value represents the total memory available to the instance.
+
+            '
+          minimum: 1
+          maximum: 65536
+          example: 16
+          x-oapi-codegen-extra-tags:
+            x-kubebuilder-validation-minimum: '1'
+            x-kubebuilder-validation-maximum: '65536'
+        cpuArchitecture:
+          type: string
+          description: 'CPU architecture provided by the instance SKU. An instance created with this
+
+            SKU can only use images built for the same architecture.
+
+            '
+          enum:
+          - amd64
+          - arm64
+          - riscv
+          x-enumNames:
+          - InstanceSkuSpecCpuArchitectureAmd64
+          - InstanceSkuSpecCpuArchitectureArm64
+          - InstanceSkuSpecCpuArchitectureRiscv
+          example: amd64
+          x-oapi-codegen-extra-tags:
+            x-kubebuilder-validation-enum: amd64;arm64;riscv
+        gpu:
+          allOf:
+          - $ref: '#/components/schemas/InstanceSkuGpuSpec'
+          description: 'GPU specification for this instance SKU. Omitted for instance SKUs
+
+            without a GPU.
+
+            '
+    Error400:
+      allOf:
+      - $ref: '#/components/schemas/Error'
+      description: A 400 Bad Request error response
+      example:
+        status: 400
+        type: http://secapi.cloud/errors/invalid-request
+        title: Bad Request
+        detail: The request was invalid or cannot be served.
+        instance: /errors/400
+        sources: []
+    Error404:
+      allOf:
+      - $ref: '#/components/schemas/Error'
+      description: A 404 Not Found error response
+      example:
+        status: 404
+        type: http://secapi.cloud/errors/resource-not-found
+        title: Not Found
+        detail: The requested resource could not be found.
+        instance: /errors/404
+        sources: []
+    ReferenceURN:
+      type: string
+      minLength: 1
+      description: "A unique resource name (URN) used to identify and reference this resource.\n\nThe URN is NOT a URL — it does not contain a protocol scheme (http/https), a host,\nor any endpoint-specific prefix. It is a portable, transport-agnostic identifier.\nA configured SDK client — which knows the provider's base URL and endpoint mapping —\ncan derive a URL from a URN, but the URN alone cannot be turned into a URL without\nthat SDK configuration context. This separation keeps the URN portable across\nenvironments and CSP deployments.\n\nThe full URN format is:\n  `{provider}/{version}/tenants/{tenant}/workspaces/{workspace}/{type}/{name}`\n\nFor hierarchical (nested) resources, additional parent path segments are included:\n  `seca.network/v1/tenants/tn-1/workspaces/ws-1/networks/my-net/route-tables/my-rt`\n\n### Automatic Prefix Inference\n\nIn most cases, the prefix of the URN can be automatically derived in the given context.\nTo simplify usage, only the resource type and name might be specified as a reference\nusing the `<type>/<name>` notation. The suffix can be made more specific by adding\nadditional segments separated by slashes.\n\nThe prefix is automatically inferred from the context. For example, if the resource is a\nblock storage in the same workspace the reference can be specified as\n`block-storages/my-block-storage`. If the resource is a block storage in a different workspace, the\nreference can be specified as `workspaces/ws-1/block-storages/my-block-storage`.\n\nFor automatic prefix inference, the following rules apply:\n- the version is inferred from the current resource version\n- the workspace is inferred from the current workspace\n- the region is inferred from the current region\n- the provider is inferred from the type and context of the usage\n\nThe prefix inference is resolved on admission into the full URN format, which makes it\nmostly suitable for human use.\n"
+      maxLength: 255
+      example: seca.compute/v1/tenants/tn-1/workspaces/ws-1/instances/my-server
+    SkuResourceMetadata:
+      description: 'Metadata for SKU resources with name, permission, type, tenant and region information.
+
+        '
+      allOf:
+      - $ref: '#/components/schemas/NameMetadata'
+      - $ref: '#/components/schemas/PermissionMetadata'
+      - $ref: '#/components/schemas/TypeMetadata'
+      - $ref: '#/components/schemas/TenantMetadata'
+      - $ref: '#/components/schemas/RegionalMetadata'
+    Annotations:
+      x-go-type-skip-optional-pointer: true
+      type: object
+      description: 'User-defined key/value pairs that are mutable and can be used to add annotations.
+
+        The number of annotations is eventually limited by the CSP.
+
+        '
+      additionalProperties:
+        type: string
+        maxLength: 1024
+      example:
+        description: Human readable description
+    ErrorSource:
+      type: object
+      description: An object containing references to the source of the error.
+      required:
+      - pointer
+      - parameter
+      properties:
+        pointer:
+          type: string
+          description: A JSON Pointer [RFC6901] to the associated entity in the request document.
+          minLength: 1
+          maxLength: 256
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error.
+          minLength: 1
+          maxLength: 64
+    TypeMetadata:
+      type: object
+      readOnly: true
+      required:
+      - apiVersion
+      - kind
+      - ref
+      description: 'Metadata for all resources with type information.
+
+        '
+      properties:
+        apiVersion:
+          type: string
+          description: API version of the resource
+          minLength: 1
+          maxLength: 16
+          default: v1
+        kind:
+          type: string
+          description: Type of the resource
+          enum:
+          - activity-log
+          - block-storage
+          - image
+          - instance
+          - instance-sku
+          - internet-gateway
+          - network
+          - network-load-balancer
+          - network-sku
+          - nic
+          - object-storage-account
+          - public-ip
+          - region
+          - role
+          - role-assignment
+          - routing-table
+          - security-group
+          - security-group-rule
+          - storage-sku
+          - subnet
+          - workspace
+          x-enumNames:
+          - ResourceKindActivityLog
+          - ResourceKindBlockStorage
+          - ResourceKindImage
+          - ResourceKindInstance
+          - ResourceKindInstanceSku
+          - ResourceKindInternetGateway
+          - ResourceKindNetwork
+          - ResourceKindNetworkLoadBalancer
+          - ResourceKindNetworkSku
+          - ResourceKindNic
+          - ResourceKindObjectStorageAccount
+          - ResourceKindPublicIP
+          - ResourceKindRegion
+          - ResourceKindRole
+          - ResourceKindRoleAssignment
+          - ResourceKindRoutingTable
+          - ResourceKindSecurityGroup
+          - ResourceKindSecurityGroupRule
+          - ResourceKindStorageSku
+          - ResourceKindSubnet
+          - ResourceKindWorkspace
+        ref:
+          $ref: '#/components/schemas/ReferenceURN'
+    SystemResourceMetadata:
+      type: object
+      description: Metadata for user-defined resource properties
+      properties:
+        labels:
+          $ref: '#/components/schemas/Labels'
+        annotations:
+          $ref: '#/components/schemas/Annotations'
+        extensions:
+          $ref: '#/components/schemas/Extensions'
+    Error401:
+      allOf:
+      - $ref: '#/components/schemas/Error'
+      description: A 401 Unauthorized error response
+      example:
+        status: 401
+        type: http://secapi.cloud/errors/unauthorized
+        title: Unauthorized
+        detail: Authentication is required and has failed or has not been provided.
+        instance: /errors/401
+        sources: []
+    RegionalMetadata:
+      type: object
+      description: Metadata for regional resources
+      readOnly: true
+      required:
+      - region
+      properties:
+        region:
+          type: string
+          description: Reference to the region where the resource is located
+          minLength: 1
+          maxLength: 64
+          example: eu-central-1
+    TenantMetadata:
+      type: object
+      description: Metadata for resources with tenant constraints
+      readOnly: true
+      required:
+      - tenant
+      properties:
+        tenant:
+          type: string
+          description: Tenant identifier
+          minLength: 1
+          maxLength: 64
+    NetworkSku:
+      description: 'Represents a Stock Keeping Unit (SKU) for network resources.
+
+
+        Network SKUs define performance tiers for network bandwidth and characteristics.
+
+        capabilities can be found also in the metadata.labels sections and are searchable.
+
+        '
+      allOf:
+      - $ref: '#/components/schemas/SystemResourceMetadata'
+      - type: object
+        properties:
+          metadata:
+            $ref: '#/components/schemas/SkuResourceMetadata'
+          spec:
+            $ref: '#/components/schemas/NetworkSkuSpec'
+    SkuIterator_2:
+      description: Iterator for skus
+      type: object
+      required:
+      - items
+      - metadata
+      properties:
+        items:
+          description: List of skus
+          type: array
+          items:
+            $ref: '#/components/schemas/NetworkSku'
+        metadata:
+          $ref: '#/components/schemas/ResponseMetadata'
+    NetworkSkuSpec:
+      type: object
+      description: 'Specification of the network SKU, including its bandwidth and packets per second.
+
+        '
+      required:
+      - bandwidth
+      - packets
+      properties:
+        bandwidth:
+          type: integer
+          description: 'The bandwidth in Mbps (Megabits per second).
+
+            '
+          minimum: 1
+          maximum: 800000
+          example: 1000
+          x-oapi-codegen-extra-tags:
+            x-kubebuilder-validation-minimum: '1'
+            x-kubebuilder-validation-maximum: '800000'
+        packets:
+          type: integer
+          description: 'The number of packets per second (PPS) that the network SKU can handle.
+
+            '
+          minimum: 1
+          maximum: 200000000000
+          example: 10000
+          x-oapi-codegen-extra-tags:
+            x-kubebuilder-validation-minimum: '1'
+            x-kubebuilder-validation-maximum: '200000000000'
+    StorageSkuSpec:
+      type: object
+      description: 'Specification of the storage SKU, including its capabilities and extensions.
+
+        '
+      required:
+      - iops
+      - type
+      - minVolumeSize
+      properties:
+        iops:
+          type: integer
+          description: 'The number of IOPS (Input/Output Operations Per Second) guaranteed for
+
+            the storage SKU.
+
+            '
+          minimum: 1
+          maximum: 45000
+          x-oapi-codegen-extra-tags:
+            x-kubebuilder-validation-minimum: '1'
+            x-kubebuilder-validation-maximum: '45000'
+        type:
+          type: string
+          description: "Type of storage SKU. Can be one of the following:\n\n* `local-ephemeral`: Local storage is directly attached to the hypervisor\n  hosting the instance. In the event of a hypervisor failure or instance\n  restart, the data may either be lost or become unavailable. The failure\n  mode depends on the Cloud Service Provider (CSP).\n  Users of local storage should be aware of these risks and implement\n  a robust backup strategy or application level replication of the data.\n  Local storage is typically suited for high-performance workloads requiring\n  low latency and high throughput, where the application layer can handle\n  failures. It is not recommended for workloads demanding high availability\n  or data durability. Example use-cases include caching, temporary data\n  or immutable workloads such as operating system images without local data.\n* `local-durable`: Local durable storage is similar to local storage\n  but is designed to provide data durability while providing high-performance.\n  It is typically implemented using a redundant storage device or\n  replicated storage solution. Local durable storage is suitable for\n  workloads requiring high performance and low latency, while also\n  ensuring data durability at the cost of availability. The time to\n  restore data may vary depending on the CSP and the\n  will be significantly higher then using `remote-durable` storage.\n  Example use-cases include replicated paxos or raft based databases or\n  replicated databases using synchronous replication, in addition to\n  file storage.\n* `remote-durable`: Remote storage is a network-attached storage solution\n  designed to provide data redundancy and high availability. While\n  typically slower than local storage, remote storage offers the\n  advantage of being accessible by different hypervisors.\n  This means the storage can be used by different instances running\n  on separate hypervisors, but only one instance at a time. This\n  enabled the recreation of the instance with the same storage on a\n  different hypervisor and therefore greatly reduces the recovery\n  time in case of failure of the hypervisor. Remote storage cannot be\n  attached to multiple instances simultaneously.\n  Example use-cases include file storage or replicated databases\n  using asynchronous replication.\n"
+          enum:
+          - local-ephemeral
+          - local-durable
+          - remote-durable
+          x-enumNames:
+          - StorageSkuTypeLocalEphemeral
+          - StorageSkuTypeLocalDurable
+          - StorageSkuTypeRemoteDurable
+          x-oapi-codegen-extra-tags:
+            x-kubebuilder-validation-enum: local-ephemeral;local-durable;remote-durable
+        minVolumeSize:
+          type: integer
+          description: 'Minimum volume size for guaranteed performance, in GB.
+
+            '
+          minimum: 1
+          x-oapi-codegen-extra-tags:
+            x-kubebuilder-validation-minimum: '1'
+      example:
+        iops: 100
+        type: remote-durable
+        minVolumeSize: 50
+    StorageSku:
+      description: 'Represents a Stock Keeping Unit (SKU) for  storage resources.
+
+
+        Storage SKUs define performance tiers for storage IOPS and characteristics.
+
+        Properties, capabilities, and extensions can be found in the metadata.labels sections.
+
+        Searchable with namespaces like "properties.", "capabilities.", and "extensions.".
+
+        '
+      allOf:
+      - $ref: '#/components/schemas/SystemResourceMetadata'
+      - type: object
+        properties:
+          metadata:
+            $ref: '#/components/schemas/SkuResourceMetadata'
+          spec:
+            $ref: '#/components/schemas/StorageSkuSpec'
+    SkuIterator_3:
+      description: Iterator for skus
+      type: object
+      required:
+      - items
+      - metadata
+      properties:
+        items:
+          description: List of skus
+          type: array
+          items:
+            $ref: '#/components/schemas/StorageSku'
+        metadata:
+          $ref: '#/components/schemas/ResponseMetadata'
+    SkuIterator_4:
+      description: Iterator for skus
+      type: object
+      required:
+      - items
+      - metadata
+      properties:
+        items:
+          description: List of skus
+          type: array
+          items:
+            $ref: '#/components/schemas/NetworkSku'
+        metadata:
+          $ref: '#/components/schemas/ResponseMetadata'
+    SkuIterator_5:
+      description: Iterator for skus
+      type: object
+      required:
+      - items
+      - metadata
+      properties:
+        items:
+          description: List of skus
+          type: array
+          items:
+            $ref: '#/components/schemas/StorageSku'
+        metadata:
+          $ref: '#/components/schemas/ResponseMetadata'
+  parameters:
+    tenantPathParam:
+      name: tenant
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+      description: Tenant ID
+    skipTokenParam:
+      in: query
+      name: skipToken
+      description: Opaque cursor for pagination. Use the skipToken from the previous response to get the next page of results. Note that skipTokens do not guarantee consistency across pages if the underlying data changes between requests
+      required: false
+      schema:
+        type: string
+    limitParam:
+      in: query
+      name: limit
+      description: Maximum number of resources to return in the response
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 10000
+        default: 1000
+    resourcePathParam:
+      name: name
+      in: path
+      required: true
+      schema:
+        type: string
+        maxLength: 128
+        minLength: 1
+        pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
+      description: Resource name
+    acceptHeader:
+      in: header
+      name: Accept
+      schema:
+        type: string
+        default: application/json
+        example: application/json; deleted=true
+        enum:
+        - application/json
+        - application/json; deleted=true
+        - application/json; deleted=only
+        x-enumNames:
+        - AcceptHeaderJson
+        - AcceptHeaderJsonDeletedTrue
+        - AcceptHeaderJsonDeletedOnly
+      description: 'Controls whether deleted resources are included:
+
+        - `"application/json"`: Returns only non-deleted resources
+
+        - `"application/json; deleted=true"`: Returns both deleted and non-deleted resources
+
+        - `"application/json; deleted=only"`: Returns only deleted resources
+
+        '
+    labelSelector:
+      in: query
+      name: labels
+      description: "Filter resources by their labels. Multiple filters are combined with comma.\nFilter syntax:\n  - Equals: key=value\n  - Not equals: key!=value\n  - Wildcards: \\*key\\*=\\*value\\* - substring (contains) match on both key and value. Each `*` can appear at start, end or in the middle to mean \"any characters\". Example: \\*env\\*=\\*prod\\* matches a label key containing \"env\" whose value contains \"prod\".\n  - Numeric: key>value, key<value, key>=value, key<=value\n  - Namespaced key examples: 'monitoring:alert-level=high' or 'billing:team=platform'\n"
+      required: false
+      schema:
+        type: string
+        example: cloud:region=us-east-1,billing:team=platform,tier!=dev
+  responses:
+    Error400:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error400'
+          example:
+            status: 400
+            type: http://secapi.cloud/errors/invalid-request
+            title: Bad Request
+            detail: The request was invalid or cannot be served.
+            instance: /errors/400
+            sources: []
+    Error401:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error401'
+          example:
+            status: 401
+            type: http://secapi.cloud/errors/unauthorized
+            title: Unauthorized
+            detail: Authentication is required and has failed or has not been provided.
+            instance: /errors/401
+            sources: []
+    Error500:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error500'
+          example:
+            status: 500
+            type: http://secapi.cloud/errors/internal-server-error
+            title: Internal Server Error
+            detail: The server encountered an unexpected condition that prevented it from fulfilling the request.
+            instance: /errors/500
+            sources: []
+    Error404:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404'
+          example:
+            status: 404
+            type: http://secapi.cloud/errors/resource-not-found
+            title: Not Found
+            detail: The requested resource could not be found.
+            instance: /errors/404
+            sources: []
+    Error403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403'
+          example:
+            status: 403
+            type: http://secapi.cloud/errors/forbidden
+            title: Forbidden
+            detail: The request was valid, but the server is refusing action.
+            instance: /errors/403
+            sources: []
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Use a JWT token for authentication. The token identifies the user,
+
+        and policies (RBAC, ABAC, or hybrid) determine authorization.
+
+        '
+x-refined-from:
+- foundation.compute.v1.yaml
+- foundation.network.v1.yaml
+- foundation.storage.v1.yaml
+- eu-sovereign-cloud-api-foundation-compute-v1-openapi.yml
+- eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+- eu-sovereign-cloud-api-foundation-storage-v1-openapi.yml

@@ -1,0 +1,264 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist agent overlay for Network
+  version: 1.0.0
+extends: ../openapi/_original/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+x-rationale: Adds agent-facing annotations derived from HTTP method semantics (GET read-only; PUT createOrUpdate and DELETE
+  idempotent per the spec's create-or-update design; POST start/stop/restart non-idempotent actions), the candidate MCP tool
+  name for each operation (mcp/eu-sovereign-cloud-api-mcp.yml), externalDocs pointing at spec.secapi.cloud, and the base-URL
+  caveat recorded in apis.yml. The original OpenAPI is not modified.
+actions:
+- target: $.info
+  update:
+    x-api-evangelist:
+      provider: eu-sovereign-cloud-api
+      family: foundation-network-v1
+      base-url-note: No shared production base URL. Per spec.secapi.cloud/docs/content/Examples/usage each implementing cloud
+        provider (e.g. IONOS, Aruba) serves SECA on its own host, dns-based or path-based. The servers[] host demo.secapi.cloud
+        did not resolve in DNS on 2026-10-09.
+- target: $
+  update:
+    externalDocs:
+      description: SECA specification documentation
+      url: https://spec.secapi.cloud/
+- target: $.paths['/v1/tenants/{tenant}/skus'].get
+  update:
+    x-agent-hints:
+      readOnly: true
+      destructive: false
+      idempotent: true
+      mcp-tool: network_list_skus
+- target: $.paths['/v1/tenants/{tenant}/skus/{name}'].get
+  update:
+    x-agent-hints:
+      readOnly: true
+      destructive: false
+      idempotent: true
+      mcp-tool: network_get_sku
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/security-groups'].get
+  update:
+    x-agent-hints:
+      readOnly: true
+      destructive: false
+      idempotent: true
+      mcp-tool: network_list_security_groups
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/security-groups/{name}'].get
+  update:
+    x-agent-hints:
+      readOnly: true
+      destructive: false
+      idempotent: true
+      mcp-tool: network_get_security_group
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/security-groups/{name}'].put
+  update:
+    x-agent-hints:
+      readOnly: false
+      destructive: false
+      idempotent: true
+      mcp-tool: network_create_or_update_security_group
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/security-groups/{name}'].delete
+  update:
+    x-agent-hints:
+      readOnly: false
+      destructive: true
+      idempotent: true
+      mcp-tool: network_delete_security_group
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/security-group-rules'].get
+  update:
+    x-agent-hints:
+      readOnly: true
+      destructive: false
+      idempotent: true
+      mcp-tool: network_list_security_group_rules
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/security-group-rules/{name}'].get
+  update:
+    x-agent-hints:
+      readOnly: true
+      destructive: false
+      idempotent: true
+      mcp-tool: network_get_security_group_rule
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/security-group-rules/{name}'].put
+  update:
+    x-agent-hints:
+      readOnly: false
+      destructive: false
+      idempotent: true
+      mcp-tool: network_create_or_update_security_group_rule
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/security-group-rules/{name}'].delete
+  update:
+    x-agent-hints:
+      readOnly: false
+      destructive: true
+      idempotent: true
+      mcp-tool: network_delete_security_group_rule
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/nics'].get
+  update:
+    x-agent-hints:
+      readOnly: true
+      destructive: false
+      idempotent: true
+      mcp-tool: network_list_nics
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/nics/{name}'].get
+  update:
+    x-agent-hints:
+      readOnly: true
+      destructive: false
+      idempotent: true
+      mcp-tool: network_get_nic
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/nics/{name}'].put
+  update:
+    x-agent-hints:
+      readOnly: false
+      destructive: false
+      idempotent: true
+      mcp-tool: network_create_or_update_nic
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/nics/{name}'].delete
+  update:
+    x-agent-hints:
+      readOnly: false
+      destructive: true
+      idempotent: true
+      mcp-tool: network_delete_nic
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/public-ips'].get
+  update:
+    x-agent-hints:
+      readOnly: true
+      destructive: false
+      idempotent: true
+      mcp-tool: network_list_public_ips
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/public-ips/{name}'].get
+  update:
+    x-agent-hints:
+      readOnly: true
+      destructive: false
+      idempotent: true
+      mcp-tool: network_get_public_ip
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/public-ips/{name}'].put
+  update:
+    x-agent-hints:
+      readOnly: false
+      destructive: false
+      idempotent: true
+      mcp-tool: network_create_or_update_public_ip
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/public-ips/{name}'].delete
+  update:
+    x-agent-hints:
+      readOnly: false
+      destructive: true
+      idempotent: true
+      mcp-tool: network_delete_public_ip
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/networks'].get
+  update:
+    x-agent-hints:
+      readOnly: true
+      destructive: false
+      idempotent: true
+      mcp-tool: network_list_networks
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/networks/{name}'].get
+  update:
+    x-agent-hints:
+      readOnly: true
+      destructive: false
+      idempotent: true
+      mcp-tool: network_get_network
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/networks/{name}'].put
+  update:
+    x-agent-hints:
+      readOnly: false
+      destructive: false
+      idempotent: true
+      mcp-tool: network_create_or_update_network
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/networks/{name}'].delete
+  update:
+    x-agent-hints:
+      readOnly: false
+      destructive: true
+      idempotent: true
+      mcp-tool: network_delete_network
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/internet-gateways'].get
+  update:
+    x-agent-hints:
+      readOnly: true
+      destructive: false
+      idempotent: true
+      mcp-tool: network_list_internet_gateways
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/internet-gateways/{name}'].get
+  update:
+    x-agent-hints:
+      readOnly: true
+      destructive: false
+      idempotent: true
+      mcp-tool: network_get_internet_gateway
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/internet-gateways/{name}'].put
+  update:
+    x-agent-hints:
+      readOnly: false
+      destructive: false
+      idempotent: true
+      mcp-tool: network_create_or_update_internet_gateway
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/internet-gateways/{name}'].delete
+  update:
+    x-agent-hints:
+      readOnly: false
+      destructive: true
+      idempotent: true
+      mcp-tool: network_delete_internet_gateway
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/networks/{network}/subnets'].get
+  update:
+    x-agent-hints:
+      readOnly: true
+      destructive: false
+      idempotent: true
+      mcp-tool: network_list_subnets
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/networks/{network}/subnets/{name}'].get
+  update:
+    x-agent-hints:
+      readOnly: true
+      destructive: false
+      idempotent: true
+      mcp-tool: network_get_subnet
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/networks/{network}/subnets/{name}'].put
+  update:
+    x-agent-hints:
+      readOnly: false
+      destructive: false
+      idempotent: true
+      mcp-tool: network_create_or_update_subnet
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/networks/{network}/subnets/{name}'].delete
+  update:
+    x-agent-hints:
+      readOnly: false
+      destructive: true
+      idempotent: true
+      mcp-tool: network_delete_subnet
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/networks/{network}/route-tables'].get
+  update:
+    x-agent-hints:
+      readOnly: true
+      destructive: false
+      idempotent: true
+      mcp-tool: network_list_route_tables
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/networks/{network}/route-tables/{name}'].get
+  update:
+    x-agent-hints:
+      readOnly: true
+      destructive: false
+      idempotent: true
+      mcp-tool: network_get_route_table
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/networks/{network}/route-tables/{name}'].put
+  update:
+    x-agent-hints:
+      readOnly: false
+      destructive: false
+      idempotent: true
+      mcp-tool: network_create_or_update_route_table
+- target: $.paths['/v1/tenants/{tenant}/workspaces/{workspace}/networks/{network}/route-tables/{name}'].delete
+  update:
+    x-agent-hints:
+      readOnly: false
+      destructive: true
+      idempotent: true
+      mcp-tool: network_delete_route_table

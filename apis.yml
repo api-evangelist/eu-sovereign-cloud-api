@@ -1,23 +1,1941 @@
 aid: eu-sovereign-cloud-api
+
 name: Sovereign European Cloud API (SECA)
-description: 'Sovereign European Cloud API (SECA) is a company surfaced via the API Evangelist harvest
-  backlog (source: spectral-ruleset-github) and added to the network as a stub for full-pipeline profiling.'
+
+description: SECA (Sovereign European Cloud API) is an open industry standard API specification for cloud infrastructure management, introduced
+  as a collaboration by the European cloud service providers Aruba, IONOS and Dynamo. Built on OpenAPI, it aims to enable sovereign multi-cloud
+  deployment of workloads across European public Infrastructure-as-a-Service providers, ensuring interoperability, data sovereignty and freedom
+  from vendor lock-in as a building block for the EuroStack. The specification and its tooling are developed openly in the eu-sovereign-cloud
+  GitHub organization and documented at spec.secapi.cloud.
+
 url: https://raw.githubusercontent.com/api-evangelist/eu-sovereign-cloud-api/refs/heads/main/apis.yml
+
+image: https://www.secapi.cloud/wp-content/uploads/2025/03/Seca-share.png
+
 x-type: company
+
 x-source: harvest:spectral-ruleset-github
-x-tier: stub
-x-tier-reason: harvest
+
+x-tier: profiled
+x-tier-reason: enrichment pass 2026-10-09 (modular-v1; was harvest)
+
 specificationVersion: '0.20'
+
 created: '2026-10-09'
+
 modified: '2026-10-09'
+
 tags:
 - Company
-apis: []
+- Cloud
+- Cloud Infrastructure
+- Sovereignty
+- Europe
+- Open Standards
+- Multi-Cloud
+- Interoperability
+- OpenAPI
+
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+
 common:
+- type: AgenticAccess
+  url: agentic-access/eu-sovereign-cloud-api-agentic-access.yml
+- type: Spectral
+  url: rules/eu-sovereign-cloud-api-spec-spectral-rules.yml
+- type: Spectral
+  url: rules/eu-sovereign-cloud-api-rules.yml
+- type: JSONLD
+  url: json-ld/eu-sovereign-cloud-api-context.jsonld
+- type: Vocabulary
+  url: vocabulary/eu-sovereign-cloud-api-vocabulary.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DataModel
+  url: data-model/eu-sovereign-cloud-api-data-model.yml
+- type: CLI
+  url: cli/eu-sovereign-cloud-api-cli.yml
+- type: ChangeLog
+  url: changelog/eu-sovereign-cloud-api-changelog.yml
+- type: Idempotency
+  url: conventions/eu-sovereign-cloud-api-conventions.yml
+- type: Conventions
+  url: conventions/eu-sovereign-cloud-api-conventions.yml
+- type: Deprecation
+  url: lifecycle/eu-sovereign-cloud-api-lifecycle.yml
+- type: Lifecycle
+  url: lifecycle/eu-sovereign-cloud-api-lifecycle.yml
+- type: ErrorCatalog
+  url: errors/eu-sovereign-cloud-api-problem-types.yml
+- type: Conformance
+  url: conformance/eu-sovereign-cloud-api-conformance.yml
+- type: Overlay
+  url: overlays/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-overlay.yaml
+- type: Hosts
+  url: hosts/eu-sovereign-cloud-api-hosts.yml
+- type: Vendors
+  url: vendors/eu-sovereign-cloud-api-vendors.yml
+- type: SDKs
+  url: packages/eu-sovereign-cloud-api-packages.yml
+- type: Packages
+  url: packages/eu-sovereign-cloud-api-packages.yml
+- type: DomainSecurity
+  url: security/eu-sovereign-cloud-api-domain-security.yml
+- type: Authentication
+  url: authentication/eu-sovereign-cloud-api-authentication.yml
 - type: Website
+  url: https://www.secapi.cloud/
+- type: Documentation
+  url: https://spec.secapi.cloud/docs/content/intro
+- type: APIReference
+  url: https://spec.secapi.cloud/docs/api/Foundation/Authorization-v1/authorization
+- type: GettingStarted
+  url: https://spec.secapi.cloud/docs/content/Examples/usage
+- type: GitHubOrganization
   url: https://github.com/eu-sovereign-cloud
+- type: GitHubRepository
+  url: https://github.com/eu-sovereign-cloud/spec
+- type: Support
+  url: https://github.com/eu-sovereign-cloud/spec/blob/main/CHAT.md
+- type: Contributing
+  url: https://github.com/eu-sovereign-cloud/spec/blob/main/CONTRIBUTING.md
+- type: Email
+  url: mailto:info@secapi.cloud
+- type: SpectralRules
+  url: https://github.com/eu-sovereign-cloud/spec/blob/223b40530a7dc57def8ce373a0e14de577fc3d40/config/vacuum/ruleset.yaml
+
+apis:
+- aid: eu-sovereign-cloud-api:eu-sovereign-cloud-api-account-api
+  name: Sovereign European Cloud API (SECA) Account API
+  description: Account management
+  humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
+  tags:
+  - Account
+  properties:
+  - type: OpenAPI
+    url: openapi/eu-sovereign-cloud-api-account-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-activity-log-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-node-pool-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-node-pool-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-cluster-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-object-storage-account-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-account-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-wellknown-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-sku-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-subnet-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-nic-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-gateway-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-storage-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-iterator-schema.json
+- aid: eu-sovereign-cloud-api:eu-sovereign-cloud-api-activity-log-api
+  name: Sovereign European Cloud API (SECA) Activity Log API
+  description: Activity Log management
+  humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
+  tags:
+  - Activity Log
+  properties:
+  - type: OpenAPI
+    url: openapi/eu-sovereign-cloud-api-activity-log-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-activity-log-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-node-pool-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-node-pool-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-cluster-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-object-storage-account-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-account-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-wellknown-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-sku-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-subnet-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-nic-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-gateway-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-storage-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-iterator-schema.json
+- aid: eu-sovereign-cloud-api:eu-sovereign-cloud-api-block-storage-api
+  name: Sovereign European Cloud API (SECA) Block Storage API
+  description: Block-Storage management
+  humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
+  tags:
+  - Block-Storage
+  properties:
+  - type: OpenAPI
+    url: openapi/eu-sovereign-cloud-api-block-storage-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-activity-log-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-node-pool-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-node-pool-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-cluster-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-object-storage-account-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-account-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-wellknown-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-sku-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-subnet-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-nic-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-gateway-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-storage-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-iterator-schema.json
+- aid: eu-sovereign-cloud-api:eu-sovereign-cloud-api-cluster-api
+  name: Sovereign European Cloud API (SECA) Cluster API
+  description: Cluster management
+  humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
+  tags:
+  - Cluster
+  properties:
+  - type: OpenAPI
+    url: openapi/eu-sovereign-cloud-api-cluster-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-activity-log-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-node-pool-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-node-pool-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-cluster-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-object-storage-account-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-account-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-wellknown-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-sku-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-subnet-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-nic-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-gateway-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-storage-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-iterator-schema.json
+- aid: eu-sovereign-cloud-api:eu-sovereign-cloud-api-image-api
+  name: Sovereign European Cloud API (SECA) Image API
+  description: Image management
+  humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
+  tags:
+  - Image
+  properties:
+  - type: OpenAPI
+    url: openapi/eu-sovereign-cloud-api-image-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-activity-log-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-node-pool-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-node-pool-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-cluster-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-object-storage-account-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-account-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-wellknown-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-sku-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-subnet-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-nic-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-gateway-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-storage-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-iterator-schema.json
+- aid: eu-sovereign-cloud-api:eu-sovereign-cloud-api-instance-api
+  name: Sovereign European Cloud API (SECA) Instance API
+  description: Instance management
+  humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
+  tags:
+  - Instance
+  properties:
+  - type: OpenAPI
+    url: openapi/eu-sovereign-cloud-api-instance-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-activity-log-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-node-pool-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-node-pool-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-cluster-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-object-storage-account-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-account-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-wellknown-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-sku-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-subnet-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-nic-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-gateway-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-storage-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-iterator-schema.json
+- aid: eu-sovereign-cloud-api:eu-sovereign-cloud-api-internet-gateway-api
+  name: Sovereign European Cloud API (SECA) Internet Gateway API
+  description: Internet Gateway management
+  humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
+  tags:
+  - Internet Gateway
+  properties:
+  - type: OpenAPI
+    url: openapi/eu-sovereign-cloud-api-internet-gateway-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-activity-log-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-node-pool-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-node-pool-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-cluster-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-object-storage-account-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-account-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-wellknown-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-sku-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-subnet-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-nic-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-gateway-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-storage-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-iterator-schema.json
+- aid: eu-sovereign-cloud-api:eu-sovereign-cloud-api-internet-nat-gateway-instance-api
+  name: Sovereign European Cloud API (SECA) Internet Nat Gateway Instance API
+  description: Internet Nat Gateway Instance management
+  humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
+  tags:
+  - Internet Nat Gateway Instance
+  properties:
+  - type: OpenAPI
+    url: openapi/eu-sovereign-cloud-api-internet-nat-gateway-instance-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-activity-log-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-node-pool-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-node-pool-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-cluster-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-object-storage-account-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-account-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-wellknown-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-sku-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-subnet-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-nic-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-gateway-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-storage-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-iterator-schema.json
+- aid: eu-sovereign-cloud-api:eu-sovereign-cloud-api-network-api
+  name: Sovereign European Cloud API (SECA) Network API
+  description: Network management
+  humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
+  tags:
+  - Network
+  properties:
+  - type: OpenAPI
+    url: openapi/eu-sovereign-cloud-api-network-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-activity-log-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-node-pool-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-node-pool-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-cluster-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-object-storage-account-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-account-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-wellknown-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-sku-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-subnet-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-nic-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-gateway-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-storage-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-iterator-schema.json
+- aid: eu-sovereign-cloud-api:eu-sovereign-cloud-api-network-load-balancer-api
+  name: Sovereign European Cloud API (SECA) Network Load Balancer API
+  description: Network Load Balancer management
+  humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
+  tags:
+  - Network Load Balancer
+  properties:
+  - type: OpenAPI
+    url: openapi/eu-sovereign-cloud-api-network-load-balancer-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-activity-log-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-node-pool-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-node-pool-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-cluster-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-object-storage-account-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-account-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-wellknown-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-sku-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-subnet-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-nic-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-gateway-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-storage-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-iterator-schema.json
+- aid: eu-sovereign-cloud-api:eu-sovereign-cloud-api-nic-api
+  name: Sovereign European Cloud API (SECA) Nic API
+  description: Nic management
+  humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
+  tags:
+  - Nic
+  properties:
+  - type: OpenAPI
+    url: openapi/eu-sovereign-cloud-api-nic-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-activity-log-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-node-pool-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-node-pool-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-cluster-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-object-storage-account-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-account-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-wellknown-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-sku-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-subnet-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-nic-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-gateway-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-storage-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-iterator-schema.json
+- aid: eu-sovereign-cloud-api:eu-sovereign-cloud-api-node-pool-api
+  name: Sovereign European Cloud API (SECA) Node Pool API
+  description: Node-Pool management
+  humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
+  tags:
+  - Node-Pool
+  properties:
+  - type: OpenAPI
+    url: openapi/eu-sovereign-cloud-api-node-pool-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-activity-log-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-node-pool-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-node-pool-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-cluster-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-object-storage-account-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-account-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-wellknown-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-sku-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-subnet-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-nic-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-gateway-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-storage-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-iterator-schema.json
+- aid: eu-sovereign-cloud-api:eu-sovereign-cloud-api-public-ip-api
+  name: Sovereign European Cloud API (SECA) Public Ip API
+  description: Public Ip management
+  humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
+  tags:
+  - Public Ip
+  properties:
+  - type: OpenAPI
+    url: openapi/eu-sovereign-cloud-api-public-ip-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-activity-log-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-node-pool-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-node-pool-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-cluster-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-object-storage-account-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-account-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-wellknown-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-sku-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-subnet-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-nic-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-gateway-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-storage-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-iterator-schema.json
+- aid: eu-sovereign-cloud-api:eu-sovereign-cloud-api-region-api
+  name: Sovereign European Cloud API (SECA) Region API
+  description: Region management
+  humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
+  tags:
+  - Region
+  properties:
+  - type: OpenAPI
+    url: openapi/eu-sovereign-cloud-api-region-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-activity-log-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-node-pool-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-node-pool-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-cluster-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-object-storage-account-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-account-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-wellknown-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-sku-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-subnet-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-nic-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-gateway-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-storage-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-iterator-schema.json
+- aid: eu-sovereign-cloud-api:eu-sovereign-cloud-api-role-api
+  name: Sovereign European Cloud API (SECA) Role API
+  description: Role management
+  humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
+  tags:
+  - Role
+  properties:
+  - type: OpenAPI
+    url: openapi/eu-sovereign-cloud-api-role-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-activity-log-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-node-pool-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-node-pool-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-cluster-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-object-storage-account-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-account-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-wellknown-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-sku-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-subnet-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-nic-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-gateway-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-storage-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-iterator-schema.json
+- aid: eu-sovereign-cloud-api:eu-sovereign-cloud-api-role-assignment-api
+  name: Sovereign European Cloud API (SECA) Role Assignment API
+  description: Role Assignment management
+  humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
+  tags:
+  - Role Assignment
+  properties:
+  - type: OpenAPI
+    url: openapi/eu-sovereign-cloud-api-role-assignment-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-activity-log-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-node-pool-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-node-pool-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-cluster-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-object-storage-account-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-account-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-wellknown-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-sku-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-subnet-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-nic-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-gateway-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-storage-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-iterator-schema.json
+- aid: eu-sovereign-cloud-api:eu-sovereign-cloud-api-route-table-api
+  name: Sovereign European Cloud API (SECA) Route Table API
+  description: Route-Table management
+  humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
+  tags:
+  - Route-Table
+  properties:
+  - type: OpenAPI
+    url: openapi/eu-sovereign-cloud-api-route-table-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-activity-log-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-node-pool-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-node-pool-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-cluster-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-object-storage-account-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-account-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-wellknown-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-sku-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-subnet-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-nic-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-gateway-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-storage-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-iterator-schema.json
+- aid: eu-sovereign-cloud-api:eu-sovereign-cloud-api-security-group-api
+  name: Sovereign European Cloud API (SECA) Security Group API
+  description: Security Group management
+  humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
+  tags:
+  - Security Group
+  properties:
+  - type: OpenAPI
+    url: openapi/eu-sovereign-cloud-api-security-group-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-activity-log-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-node-pool-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-node-pool-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-cluster-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-object-storage-account-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-account-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-wellknown-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-sku-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-subnet-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-nic-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-gateway-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-storage-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-iterator-schema.json
+- aid: eu-sovereign-cloud-api:eu-sovereign-cloud-api-security-group-rule-api
+  name: Sovereign European Cloud API (SECA) Security Group Rule API
+  description: Security Group Rule management
+  humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
+  tags:
+  - Security Group Rule
+  properties:
+  - type: OpenAPI
+    url: openapi/eu-sovereign-cloud-api-security-group-rule-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-activity-log-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-node-pool-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-node-pool-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-cluster-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-object-storage-account-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-account-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-wellknown-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-sku-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-subnet-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-nic-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-gateway-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-storage-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-iterator-schema.json
+- aid: eu-sovereign-cloud-api:eu-sovereign-cloud-api-sku-api
+  name: Sovereign European Cloud API (SECA) Sku API
+  description: Sku management
+  humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
+  tags:
+  - Sku
+  properties:
+  - type: OpenAPI
+    url: openapi/eu-sovereign-cloud-api-sku-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-activity-log-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-node-pool-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-node-pool-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-cluster-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-object-storage-account-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-account-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-wellknown-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-sku-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-subnet-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-nic-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-gateway-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-storage-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-iterator-schema.json
+- aid: eu-sovereign-cloud-api:eu-sovereign-cloud-api-subnet-api
+  name: Sovereign European Cloud API (SECA) Subnet API
+  description: Subnet management
+  humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
+  tags:
+  - Subnet
+  properties:
+  - type: OpenAPI
+    url: openapi/eu-sovereign-cloud-api-subnet-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-activity-log-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-node-pool-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-node-pool-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-cluster-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-object-storage-account-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-account-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-wellknown-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-sku-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-subnet-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-nic-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-gateway-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-storage-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-iterator-schema.json
+- aid: eu-sovereign-cloud-api:eu-sovereign-cloud-api-wellknown-api
+  name: Sovereign European Cloud API (SECA) Wellknown API
+  description: Wellknown management
+  humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
+  tags:
+  - Wellknown
+  properties:
+  - type: OpenAPI
+    url: openapi/eu-sovereign-cloud-api-wellknown-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-activity-log-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-node-pool-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-node-pool-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-cluster-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-object-storage-account-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-account-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-wellknown-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-sku-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-subnet-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-nic-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-gateway-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-storage-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-iterator-schema.json
+- aid: eu-sovereign-cloud-api:eu-sovereign-cloud-api-workspace-api
+  name: Sovereign European Cloud API (SECA) Workspace API
+  description: Workspace management
+  humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
+  tags:
+  - Workspace
+  properties:
+  - type: OpenAPI
+    url: openapi/eu-sovereign-cloud-api-workspace-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-activity-log-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-node-pool-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-kubernetes-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-node-pool-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-cluster-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-load-balancer-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-nat-gateway-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-object-storage-account-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-account-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-wellknown-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-assignment-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-role-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-instance-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-sku-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-subnet-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-security-group-rule-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-nic-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-network-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-internet-gateway-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-region-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-storage-sku-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-block-storage-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-image-iterator-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-schema.json
+  - type: JSONSchema
+    url: json-schema/eu-sovereign-cloud-api-workspace-iterator-schema.json
+x-enrichment:
+  date: '2026-10-09'
+  status: enriched
+  artifacts_added: 101
+  pass: modular-v1
+  engine: identity=anthropic,contract=anthropic,surfaces=anthropic,docs=anthropic,regulatory=anthropic
+x-coverage:
+  state: covered
+  reason: identity-verified
+  detail: 'Enriched 2026-10-09: website and identity verified (verified) from the provider''s own pages; probed URLs below.'
+  evidence:
+  - url: https://raw.githubusercontent.com/api-evangelist/eu-sovereign-cloud-api/refs/heads/main/apis.yml
+    status: null

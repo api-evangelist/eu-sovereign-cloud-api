@@ -1,0 +1,588 @@
+{
+  "@context": {
+    "@vocab": "https://secapi.cloud/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "eu": "https://secapi.cloud/schema#",
+    "ActivityLogIterator": "eu:ActivityLogIterator",
+    "items": {
+      "@id": "eu:items",
+      "@container": "@list"
+    },
+    "metadata": {
+      "@id": "eu:metadata",
+      "@type": "@id"
+    },
+    "NameMetadata": "eu:NameMetadata",
+    "name": {
+      "@id": "eu:name",
+      "@type": "xsd:string"
+    },
+    "PermissionMetadata": "eu:PermissionMetadata",
+    "provider": {
+      "@id": "eu:provider",
+      "@type": "xsd:string"
+    },
+    "resource": {
+      "@id": "eu:resource",
+      "@type": "xsd:string"
+    },
+    "verb": {
+      "@id": "eu:verb",
+      "@type": "xsd:string"
+    },
+    "ModificationMetadata": "eu:ModificationMetadata",
+    "createdAt": {
+      "@id": "eu:createdAt",
+      "@type": "xsd:dateTime"
+    },
+    "deletedAt": {
+      "@id": "eu:deletedAt",
+      "@type": "xsd:dateTime"
+    },
+    "lastModifiedAt": {
+      "@id": "eu:lastModifiedAt",
+      "@type": "xsd:dateTime"
+    },
+    "resourceVersion": {
+      "@id": "eu:resourceVersion",
+      "@type": "xsd:integer"
+    },
+    "TypeMetadata": "eu:TypeMetadata",
+    "apiVersion": {
+      "@id": "eu:apiVersion",
+      "@type": "xsd:string"
+    },
+    "kind": {
+      "@id": "eu:kind",
+      "@type": "xsd:string"
+    },
+    "ref": {
+      "@id": "eu:ref",
+      "@type": "@id"
+    },
+    "TenantMetadata": "eu:TenantMetadata",
+    "tenant": {
+      "@id": "eu:tenant",
+      "@type": "xsd:string"
+    },
+    "WorkspaceMetadata": "eu:WorkspaceMetadata",
+    "workspace": {
+      "@id": "eu:workspace",
+      "@type": "xsd:string"
+    },
+    "RegionalMetadata": "eu:RegionalMetadata",
+    "region": {
+      "@id": "eu:region",
+      "@type": "xsd:string"
+    },
+    "Reference": "eu:Reference",
+    "BlockStorageSpec": "eu:BlockStorageSpec",
+    "skuRef": {
+      "@id": "eu:skuRef"
+    },
+    "sizeGB": {
+      "@id": "eu:sizeGB",
+      "@type": "xsd:integer"
+    },
+    "sourceImageRef": {
+      "@id": "eu:sourceImageRef"
+    },
+    "InstanceSkuGpuSpec": "eu:InstanceSkuGpuSpec",
+    "count": {
+      "@id": "eu:count",
+      "@type": "xsd:integer"
+    },
+    "vendor": {
+      "@id": "eu:vendor",
+      "@type": "xsd:string"
+    },
+    "model": {
+      "@id": "eu:model",
+      "@type": "xsd:string"
+    },
+    "ram": {
+      "@id": "eu:ram",
+      "@type": "xsd:integer"
+    },
+    "InstanceSkuSpec": "eu:InstanceSkuSpec",
+    "vCPU": {
+      "@id": "eu:vCPU",
+      "@type": "xsd:integer"
+    },
+    "cpuArchitecture": {
+      "@id": "eu:cpuArchitecture",
+      "@type": "xsd:string"
+    },
+    "gpu": {
+      "@id": "eu:gpu"
+    },
+    "VolumeReference": "eu:VolumeReference",
+    "deviceRef": {
+      "@id": "eu:deviceRef"
+    },
+    "type": {
+      "@id": "eu:type",
+      "@type": "xsd:string"
+    },
+    "InstanceSpec": "eu:InstanceSpec",
+    "primaryNicRef": {
+      "@id": "eu:primaryNicRef"
+    },
+    "additionalNicRefs": {
+      "@id": "eu:additionalNicRefs",
+      "@container": "@list"
+    },
+    "zone": {
+      "@id": "eu:zone"
+    },
+    "securityGroupRef": {
+      "@id": "eu:securityGroupRef"
+    },
+    "userData": {
+      "@id": "eu:userData",
+      "@type": "xsd:string"
+    },
+    "antiAffinityGroup": {
+      "@id": "eu:antiAffinityGroup",
+      "@type": "xsd:string"
+    },
+    "sshKeys": {
+      "@id": "eu:sshKeys",
+      "@container": "@list"
+    },
+    "bootVolume": {
+      "@id": "eu:bootVolume"
+    },
+    "dataVolumes": {
+      "@id": "eu:dataVolumes",
+      "@container": "@list"
+    },
+    "LoadBalancerHealthCheck": "eu:LoadBalancerHealthCheck",
+    "interval": {
+      "@id": "eu:interval",
+      "@type": "xsd:integer"
+    },
+    "timeout": {
+      "@id": "eu:timeout",
+      "@type": "xsd:integer"
+    },
+    "retry": {
+      "@id": "eu:retry",
+      "@type": "xsd:integer"
+    },
+    "LoadBalancerTarget": "eu:LoadBalancerTarget",
+    "algorithm": {
+      "@id": "eu:algorithm",
+      "@type": "xsd:string"
+    },
+    "port": {
+      "@id": "eu:port"
+    },
+    "members": {
+      "@id": "eu:members",
+      "@container": "@list"
+    },
+    "healthCheck": {
+      "@id": "eu:healthCheck",
+      "@type": "@id"
+    },
+    "proxyProtocol": {
+      "@id": "eu:proxyProtocol",
+      "@type": "xsd:string"
+    },
+    "NetworkLoadBalancerFrontend": "eu:NetworkLoadBalancerFrontend",
+    "protocol": {
+      "@id": "eu:protocol",
+      "@type": "xsd:string"
+    },
+    "target": {
+      "@id": "eu:target",
+      "@type": "@id"
+    },
+    "NetworkLoadBalancerSpec": "eu:NetworkLoadBalancerSpec",
+    "nicRef": {
+      "@id": "eu:nicRef"
+    },
+    "frontendPort": {
+      "@id": "eu:frontendPort"
+    },
+    "backendPort": {
+      "@id": "eu:backendPort"
+    },
+    "frontends": {
+      "@id": "eu:frontends",
+      "@container": "@list"
+    },
+    "NetworkSkuSpec": "eu:NetworkSkuSpec",
+    "bandwidth": {
+      "@id": "eu:bandwidth",
+      "@type": "xsd:integer"
+    },
+    "packets": {
+      "@id": "eu:packets",
+      "@type": "xsd:integer"
+    },
+    "cidr": "eu:cidr",
+    "ipv4": {
+      "@id": "eu:ipv4",
+      "@type": "xsd:string"
+    },
+    "ipv6": {
+      "@id": "eu:ipv6",
+      "@type": "xsd:string"
+    },
+    "NetworkSpec": "eu:NetworkSpec",
+    "additionalCidrs": {
+      "@id": "eu:additionalCidrs",
+      "@container": "@list"
+    },
+    "NicSpec": "eu:NicSpec",
+    "securityGroupRefs": {
+      "@id": "eu:securityGroupRefs",
+      "@container": "@list"
+    },
+    "addresses": {
+      "@id": "eu:addresses",
+      "@container": "@list"
+    },
+    "publicIpRefs": {
+      "@id": "eu:publicIpRefs",
+      "@container": "@list"
+    },
+    "subnetRef": {
+      "@id": "eu:subnetRef"
+    },
+    "IPVersion": "eu:IPVersion",
+    "PublicIpSpec": "eu:PublicIpSpec",
+    "version": {
+      "@id": "eu:version",
+      "@type": "@id"
+    },
+    "address": {
+      "@id": "eu:address",
+      "@type": "xsd:string"
+    },
+    "RoleAssignmentScope": "eu:RoleAssignmentScope",
+    "tenants": {
+      "@id": "eu:tenants",
+      "@container": "@list"
+    },
+    "regions": {
+      "@id": "eu:regions",
+      "@container": "@list"
+    },
+    "workspaces": {
+      "@id": "eu:workspaces",
+      "@container": "@list"
+    },
+    "RoleAssignmentSpec": "eu:RoleAssignmentSpec",
+    "subs": {
+      "@id": "eu:subs",
+      "@container": "@list"
+    },
+    "scopes": {
+      "@id": "eu:scopes",
+      "@container": "@list"
+    },
+    "roles": {
+      "@id": "eu:roles",
+      "@container": "@list"
+    },
+    "Permission": "eu:Permission",
+    "resources": {
+      "@id": "eu:resources",
+      "@container": "@list"
+    },
+    "RoleSpec": "eu:RoleSpec",
+    "permissions": {
+      "@id": "eu:permissions",
+      "@container": "@list"
+    },
+    "Ports": "eu:Ports",
+    "from": {
+      "@id": "eu:from"
+    },
+    "to": {
+      "@id": "eu:to"
+    },
+    "list": {
+      "@id": "eu:list",
+      "@container": "@list"
+    },
+    "IcmpConfig": "eu:IcmpConfig",
+    "code": {
+      "@id": "eu:code",
+      "@type": "xsd:integer"
+    },
+    "SecurityGroupRuleSpec": "eu:SecurityGroupRuleSpec",
+    "annotations": {
+      "@id": "eu:annotations",
+      "@type": "@id"
+    },
+    "direction": {
+      "@id": "eu:direction",
+      "@type": "xsd:string"
+    },
+    "ports": {
+      "@id": "eu:ports"
+    },
+    "icmp": {
+      "@id": "eu:icmp",
+      "@type": "@id"
+    },
+    "sourceRef": {
+      "@id": "eu:sourceRef",
+      "@container": "@list"
+    },
+    "SecurityGroupSpec": "eu:SecurityGroupSpec",
+    "rules": {
+      "@id": "eu:rules",
+      "@container": "@list"
+    },
+    "ruleRefs": {
+      "@id": "eu:ruleRefs",
+      "@container": "@list"
+    },
+    "StorageSkuSpec": "eu:StorageSkuSpec",
+    "iops": {
+      "@id": "eu:iops",
+      "@type": "xsd:integer"
+    },
+    "minVolumeSize": {
+      "@id": "eu:minVolumeSize",
+      "@type": "xsd:integer"
+    },
+    "SubnetSpec": "eu:SubnetSpec",
+    "routeTableRef": {
+      "@id": "eu:routeTableRef"
+    },
+    "RequestObject": "eu:RequestObject",
+    "body": {
+      "@id": "eu:body"
+    },
+    "ResponseObject": "eu:ResponseObject",
+    "ActivityLogSpec": "eu:ActivityLogSpec",
+    "subject": {
+      "@id": "eu:subject",
+      "@type": "xsd:string"
+    },
+    "request": {
+      "@id": "eu:request",
+      "@type": "@id"
+    },
+    "response": {
+      "@id": "eu:response",
+      "@type": "@id"
+    },
+    "ActivityLog": "eu:ActivityLog",
+    "spec": {
+      "@id": "eu:spec",
+      "@type": "@id"
+    },
+    "ErrorSource": "eu:ErrorSource",
+    "pointer": {
+      "@id": "eu:pointer",
+      "@type": "xsd:string"
+    },
+    "parameter": {
+      "@id": "eu:parameter",
+      "@type": "xsd:string"
+    },
+    "Error": "eu:Error",
+    "title": {
+      "@id": "eu:title",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "eu:status",
+      "@type": "xsd:decimal"
+    },
+    "detail": {
+      "@id": "eu:detail",
+      "@type": "xsd:string"
+    },
+    "instance": {
+      "@id": "eu:instance",
+      "@type": "xsd:string"
+    },
+    "sources": {
+      "@id": "eu:sources",
+      "@container": "@list"
+    },
+    "meta": {
+      "@id": "eu:meta"
+    },
+    "ClusterIterator": "eu:ClusterIterator",
+    "Node-PoolIterator": "eu:Node-PoolIterator",
+    "UserResourceMetadata": "eu:UserResourceMetadata",
+    "labels": {
+      "@id": "eu:labels",
+      "@type": "@id"
+    },
+    "extensions": {
+      "@id": "eu:extensions",
+      "@type": "@id"
+    },
+    "KubernetesClusterSpec": "eu:KubernetesClusterSpec",
+    "restrictKubernetesApi": {
+      "@id": "eu:restrictKubernetesApi",
+      "@container": "@list"
+    },
+    "podCidr": {
+      "@id": "eu:podCidr",
+      "@type": "xsd:string"
+    },
+    "serviceCidr": {
+      "@id": "eu:serviceCidr",
+      "@type": "xsd:string"
+    },
+    "ResourceState": "eu:ResourceState",
+    "StatusCondition": "eu:StatusCondition",
+    "state": {
+      "@id": "eu:state",
+      "@type": "@id"
+    },
+    "lastTransitionAt": {
+      "@id": "eu:lastTransitionAt",
+      "@type": "xsd:dateTime"
+    },
+    "reason": {
+      "@id": "eu:reason",
+      "@type": "xsd:string"
+    },
+    "message": {
+      "@id": "eu:message",
+      "@type": "xsd:string"
+    },
+    "Status": "eu:Status",
+    "conditions": {
+      "@id": "eu:conditions",
+      "@container": "@list"
+    },
+    "KubernetesNodeRootVolume": "eu:KubernetesNodeRootVolume",
+    "KubernetesNodeTemplate": "eu:KubernetesNodeTemplate",
+    "rootVolume": {
+      "@id": "eu:rootVolume",
+      "@type": "@id"
+    },
+    "KubernetesNodeTaint": "eu:KubernetesNodeTaint",
+    "key": {
+      "@id": "eu:key",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "eu:value",
+      "@type": "xsd:string"
+    },
+    "effect": {
+      "@id": "eu:effect",
+      "@type": "xsd:string"
+    },
+    "KubernetesNodePoolSpec": "eu:KubernetesNodePoolSpec",
+    "instances": {
+      "@id": "eu:instances",
+      "@type": "xsd:integer"
+    },
+    "nodeTemplate": {
+      "@id": "eu:nodeTemplate",
+      "@type": "@id"
+    },
+    "taints": {
+      "@id": "eu:taints",
+      "@container": "@list"
+    },
+    "NetworkLoadBalancerIterator": "eu:NetworkLoadBalancerIterator",
+    "InternetNatGatewayInstanceIterator": "eu:InternetNatGatewayInstanceIterator",
+    "InternetNatGatewayInstanceSpec": "eu:InternetNatGatewayInstanceSpec",
+    "publicIpRef": {
+      "@id": "eu:publicIpRef"
+    },
+    "AccountIterator": "eu:AccountIterator",
+    "WellknownEndpoint": "eu:WellknownEndpoint",
+    "url": {
+      "@id": "eu:url",
+      "@type": "xsd:string"
+    },
+    "Wellknown": "eu:Wellknown",
+    "endpoints": {
+      "@id": "eu:endpoints",
+      "@container": "@list"
+    },
+    "RoleIterator": "eu:RoleIterator",
+    "RoleAssignmentIterator": "eu:RoleAssignmentIterator",
+    "SkuIterator": "eu:SkuIterator",
+    "InstanceIterator": "eu:InstanceIterator",
+    "SystemResourceMetadata": "eu:SystemResourceMetadata",
+    "SecurityGroupIterator": "eu:SecurityGroupIterator",
+    "SecurityGroupRuleIterator": "eu:SecurityGroupRuleIterator",
+    "NicIterator": "eu:NicIterator",
+    "PublicIpIterator": "eu:PublicIpIterator",
+    "NetworkIterator": "eu:NetworkIterator",
+    "InternetGatewayIterator": "eu:InternetGatewayIterator",
+    "SubnetIterator": "eu:SubnetIterator",
+    "Route-TableIterator": "eu:Route-TableIterator",
+    "InternetGatewaySpec": "eu:InternetGatewaySpec",
+    "egressOnly": {
+      "@id": "eu:egressOnly",
+      "@type": "xsd:boolean"
+    },
+    "NetworkMetadata": "eu:NetworkMetadata",
+    "network": {
+      "@id": "eu:network",
+      "@type": "xsd:string"
+    },
+    "RouteSpec": "eu:RouteSpec",
+    "destinationCidrBlock": {
+      "@id": "eu:destinationCidrBlock",
+      "@type": "xsd:string"
+    },
+    "targetRef": {
+      "@id": "eu:targetRef"
+    },
+    "RouteTableSpec": "eu:RouteTableSpec",
+    "routes": {
+      "@id": "eu:routes",
+      "@container": "@list"
+    },
+    "RegionIterator": "eu:RegionIterator",
+    "Provider": "eu:Provider",
+    "RegionSpec": "eu:RegionSpec",
+    "availableZones": {
+      "@id": "eu:availableZones",
+      "@container": "@list"
+    },
+    "providers": {
+      "@id": "eu:providers",
+      "@container": "@list"
+    },
+    "Region": "eu:Region",
+    "ImageIterator": "eu:ImageIterator",
+    "Block-StorageIterator": "eu:Block-StorageIterator",
+    "ImageSpec": "eu:ImageSpec",
+    "blockStorageRef": {
+      "@id": "eu:blockStorageRef"
+    },
+    "initializer": {
+      "@id": "eu:initializer",
+      "@type": "xsd:string"
+    },
+    "boot": {
+      "@id": "eu:boot",
+      "@type": "xsd:string"
+    },
+    "WorkspaceIterator": "eu:WorkspaceIterator"
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Sovereign European Cloud API (SECA) API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Sovereign European Cloud API (SECA)'s own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-09) from openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml, openapi/eu-sovereign-cloud-api-extensions-kubernetes-v1beta1-openapi.yml, openapi/eu-sovereign-cloud-api-extensions-loadbalancer-v1beta1-openapi.yml.",
+  "dcterms:created": "2026-10-09",
+  "dcterms:source": [
+    "openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml",
+    "openapi/eu-sovereign-cloud-api-extensions-kubernetes-v1beta1-openapi.yml",
+    "openapi/eu-sovereign-cloud-api-extensions-loadbalancer-v1beta1-openapi.yml",
+    "openapi/eu-sovereign-cloud-api-extensions-natgateway-v1beta1-openapi.yml",
+    "openapi/eu-sovereign-cloud-api-extensions-objectstorage-v1beta1-openapi.yml"
+  ]
+}

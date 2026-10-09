@@ -1,0 +1,289 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/eu-sovereign-cloud-api/main/json-schema/eu-sovereign-cloud-api-storage-sku-schema.json",
+  "title": "StorageSku",
+  "description": "Represents a Stock Keeping Unit (SKU) for  storage resources.\n\nStorage SKUs define performance tiers for storage IOPS and characteristics.\nProperties, capabilities, and extensions can be found in the metadata.labels sections.\nSearchable with namespaces like \"properties.\", \"capabilities.\", and \"extensions.\".\n",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/eu-sovereign-cloud-api-foundation-storage-v1-openapi.yml#/components/schemas/StorageSku",
+  "allOf": [
+    {
+      "$ref": "#/$defs/SystemResourceMetadata"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "$ref": "#/$defs/SkuResourceMetadata"
+        },
+        "spec": {
+          "$ref": "#/$defs/StorageSkuSpec"
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "Annotations": {
+      "x-go-type-skip-optional-pointer": true,
+      "type": "object",
+      "description": "User-defined key/value pairs that are mutable and can be used to add annotations.\nThe number of annotations is eventually limited by the CSP.\n",
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 1024
+      }
+    },
+    "Extensions": {
+      "x-go-type-skip-optional-pointer": true,
+      "type": "object",
+      "description": "User-defined key/value pairs that are mutable and can be used to add extensions.\nExtensions are subject to validation by the CSP, and any value that is not accepted will be rejected during admission.\n",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "Labels": {
+      "x-go-type-skip-optional-pointer": true,
+      "type": "object",
+      "description": "User-defined key/value pairs that are mutable and can be used to\norganize and categorize resources. They can be used to filter resources.\nThe number of labels is eventually limited by the CSP.\n",
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 63
+      }
+    },
+    "NameMetadata": {
+      "type": "object",
+      "readOnly": true,
+      "required": [
+        "name"
+      ],
+      "description": "Metadata for resource names",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource identifier in dash-case (kebab-case) format. Must start and end with an alphanumeric character.\nCan contain lowercase letters, numbers, and hyphens. Multiple segments can be joined with dots.\nEach segment follows the same rules.\n",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$"
+        }
+      }
+    },
+    "PermissionMetadata": {
+      "type": "object",
+      "readOnly": true,
+      "description": "Metadata for permission management",
+      "required": [
+        "provider",
+        "resource",
+        "verb"
+      ],
+      "properties": {
+        "provider": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "resource": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "verb": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 7
+        }
+      }
+    },
+    "ReferenceURN": {
+      "type": "string",
+      "minLength": 1,
+      "description": "A unique resource name (URN) used to identify and reference this resource.\n\nThe URN is NOT a URL — it does not contain a protocol scheme (http/https), a host,\nor any endpoint-specific prefix. It is a portable, transport-agnostic identifier.\nA configured SDK client — which knows the provider's base URL and endpoint mapping —\ncan derive a URL from a URN, but the URN alone cannot be turned into a URL without\nthat SDK configuration context. This separation keeps the URN portable across\nenvironments and CSP deployments.\n\nThe full URN format is:\n  `{provider}/{version}/tenants/{tenant}/workspaces/{workspace}/{type}/{name}`\n\nFor hierarchical (nested) resources, additional parent path segments are included:\n  `seca.network/v1/tenants/tn-1/workspaces/ws-1/networks/my-net/route-tables/my-rt`\n\n### Automatic Prefix Inference\n\nIn most cases, the prefix of the URN can be automatically derived in the given context.\nTo simplify usage, only the resource type and name might be specified as a reference\nusing the `<type>/<name>` notation. The suffix can be made more specific by adding\nadditional segments separated by slashes.\n\nThe prefix is automatically inferred from the context. For example, if the resource is a\nblock storage in the same workspace the reference can be specified as\n`block-storages/my-block-storage`. If the resource is a block storage in a different workspace, the\nreference can be specified as `workspaces/ws-1/block-storages/my-block-storage`.\n\nFor automatic prefix inference, the following rules apply:\n- the version is inferred from the current resource version\n- the workspace is inferred from the current workspace\n- the region is inferred from the current region\n- the provider is inferred from the type and context of the usage\n\nThe prefix inference is resolved on admission into the full URN format, which makes it\nmostly suitable for human use.\n",
+      "maxLength": 255
+    },
+    "RegionalMetadata": {
+      "type": "object",
+      "description": "Metadata for regional resources",
+      "readOnly": true,
+      "required": [
+        "region"
+      ],
+      "properties": {
+        "region": {
+          "type": "string",
+          "description": "Reference to the region where the resource is located",
+          "minLength": 1,
+          "maxLength": 64
+        }
+      }
+    },
+    "SkuResourceMetadata": {
+      "description": "Metadata for SKU resources with name, permission, type, tenant and region information.\n",
+      "allOf": [
+        {
+          "$ref": "#/$defs/NameMetadata"
+        },
+        {
+          "$ref": "#/$defs/PermissionMetadata"
+        },
+        {
+          "$ref": "#/$defs/TypeMetadata"
+        },
+        {
+          "$ref": "#/$defs/TenantMetadata"
+        },
+        {
+          "$ref": "#/$defs/RegionalMetadata"
+        }
+      ]
+    },
+    "StorageSkuSpec": {
+      "type": "object",
+      "description": "Specification of the storage SKU, including its capabilities and extensions.\n",
+      "required": [
+        "iops",
+        "type",
+        "minVolumeSize"
+      ],
+      "properties": {
+        "iops": {
+          "type": "integer",
+          "description": "The number of IOPS (Input/Output Operations Per Second) guaranteed for\nthe storage SKU.\n",
+          "minimum": 1,
+          "maximum": 45000,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-minimum": "1",
+            "x-kubebuilder-validation-maximum": "45000"
+          }
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of storage SKU. Can be one of the following:\n\n* `local-ephemeral`: Local storage is directly attached to the hypervisor\n  hosting the instance. In the event of a hypervisor failure or instance\n  restart, the data may either be lost or become unavailable. The failure\n  mode depends on the Cloud Service Provider (CSP).\n  Users of local storage should be aware of these risks and implement\n  a robust backup strategy or application level replication of the data.\n  Local storage is typically suited for high-performance workloads requiring\n  low latency and high throughput, where the application layer can handle\n  failures. It is not recommended for workloads demanding high availability\n  or data durability. Example use-cases include caching, temporary data\n  or immutable workloads such as operating system images without local data.\n* `local-durable`: Local durable storage is similar to local storage\n  but is designed to provide data durability while providing high-performance.\n  It is typically implemented using a redundant storage device or\n  replicated storage solution. Local durable storage is suitable for\n  workloads requiring high performance and low latency, while also\n  ensuring data durability at the cost of availability. The time to\n  restore data may vary depending on the CSP and the\n  will be significantly higher then using `remote-durable` storage.\n  Example use-cases include replicated paxos or raft based databases or\n  replicated databases using synchronous replication, in addition to\n  file storage.\n* `remote-durable`: Remote storage is a network-attached storage solution\n  designed to provide data redundancy and high availability. While\n  typically slower than local storage, remote storage offers the\n  advantage of being accessible by different hypervisors.\n  This means the storage can be used by different instances running\n  on separate hypervisors, but only one instance at a time. This\n  enabled the recreation of the instance with the same storage on a\n  different hypervisor and therefore greatly reduces the recovery\n  time in case of failure of the hypervisor. Remote storage cannot be\n  attached to multiple instances simultaneously.\n  Example use-cases include file storage or replicated databases\n  using asynchronous replication.\n",
+          "enum": [
+            "local-ephemeral",
+            "local-durable",
+            "remote-durable"
+          ],
+          "x-enumNames": [
+            "StorageSkuTypeLocalEphemeral",
+            "StorageSkuTypeLocalDurable",
+            "StorageSkuTypeRemoteDurable"
+          ],
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-enum": "local-ephemeral;local-durable;remote-durable"
+          }
+        },
+        "minVolumeSize": {
+          "type": "integer",
+          "description": "Minimum volume size for guaranteed performance, in GB.\n",
+          "minimum": 1,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-minimum": "1"
+          }
+        }
+      }
+    },
+    "SystemResourceMetadata": {
+      "type": "object",
+      "description": "Metadata for user-defined resource properties",
+      "properties": {
+        "labels": {
+          "$ref": "#/$defs/Labels"
+        },
+        "annotations": {
+          "$ref": "#/$defs/Annotations"
+        },
+        "extensions": {
+          "$ref": "#/$defs/Extensions"
+        }
+      }
+    },
+    "TenantMetadata": {
+      "type": "object",
+      "description": "Metadata for resources with tenant constraints",
+      "readOnly": true,
+      "required": [
+        "tenant"
+      ],
+      "properties": {
+        "tenant": {
+          "type": "string",
+          "description": "Tenant identifier",
+          "minLength": 1,
+          "maxLength": 64
+        }
+      }
+    },
+    "TypeMetadata": {
+      "type": "object",
+      "readOnly": true,
+      "required": [
+        "apiVersion",
+        "kind",
+        "ref"
+      ],
+      "description": "Metadata for all resources with type information.\n",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "description": "API version of the resource",
+          "minLength": 1,
+          "maxLength": 16,
+          "default": "v1"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Type of the resource",
+          "enum": [
+            "activity-log",
+            "block-storage",
+            "image",
+            "instance",
+            "instance-sku",
+            "internet-gateway",
+            "network",
+            "network-load-balancer",
+            "network-sku",
+            "nic",
+            "object-storage-account",
+            "public-ip",
+            "region",
+            "role",
+            "role-assignment",
+            "routing-table",
+            "security-group",
+            "security-group-rule",
+            "storage-sku",
+            "subnet",
+            "workspace"
+          ],
+          "x-enumNames": [
+            "ResourceKindActivityLog",
+            "ResourceKindBlockStorage",
+            "ResourceKindImage",
+            "ResourceKindInstance",
+            "ResourceKindInstanceSku",
+            "ResourceKindInternetGateway",
+            "ResourceKindNetwork",
+            "ResourceKindNetworkLoadBalancer",
+            "ResourceKindNetworkSku",
+            "ResourceKindNic",
+            "ResourceKindObjectStorageAccount",
+            "ResourceKindPublicIP",
+            "ResourceKindRegion",
+            "ResourceKindRole",
+            "ResourceKindRoleAssignment",
+            "ResourceKindRoutingTable",
+            "ResourceKindSecurityGroup",
+            "ResourceKindSecurityGroupRule",
+            "ResourceKindStorageSku",
+            "ResourceKindSubnet",
+            "ResourceKindWorkspace"
+          ]
+        },
+        "ref": {
+          "$ref": "#/$defs/ReferenceURN"
+        }
+      }
+    }
+  }
+}

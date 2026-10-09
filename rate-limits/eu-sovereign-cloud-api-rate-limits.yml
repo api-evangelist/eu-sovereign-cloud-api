@@ -1,0 +1,12 @@
+generated: '2026-10-09'
+method: none
+source: https://spec.secapi.cloud/docs/content/Conventions/http-semantics
+name: SECA Rate Limits
+limit_count: 0
+limits: []
+signaling:
+  status: 429
+  headers:
+  - Retry-After
+note: No numeric limits are published. The HTTP Semantics page defines 429 Too Many Requests and says the response
+  "should include a Retry-After header"; limits are left to each implementing provider.

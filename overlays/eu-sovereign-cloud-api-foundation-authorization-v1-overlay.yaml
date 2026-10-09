@@ -1,0 +1,82 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist agent overlay for Authorization
+  version: 1.0.0
+extends: ../openapi/_original/eu-sovereign-cloud-api-foundation-authorization-v1-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/eu-sovereign-cloud-api-foundation-authorization-v1-openapi.yml
+x-rationale: Adds agent-facing annotations derived from HTTP method semantics (GET read-only; PUT createOrUpdate and DELETE
+  idempotent per the spec's create-or-update design; POST start/stop/restart non-idempotent actions), the candidate MCP tool
+  name for each operation (mcp/eu-sovereign-cloud-api-mcp.yml), externalDocs pointing at spec.secapi.cloud, and the base-URL
+  caveat recorded in apis.yml. The original OpenAPI is not modified.
+actions:
+- target: $.info
+  update:
+    x-api-evangelist:
+      provider: eu-sovereign-cloud-api
+      family: foundation-authorization-v1
+      base-url-note: No shared production base URL. Per spec.secapi.cloud/docs/content/Examples/usage each implementing cloud
+        provider (e.g. IONOS, Aruba) serves SECA on its own host, dns-based or path-based. The servers[] host demo.secapi.cloud
+        did not resolve in DNS on 2026-10-09.
+- target: $
+  update:
+    externalDocs:
+      description: SECA specification documentation
+      url: https://spec.secapi.cloud/
+- target: $.paths['/v1/tenants/{tenant}/roles'].get
+  update:
+    x-agent-hints:
+      readOnly: true
+      destructive: false
+      idempotent: true
+      mcp-tool: authorization_list_roles
+- target: $.paths['/v1/tenants/{tenant}/roles/{name}'].get
+  update:
+    x-agent-hints:
+      readOnly: true
+      destructive: false
+      idempotent: true
+      mcp-tool: authorization_get_role
+- target: $.paths['/v1/tenants/{tenant}/roles/{name}'].put
+  update:
+    x-agent-hints:
+      readOnly: false
+      destructive: false
+      idempotent: true
+      mcp-tool: authorization_create_or_update_role
+- target: $.paths['/v1/tenants/{tenant}/roles/{name}'].delete
+  update:
+    x-agent-hints:
+      readOnly: false
+      destructive: true
+      idempotent: true
+      mcp-tool: authorization_delete_role
+- target: $.paths['/v1/tenants/{tenant}/role-assignments'].get
+  update:
+    x-agent-hints:
+      readOnly: true
+      destructive: false
+      idempotent: true
+      mcp-tool: authorization_list_role_assignments
+- target: $.paths['/v1/tenants/{tenant}/role-assignments/{name}'].get
+  update:
+    x-agent-hints:
+      readOnly: true
+      destructive: false
+      idempotent: true
+      mcp-tool: authorization_get_role_assignment
+- target: $.paths['/v1/tenants/{tenant}/role-assignments/{name}'].put
+  update:
+    x-agent-hints:
+      readOnly: false
+      destructive: false
+      idempotent: true
+      mcp-tool: authorization_create_or_update_role_assignment
+- target: $.paths['/v1/tenants/{tenant}/role-assignments/{name}'].delete
+  update:
+    x-agent-hints:
+      readOnly: false
+      destructive: true
+      idempotent: true
+      mcp-tool: authorization_delete_role_assignment

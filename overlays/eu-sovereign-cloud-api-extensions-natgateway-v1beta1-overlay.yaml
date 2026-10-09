@@ -1,0 +1,54 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist agent overlay for NAT Gateway
+  version: 1.0.0
+extends: ../openapi/_original/eu-sovereign-cloud-api-extensions-natgateway-v1beta1-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/eu-sovereign-cloud-api-extensions-natgateway-v1beta1-openapi.yml
+x-rationale: Adds agent-facing annotations derived from HTTP method semantics (GET read-only; PUT createOrUpdate and DELETE
+  idempotent per the spec's create-or-update design; POST start/stop/restart non-idempotent actions), the candidate MCP tool
+  name for each operation (mcp/eu-sovereign-cloud-api-mcp.yml), externalDocs pointing at spec.secapi.cloud, and the base-URL
+  caveat recorded in apis.yml. The original OpenAPI is not modified.
+actions:
+- target: $.info
+  update:
+    x-api-evangelist:
+      provider: eu-sovereign-cloud-api
+      family: extensions-natgateway-v1beta1
+      base-url-note: No shared production base URL. Per spec.secapi.cloud/docs/content/Examples/usage each implementing cloud
+        provider (e.g. IONOS, Aruba) serves SECA on its own host, dns-based or path-based. The servers[] host demo.secapi.cloud
+        did not resolve in DNS on 2026-10-09.
+- target: $
+  update:
+    externalDocs:
+      description: SECA specification documentation
+      url: https://spec.secapi.cloud/
+- target: $.paths['/v1beta1/tenants/{tenant}/workspaces/{workspace}/internet-nat-gateway-instances'].get
+  update:
+    x-agent-hints:
+      readOnly: true
+      destructive: false
+      idempotent: true
+      mcp-tool: natgateway_list_internet_nat_gateway_instances
+- target: $.paths['/v1beta1/tenants/{tenant}/workspaces/{workspace}/internet-nat-gateway-instances/{name}'].get
+  update:
+    x-agent-hints:
+      readOnly: true
+      destructive: false
+      idempotent: true
+      mcp-tool: natgateway_get_internet_nat_gateway_instance
+- target: $.paths['/v1beta1/tenants/{tenant}/workspaces/{workspace}/internet-nat-gateway-instances/{name}'].put
+  update:
+    x-agent-hints:
+      readOnly: false
+      destructive: false
+      idempotent: true
+      mcp-tool: natgateway_create_or_update_internet_nat_gateway_instance
+- target: $.paths['/v1beta1/tenants/{tenant}/workspaces/{workspace}/internet-nat-gateway-instances/{name}'].delete
+  update:
+    x-agent-hints:
+      readOnly: false
+      destructive: true
+      idempotent: true
+      mcp-tool: natgateway_delete_internet_nat_gateway_instance

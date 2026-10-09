@@ -1,0 +1,52 @@
+generated: '2026-10-09'
+method: searched
+source: https://github.com/eu-sovereign-cloud/spec/releases
+name: SECA Specification Changelog
+scheme: GitHub Releases on eu-sovereign-cloud/spec, tags v1, v1.1 ... v1.8; per-resource API versions (v1, v1beta1)
+  are separate
+current_version: v1.8
+entries:
+- version: v1.8
+  date: '2026-09-24'
+  breaking: null
+  highlights:
+  - ObjectStorageAccount scoped to tenant, not workspace (PR 316)
+  - Compute instance action preconditions documented and missing 412 response added (PR 317)
+  - Description for status.conditions; CEL validations for Subnet
+  url: https://github.com/eu-sovereign-cloud/spec/releases/tag/v1.8
+- version: v1.7
+  date: '2026-06-30'
+  breaking: null
+  highlights:
+  - Fix instance and network default value (PR 314)
+  url: https://github.com/eu-sovereign-cloud/spec/releases/tag/v1.7
+- version: v1.6
+  date: '2026-06-30'
+  breaking: null
+  highlights:
+  - Removed terraform spec (PR 311)
+  - Defaults for block storage size, network cidr, instance powerstate (PR 312)
+  url: https://github.com/eu-sovereign-cloud/spec/releases/tag/v1.6
+- version: v1.5
+  date: '2026-06-22'
+  breaking: null
+  highlights:
+  - Resolve cyclic dependency between network and route table (PR 309)
+  - NAT gateway property propagation fix (PR 308)
+  url: https://github.com/eu-sovereign-cloud/spec/releases/tag/v1.5
+- version: v1.4
+  date: '2026-05-19'
+  breaking: null
+  highlights:
+  - Workflow to upgrade go-sdk with latest spec (PR 302)
+  - Status documentation aligned with OpenAPI (PR 303)
+  - CEL validations added (PR 305)
+  url: https://github.com/eu-sovereign-cloud/spec/releases/tag/v1.4
+- version: v1.3
+  date: '2026-04-22'
+  breaking: null
+  highlights:
+  - Error schema enhanced with additional properties and updated error type URIs (PR 286)
+  - Network element update (PR 284)
+  url: https://github.com/eu-sovereign-cloud/spec/releases/tag/v1.3
+note: Release notes do not label changes breaking/non-breaking; breaking is null (not stated).

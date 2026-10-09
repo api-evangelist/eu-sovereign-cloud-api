@@ -1,0 +1,69 @@
+generated: '2026-10-09'
+method: searched
+source: https://spec.secapi.cloud/docs/content/Conventions/http-semantics
+name: SECA Problem Types
+format: RFC 7807 ProblemDetails (served as application/json in the contracts)
+envelope:
+  fields:
+  - type
+  - title
+  - status
+  - detail
+  - instance
+  - sources
+  sources_item:
+  - pointer (RFC 6901 JSON Pointer)
+  - parameter
+problems:
+- status: 400
+  title: Bad Request
+  type: http://secapi.cloud/errors/invalid-request
+  description: The request was invalid or cannot be served.
+  remediation: Do not repeat without changing the request (docs).
+- status: 401
+  title: Unauthorized
+  type: http://secapi.cloud/errors/unauthorized
+  description: Authentication is required and has failed or has not been provided.
+  remediation: Repeat with a valid Authorization header (docs).
+- status: 403
+  title: Forbidden
+  type: http://secapi.cloud/errors/forbidden
+  description: The request was valid, but the server is refusing action.
+  remediation: Permission problem; re-authenticating will not help, do not repeat (docs).
+- status: 404
+  title: Not Found
+  type: http://secapi.cloud/errors/resource-not-found
+  description: The requested resource could not be found.
+  remediation: May become available later; retry allowed (docs).
+- status: 409
+  title: Conflict
+  type: http://secapi.cloud/errors/resource-conflict
+  description: The request could not be completed due to a conflict with the current state of the resource.
+  remediation: Resolve the conflict and resubmit (docs).
+- status: 412
+  title: Precondition Failed
+  type: http://secapi.cloud/errors/precondition-failed
+  description: The precondition given in the If-Match header failed.
+  remediation: Re-read the resource (resourceVersion) and retry the conditional request.
+- status: 422
+  title: Unprocessable Entity
+  type: http://secapi.cloud/errors/validation-error
+  description: The request was well-formed but was unable to be followed due to semantic errors.
+  remediation: Fix the fields named in sources[].pointer.
+- status: 500
+  title: Internal Server Error
+  type: http://secapi.cloud/errors/internal-server-error
+  description: The server encountered an unexpected condition that prevented it from fulfilling the request.
+  remediation: Reasonable for the client to retry (docs).
+- status: 429
+  title: Too Many Requests
+  type: null
+  description: The client has sent too many requests in a given amount of time (docs; not declared in contracts).
+  remediation: Wait for Retry-After.
+- status: 503
+  title: Service Unavailable
+  type: null
+  description: Intentional/anticipated downtime, e.g. service maintenance (docs; not declared in contracts).
+  remediation: Retry later.
+note: type URIs and detail strings are the examples in the spec Error4xx/5xx schemas; descriptions of 429/503 from
+  the HTTP Semantics docs page.

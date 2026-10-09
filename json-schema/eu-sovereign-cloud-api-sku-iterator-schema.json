@@ -1,0 +1,397 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/eu-sovereign-cloud-api/main/json-schema/eu-sovereign-cloud-api-sku-iterator-schema.json",
+  "title": "SkuIterator",
+  "description": "Iterator for skus",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/eu-sovereign-cloud-api-foundation-compute-v1-openapi.yml#/components/schemas/SkuIterator",
+  "type": "object",
+  "required": [
+    "items",
+    "metadata"
+  ],
+  "properties": {
+    "items": {
+      "description": "List of skus",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/InstanceSku"
+      }
+    },
+    "metadata": {
+      "$ref": "#/$defs/ResponseMetadata"
+    }
+  },
+  "$defs": {
+    "Annotations": {
+      "x-go-type-skip-optional-pointer": true,
+      "type": "object",
+      "description": "User-defined key/value pairs that are mutable and can be used to add annotations.\nThe number of annotations is eventually limited by the CSP.\n",
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 1024
+      }
+    },
+    "Extensions": {
+      "x-go-type-skip-optional-pointer": true,
+      "type": "object",
+      "description": "User-defined key/value pairs that are mutable and can be used to add extensions.\nExtensions are subject to validation by the CSP, and any value that is not accepted will be rejected during admission.\n",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "InstanceSku": {
+      "description": "Represents a Stock Keeping Unit (SKU) for compute instances.\n",
+      "allOf": [
+        {
+          "$ref": "#/$defs/SystemResourceMetadata"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "metadata": {
+              "$ref": "#/$defs/SkuResourceMetadata"
+            },
+            "spec": {
+              "$ref": "#/$defs/InstanceSkuSpec"
+            }
+          }
+        }
+      ]
+    },
+    "InstanceSkuGpuSpec": {
+      "type": "object",
+      "description": "Specification of the GPU(s) attached to an instance SKU.\n",
+      "required": [
+        "count",
+        "vendor",
+        "model",
+        "ram"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer",
+          "description": "The number of GPUs allocated to the instance SKU.\n",
+          "minimum": 1,
+          "maximum": 16,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-minimum": "1",
+            "x-kubebuilder-validation-maximum": "16"
+          }
+        },
+        "vendor": {
+          "type": "string",
+          "description": "The GPU vendor. An instance created with this SKU can only use images\nand drivers built for the same vendor.\n",
+          "enum": [
+            "nvidia",
+            "amd",
+            "intel"
+          ],
+          "x-enumNames": [
+            "InstanceSkuGpuSpecVendorNvidia",
+            "InstanceSkuGpuSpecVendorAmd",
+            "InstanceSkuGpuSpecVendorIntel"
+          ],
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-enum": "nvidia;amd;intel"
+          }
+        },
+        "model": {
+          "type": "string",
+          "description": "The GPU model name, as reported by the vendor (e.g. \"H100\", \"MI300X\",\n\"L40S\"). Free-form, since GPU model names change frequently as new\nhardware is released, unlike vendor, which is a small, stable set.\n",
+          "minLength": 1,
+          "maxLength": 64,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-min-length": "1",
+            "x-kubebuilder-validation-max-length": "64"
+          }
+        },
+        "ram": {
+          "type": "integer",
+          "description": "The amount of dedicated video memory (VRAM) per GPU, in GiB (gibibytes).\n",
+          "minimum": 1,
+          "maximum": 256,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-minimum": "1",
+            "x-kubebuilder-validation-maximum": "256"
+          }
+        }
+      }
+    },
+    "InstanceSkuSpec": {
+      "type": "object",
+      "description": "Specification of the instance SKU, including its capabilities and extensions.\n",
+      "required": [
+        "vCPU",
+        "ram",
+        "cpuArchitecture"
+      ],
+      "properties": {
+        "vCPU": {
+          "type": "integer",
+          "description": "The number of virtual CPUs (vCPUs) allocated to the instance SKU.\nThis value represents the number of cores visible to the operating system.\nIt does not specify the number of physical processors or hyper-threads available.\n",
+          "minimum": 1,
+          "maximum": 60,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-minimum": "1",
+            "x-kubebuilder-validation-maximum": "60"
+          }
+        },
+        "ram": {
+          "type": "integer",
+          "description": "The amount of RAM (Random Access Memory) allocated to the instance SKU in GiB (gibibytes).\nThis value represents the total memory available to the instance.\n",
+          "minimum": 1,
+          "maximum": 65536,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-minimum": "1",
+            "x-kubebuilder-validation-maximum": "65536"
+          }
+        },
+        "cpuArchitecture": {
+          "type": "string",
+          "description": "CPU architecture provided by the instance SKU. An instance created with this\nSKU can only use images built for the same architecture.\n",
+          "enum": [
+            "amd64",
+            "arm64",
+            "riscv"
+          ],
+          "x-enumNames": [
+            "InstanceSkuSpecCpuArchitectureAmd64",
+            "InstanceSkuSpecCpuArchitectureArm64",
+            "InstanceSkuSpecCpuArchitectureRiscv"
+          ],
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-enum": "amd64;arm64;riscv"
+          }
+        },
+        "gpu": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/InstanceSkuGpuSpec"
+            }
+          ],
+          "description": "GPU specification for this instance SKU. Omitted for instance SKUs\nwithout a GPU.\n"
+        }
+      }
+    },
+    "Labels": {
+      "x-go-type-skip-optional-pointer": true,
+      "type": "object",
+      "description": "User-defined key/value pairs that are mutable and can be used to\norganize and categorize resources. They can be used to filter resources.\nThe number of labels is eventually limited by the CSP.\n",
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 63
+      }
+    },
+    "NameMetadata": {
+      "type": "object",
+      "readOnly": true,
+      "required": [
+        "name"
+      ],
+      "description": "Metadata for resource names",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource identifier in dash-case (kebab-case) format. Must start and end with an alphanumeric character.\nCan contain lowercase letters, numbers, and hyphens. Multiple segments can be joined with dots.\nEach segment follows the same rules.\n",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$"
+        }
+      }
+    },
+    "PermissionMetadata": {
+      "type": "object",
+      "readOnly": true,
+      "description": "Metadata for permission management",
+      "required": [
+        "provider",
+        "resource",
+        "verb"
+      ],
+      "properties": {
+        "provider": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "resource": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "verb": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 7
+        }
+      }
+    },
+    "ReferenceURN": {
+      "type": "string",
+      "minLength": 1,
+      "description": "A unique resource name (URN) used to identify and reference this resource.\n\nThe URN is NOT a URL — it does not contain a protocol scheme (http/https), a host,\nor any endpoint-specific prefix. It is a portable, transport-agnostic identifier.\nA configured SDK client — which knows the provider's base URL and endpoint mapping —\ncan derive a URL from a URN, but the URN alone cannot be turned into a URL without\nthat SDK configuration context. This separation keeps the URN portable across\nenvironments and CSP deployments.\n\nThe full URN format is:\n  `{provider}/{version}/tenants/{tenant}/workspaces/{workspace}/{type}/{name}`\n\nFor hierarchical (nested) resources, additional parent path segments are included:\n  `seca.network/v1/tenants/tn-1/workspaces/ws-1/networks/my-net/route-tables/my-rt`\n\n### Automatic Prefix Inference\n\nIn most cases, the prefix of the URN can be automatically derived in the given context.\nTo simplify usage, only the resource type and name might be specified as a reference\nusing the `<type>/<name>` notation. The suffix can be made more specific by adding\nadditional segments separated by slashes.\n\nThe prefix is automatically inferred from the context. For example, if the resource is a\nblock storage in the same workspace the reference can be specified as\n`block-storages/my-block-storage`. If the resource is a block storage in a different workspace, the\nreference can be specified as `workspaces/ws-1/block-storages/my-block-storage`.\n\nFor automatic prefix inference, the following rules apply:\n- the version is inferred from the current resource version\n- the workspace is inferred from the current workspace\n- the region is inferred from the current region\n- the provider is inferred from the type and context of the usage\n\nThe prefix inference is resolved on admission into the full URN format, which makes it\nmostly suitable for human use.\n",
+      "maxLength": 255
+    },
+    "RegionalMetadata": {
+      "type": "object",
+      "description": "Metadata for regional resources",
+      "readOnly": true,
+      "required": [
+        "region"
+      ],
+      "properties": {
+        "region": {
+          "type": "string",
+          "description": "Reference to the region where the resource is located",
+          "minLength": 1,
+          "maxLength": 64
+        }
+      }
+    },
+    "ResponseMetadata": {
+      "description": "Metadata for response objects.\n",
+      "allOf": [
+        {
+          "$ref": "#/$defs/PermissionMetadata"
+        },
+        {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "skipToken": {
+              "type": "string",
+              "description": "Opaque cursor to get the next page. Field is omitted when there are no more pages available.",
+              "maxLength": 5
+            }
+          }
+        }
+      ]
+    },
+    "SkuResourceMetadata": {
+      "description": "Metadata for SKU resources with name, permission, type, tenant and region information.\n",
+      "allOf": [
+        {
+          "$ref": "#/$defs/NameMetadata"
+        },
+        {
+          "$ref": "#/$defs/PermissionMetadata"
+        },
+        {
+          "$ref": "#/$defs/TypeMetadata"
+        },
+        {
+          "$ref": "#/$defs/TenantMetadata"
+        },
+        {
+          "$ref": "#/$defs/RegionalMetadata"
+        }
+      ]
+    },
+    "SystemResourceMetadata": {
+      "type": "object",
+      "description": "Metadata for user-defined resource properties",
+      "properties": {
+        "labels": {
+          "$ref": "#/$defs/Labels"
+        },
+        "annotations": {
+          "$ref": "#/$defs/Annotations"
+        },
+        "extensions": {
+          "$ref": "#/$defs/Extensions"
+        }
+      }
+    },
+    "TenantMetadata": {
+      "type": "object",
+      "description": "Metadata for resources with tenant constraints",
+      "readOnly": true,
+      "required": [
+        "tenant"
+      ],
+      "properties": {
+        "tenant": {
+          "type": "string",
+          "description": "Tenant identifier",
+          "minLength": 1,
+          "maxLength": 64
+        }
+      }
+    },
+    "TypeMetadata": {
+      "type": "object",
+      "readOnly": true,
+      "required": [
+        "apiVersion",
+        "kind",
+        "ref"
+      ],
+      "description": "Metadata for all resources with type information.\n",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "description": "API version of the resource",
+          "minLength": 1,
+          "maxLength": 16,
+          "default": "v1"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Type of the resource",
+          "enum": [
+            "activity-log",
+            "block-storage",
+            "image",
+            "instance",
+            "instance-sku",
+            "internet-gateway",
+            "network",
+            "network-load-balancer",
+            "network-sku",
+            "nic",
+            "object-storage-account",
+            "public-ip",
+            "region",
+            "role",
+            "role-assignment",
+            "routing-table",
+            "security-group",
+            "security-group-rule",
+            "storage-sku",
+            "subnet",
+            "workspace"
+          ],
+          "x-enumNames": [
+            "ResourceKindActivityLog",
+            "ResourceKindBlockStorage",
+            "ResourceKindImage",
+            "ResourceKindInstance",
+            "ResourceKindInstanceSku",
+            "ResourceKindInternetGateway",
+            "ResourceKindNetwork",
+            "ResourceKindNetworkLoadBalancer",
+            "ResourceKindNetworkSku",
+            "ResourceKindNic",
+            "ResourceKindObjectStorageAccount",
+            "ResourceKindPublicIP",
+            "ResourceKindRegion",
+            "ResourceKindRole",
+            "ResourceKindRoleAssignment",
+            "ResourceKindRoutingTable",
+            "ResourceKindSecurityGroup",
+            "ResourceKindSecurityGroupRule",
+            "ResourceKindStorageSku",
+            "ResourceKindSubnet",
+            "ResourceKindWorkspace"
+          ]
+        },
+        "ref": {
+          "$ref": "#/$defs/ReferenceURN"
+        }
+      }
+    }
+  }
+}

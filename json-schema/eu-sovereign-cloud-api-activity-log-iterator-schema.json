@@ -1,0 +1,1759 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/eu-sovereign-cloud-api/main/json-schema/eu-sovereign-cloud-api-activity-log-iterator-schema.json",
+  "title": "ActivityLogIterator",
+  "description": "Iterator for activity logs",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml#/components/schemas/ActivityLogIterator",
+  "type": "object",
+  "required": [
+    "items",
+    "metadata"
+  ],
+  "properties": {
+    "items": {
+      "description": "List of activity logs",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ActivityLog"
+      }
+    },
+    "metadata": {
+      "$ref": "#/$defs/ResponseMetadata"
+    }
+  },
+  "$defs": {
+    "ActivityLog": {
+      "type": "object",
+      "description": "Activity log resource",
+      "required": [
+        "spec"
+      ],
+      "properties": {
+        "metadata": {
+          "$ref": "#/$defs/RegionalWorkspaceResourceMetadata"
+        },
+        "spec": {
+          "$ref": "#/$defs/ActivityLogSpec"
+        }
+      }
+    },
+    "ActivityLogSpec": {
+      "type": "object",
+      "description": "Activity log specification",
+      "properties": {
+        "subject": {
+          "type": "string",
+          "x-go-type-skip-optional-pointer": true,
+          "description": "User-JWT executing this query",
+          "maxLength": 256,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-max-length": "256"
+          }
+        },
+        "request": {
+          "$ref": "#/$defs/RequestObject"
+        },
+        "response": {
+          "$ref": "#/$defs/ResponseObject"
+        }
+      }
+    },
+    "Annotations": {
+      "x-go-type-skip-optional-pointer": true,
+      "type": "object",
+      "description": "User-defined key/value pairs that are mutable and can be used to add annotations.\nThe number of annotations is eventually limited by the CSP.\n",
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 1024
+      }
+    },
+    "BlockStorageSpec": {
+      "type": "object",
+      "description": "References the SKU used for this block.\nIf a reference to the source image is used as the base for creating this block storage.\n",
+      "required": [
+        "skuRef",
+        "sizeGB"
+      ],
+      "properties": {
+        "skuRef": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Reference"
+            }
+          ],
+          "description": "Reference to the SKU of the block storage. The SKU is immutable after creation.\nIf you want to change the SKU, you need to create a new block storage and migrate the data.\n",
+          "x-oapi-codegen-extra-tags": {
+            "x-cel-rule-0": "self == oldSelf",
+            "x-cel-message-0": "spec.skuRef is immutable"
+          }
+        },
+        "sizeGB": {
+          "type": "integer",
+          "description": "Size of the block storage in GB.",
+          "minimum": 1,
+          "maximum": 1000000,
+          "x-oapi-codegen-extra-tags": {
+            "x-cel-rule-0": "self >= oldSelf",
+            "x-cel-message-0": "spec.sizeGB cannot be decreased",
+            "x-kubebuilder-validation-minimum": "1",
+            "x-kubebuilder-validation-maximum": "1000000"
+          }
+        },
+        "sourceImageRef": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Reference"
+            }
+          ],
+          "description": "Reference to the source image used as the base for creating the block storage."
+        }
+      }
+    },
+    "IPVersion": {
+      "type": "string",
+      "description": "IP version of the address",
+      "enum": [
+        "IPv4",
+        "IPv6"
+      ],
+      "x-enumNames": [
+        "IPVersionIPv4",
+        "IPVersionIPv6"
+      ],
+      "x-oapi-codegen-extra-tags": {
+        "x-kubebuilder-validation-enum": "IPv4;IPv6"
+      }
+    },
+    "IcmpConfig": {
+      "type": "object",
+      "description": "ICMP specific rule configuration",
+      "required": [
+        "type",
+        "code"
+      ],
+      "properties": {
+        "type": {
+          "type": "integer",
+          "description": "ICMP type",
+          "minimum": 0,
+          "maximum": 8,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-minimum": "0",
+            "x-kubebuilder-validation-maximum": "8"
+          }
+        },
+        "code": {
+          "type": "integer",
+          "description": "ICMP code",
+          "minimum": 0,
+          "maximum": 5,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-minimum": "0",
+            "x-kubebuilder-validation-maximum": "5"
+          }
+        }
+      }
+    },
+    "InstanceSkuGpuSpec": {
+      "type": "object",
+      "description": "Specification of the GPU(s) attached to an instance SKU.\n",
+      "required": [
+        "count",
+        "vendor",
+        "model",
+        "ram"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer",
+          "description": "The number of GPUs allocated to the instance SKU.\n",
+          "minimum": 1,
+          "maximum": 16,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-minimum": "1",
+            "x-kubebuilder-validation-maximum": "16"
+          }
+        },
+        "vendor": {
+          "type": "string",
+          "description": "The GPU vendor. An instance created with this SKU can only use images\nand drivers built for the same vendor.\n",
+          "enum": [
+            "nvidia",
+            "amd",
+            "intel"
+          ],
+          "x-enumNames": [
+            "InstanceSkuGpuSpecVendorNvidia",
+            "InstanceSkuGpuSpecVendorAmd",
+            "InstanceSkuGpuSpecVendorIntel"
+          ],
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-enum": "nvidia;amd;intel"
+          }
+        },
+        "model": {
+          "type": "string",
+          "description": "The GPU model name, as reported by the vendor (e.g. \"H100\", \"MI300X\",\n\"L40S\"). Free-form, since GPU model names change frequently as new\nhardware is released, unlike vendor, which is a small, stable set.\n",
+          "minLength": 1,
+          "maxLength": 64,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-min-length": "1",
+            "x-kubebuilder-validation-max-length": "64"
+          }
+        },
+        "ram": {
+          "type": "integer",
+          "description": "The amount of dedicated video memory (VRAM) per GPU, in GiB (gibibytes).\n",
+          "minimum": 1,
+          "maximum": 256,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-minimum": "1",
+            "x-kubebuilder-validation-maximum": "256"
+          }
+        }
+      }
+    },
+    "InstanceSkuSpec": {
+      "type": "object",
+      "description": "Specification of the instance SKU, including its capabilities and extensions.\n",
+      "required": [
+        "vCPU",
+        "ram",
+        "cpuArchitecture"
+      ],
+      "properties": {
+        "vCPU": {
+          "type": "integer",
+          "description": "The number of virtual CPUs (vCPUs) allocated to the instance SKU.\nThis value represents the number of cores visible to the operating system.\nIt does not specify the number of physical processors or hyper-threads available.\n",
+          "minimum": 1,
+          "maximum": 60,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-minimum": "1",
+            "x-kubebuilder-validation-maximum": "60"
+          }
+        },
+        "ram": {
+          "type": "integer",
+          "description": "The amount of RAM (Random Access Memory) allocated to the instance SKU in GiB (gibibytes).\nThis value represents the total memory available to the instance.\n",
+          "minimum": 1,
+          "maximum": 65536,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-minimum": "1",
+            "x-kubebuilder-validation-maximum": "65536"
+          }
+        },
+        "cpuArchitecture": {
+          "type": "string",
+          "description": "CPU architecture provided by the instance SKU. An instance created with this\nSKU can only use images built for the same architecture.\n",
+          "enum": [
+            "amd64",
+            "arm64",
+            "riscv"
+          ],
+          "x-enumNames": [
+            "InstanceSkuSpecCpuArchitectureAmd64",
+            "InstanceSkuSpecCpuArchitectureArm64",
+            "InstanceSkuSpecCpuArchitectureRiscv"
+          ],
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-enum": "amd64;arm64;riscv"
+          }
+        },
+        "gpu": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/InstanceSkuGpuSpec"
+            }
+          ],
+          "description": "GPU specification for this instance SKU. Omitted for instance SKUs\nwithout a GPU.\n"
+        }
+      }
+    },
+    "InstanceSpec": {
+      "type": "object",
+      "description": "Specification of the instance, including its SKU, network configuration, and storage options.\n",
+      "required": [
+        "skuRef",
+        "zone",
+        "bootVolume"
+      ],
+      "properties": {
+        "skuRef": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Reference"
+            }
+          ],
+          "description": "Reference to the SKU of the instance. The SKU is immutable after the instance is created.\nTo change the SKU, the instance must be deleted and recreated with the new SKU reference.\n",
+          "x-oapi-codegen-extra-tags": {
+            "x-cel-rule-0": "self == oldSelf",
+            "x-cel-message-0": "spec.skuRef is immutable"
+          }
+        },
+        "primaryNicRef": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Reference"
+            }
+          ],
+          "description": "Reference to the primary NIC attached to this instance."
+        },
+        "additionalNicRefs": {
+          "type": "array",
+          "x-go-type-skip-optional-pointer": true,
+          "maxItems": 16,
+          "description": "Additional NICs attached to this instance",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/Reference"
+              }
+            ],
+            "description": "Reference to an additional NIC attached to this instance."
+          },
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-max-items": "16"
+          }
+        },
+        "zone": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Zone"
+            }
+          ],
+          "description": "The zone in which the instance is deployed. The zone is immutable after the instance is created.\nTo change the zone, the instance must be deleted and recreated with the new zone.\n",
+          "x-oapi-codegen-extra-tags": {
+            "x-cel-rule-0": "self == oldSelf",
+            "x-cel-message-0": "spec.zone is immutable",
+            "x-kubebuilder-validation-min-length": "1",
+            "x-kubebuilder-validation-max-length": "32"
+          }
+        },
+        "securityGroupRef": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Reference"
+            }
+          ],
+          "description": "Reference to the security group associated with this instance."
+        },
+        "userData": {
+          "type": "string",
+          "x-go-type-skip-optional-pointer": true,
+          "description": "Cloud-init user data for instance initialization\nExample cloud-init user configuration with SSH key:\n",
+          "maxLength": 65536,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-max-length": "65536"
+          }
+        },
+        "antiAffinityGroup": {
+          "description": "Anti-affinity group to which this instance belongs.\nInstances in the same anti-affinity group are placed on different physical hosts.\nThe number of maximum instances in an anti-affinity group is provider-specific.\n",
+          "type": "string",
+          "x-go-type-skip-optional-pointer": true,
+          "maxLength": 64,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-max-length": "64"
+          }
+        },
+        "sshKeys": {
+          "type": "array",
+          "x-go-type-skip-optional-pointer": true,
+          "maxItems": 32,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "x-oapi-codegen-extra-tags": {
+              "x-kubebuilder-validation-max-length": "4096"
+            }
+          },
+          "description": "Provider-specific references to SSH keys used in cloud-init vendorData.\nThese references are used to inject SSH public keys during instance initialization\nthrough cloud-init's vendor data configuration.\n",
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-items-min-length": "1",
+            "x-kubebuilder-validation-items-max-length": "4096",
+            "x-kubebuilder-validation-max-items": "32"
+          }
+        },
+        "bootVolume": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/VolumeReference"
+            }
+          ],
+          "description": "Reference to the block storage used to store the boot volume of the instance."
+        },
+        "dataVolumes": {
+          "type": "array",
+          "x-go-type-skip-optional-pointer": true,
+          "maxItems": 64,
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/VolumeReference"
+              }
+            ],
+            "description": "Reference to the block storage used to store an additional volume of the instance."
+          },
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-max-items": "64"
+          }
+        }
+      }
+    },
+    "LoadBalancerHealthCheck": {
+      "type": "object",
+      "description": "Optional port health check. It probes the port with protocol.",
+      "required": [
+        "interval",
+        "timeout",
+        "retry"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "x-go-type-skip-optional-pointer": true,
+          "description": "Specifies the type of health check. A `connect` health check attempts\nto establish a connection to the specified port to determine its health.\n",
+          "enum": [
+            "connect"
+          ],
+          "x-enumNames": [
+            "LoadBalancerHealthCheckConnect"
+          ],
+          "default": "connect",
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-enum": "connect",
+            "x-kubebuilder-default": "connect"
+          }
+        },
+        "interval": {
+          "type": "integer",
+          "description": "health check interval in seconds. It means after how many seconds it will take a new check",
+          "minimum": 1,
+          "maximum": 86400,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-minimum": "1",
+            "x-kubebuilder-validation-maximum": "86400"
+          }
+        },
+        "timeout": {
+          "type": "integer",
+          "description": "health check in seconds. It means after how many seconds the attempt will be considered unhealthy",
+          "minimum": 1,
+          "maximum": 600,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-minimum": "1",
+            "x-kubebuilder-validation-maximum": "600"
+          }
+        },
+        "retry": {
+          "type": "integer",
+          "description": "health check retry number after considered unhealthy a backend instance",
+          "minimum": 0,
+          "maximum": 10,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-minimum": "0",
+            "x-kubebuilder-validation-maximum": "10"
+          }
+        }
+      }
+    },
+    "LoadBalancerTarget": {
+      "type": "object",
+      "description": "The target of the LoadBalancer. It can be a set of instances nics. The port can be different from the frontend port, if omitted it will be the same. If no health check is specified, the LoadBalancer will not check the health of the backend instances.",
+      "required": [
+        "members"
+      ],
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "x-go-type-skip-optional-pointer": true,
+          "description": "LoadBalancer algorithm to take a backend instance",
+          "enum": [
+            "round-robin"
+          ],
+          "x-enumNames": [
+            "LoadBalancerAlgorithmRoundRobin"
+          ],
+          "default": "round-robin",
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-enum": "round-robin",
+            "x-kubebuilder-default": "round-robin"
+          }
+        },
+        "port": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/NetworkLoadBalancerPort"
+            }
+          ],
+          "description": "Backend port to which the load balancer will be forwarding the traffic to"
+        },
+        "members": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1000,
+          "description": "Nic reference to the members as part of the LoadBalancerTarget",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/Reference"
+              }
+            ],
+            "description": "Reference to the NIC of a backend instance."
+          },
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-min-items": "1",
+            "x-kubebuilder-validation-max-items": "1000"
+          }
+        },
+        "healthCheck": {
+          "$ref": "#/$defs/LoadBalancerHealthCheck"
+        },
+        "proxyProtocol": {
+          "type": "string",
+          "x-go-type-skip-optional-pointer": true,
+          "description": "Specifies the proxy protocol version. The proxy protocol is used to\npass client connection information to the backend instances.\nIf not specified, the default is `none`.\n",
+          "enum": [
+            "none",
+            "v2"
+          ],
+          "x-enumNames": [
+            "LoadBalancerProxyProtocolNone",
+            "LoadBalancerProxyProtocolV2"
+          ],
+          "default": "none",
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-enum": "none;v2",
+            "x-kubebuilder-default": "none"
+          }
+        }
+      }
+    },
+    "ModificationMetadata": {
+      "type": "object",
+      "readOnly": true,
+      "description": "Base metadata for all resources with optional region references",
+      "required": [
+        "createdAt",
+        "lastModifiedAt",
+        "resourceVersion"
+      ],
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Indicates the time when the resource was created. The field is set by the provider and should not be modified by the user."
+        },
+        "deletedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "If set, indicates the time when the resource was marked for deletion. Resources with this field set are considered pending deletion."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Indicates the time when the resource was created or last modified. Field is used for \"If-Unmodified-Since\" logic for concurrency control. The provider guarantees that a modification on a single resource can happen only once every millisecond."
+        },
+        "resourceVersion": {
+          "type": "integer",
+          "description": "Incremented on every modification of the resource. Used for optimistic concurrency control.",
+          "minimum": 1,
+          "format": "int64"
+        }
+      }
+    },
+    "NameMetadata": {
+      "type": "object",
+      "readOnly": true,
+      "required": [
+        "name"
+      ],
+      "description": "Metadata for resource names",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource identifier in dash-case (kebab-case) format. Must start and end with an alphanumeric character.\nCan contain lowercase letters, numbers, and hyphens. Multiple segments can be joined with dots.\nEach segment follows the same rules.\n",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$"
+        }
+      }
+    },
+    "NetworkLoadBalancerFrontend": {
+      "type": "object",
+      "description": "Represents the frontend configuration of the LoadBalancer. Each frontend\ncan have multiple targets, but the combination of port and protocol must\nbe unique to ensure proper routing.\n",
+      "required": [
+        "protocol",
+        "port",
+        "target"
+      ],
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "description": "Frontend Protocol to which the load balancer will be listening on",
+          "enum": [
+            "tcp",
+            "udp",
+            "both"
+          ],
+          "x-enumNames": [
+            "LoadBalancerProtocolTCP",
+            "LoadBalancerProtocolUDP",
+            "LoadBalancerProtocolBoth"
+          ],
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-enum": "tcp;udp;both"
+          }
+        },
+        "port": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/NetworkLoadBalancerPort"
+            }
+          ],
+          "description": "Frontend port to which the load balancer will be listening on"
+        },
+        "target": {
+          "$ref": "#/$defs/LoadBalancerTarget"
+        }
+      }
+    },
+    "NetworkLoadBalancerPort": {
+      "type": "integer",
+      "description": "Load Balancer port to receive or forward the traffic",
+      "minimum": 1,
+      "maximum": 65535,
+      "x-oapi-codegen-extra-tags": {
+        "x-kubebuilder-validation-minimum": "1",
+        "x-kubebuilder-validation-maximum": "65535"
+      }
+    },
+    "NetworkLoadBalancerSpec": {
+      "type": "object",
+      "description": "Defines the specification for a Network Load Balancer. A Load Balancer can have multiple\nfrontends, where each frontend may target multiple backend instances. Frontend ports and\nprotocols must be unique to ensure proper routing. The NIC associated with the proxy\ndetermines whether the Load Balancer is internal or external.\n",
+      "required": [
+        "nicRef",
+        "frontends"
+      ],
+      "properties": {
+        "nicRef": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Reference"
+            }
+          ],
+          "description": "Reference to the NIC attached to the load balancer."
+        },
+        "securityGroupRef": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Reference"
+            }
+          ],
+          "description": "Reference to the security group associated with this instance."
+        },
+        "frontendPort": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/NetworkLoadBalancerPort"
+            }
+          ],
+          "description": "Frontend port to which the load balancer will be listening on"
+        },
+        "backendPort": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/NetworkLoadBalancerPort"
+            }
+          ],
+          "description": "Backend port to which the load balancer will be forwarding the traffic to"
+        },
+        "frontends": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/$defs/NetworkLoadBalancerFrontend"
+          },
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-min-items": "1",
+            "x-kubebuilder-validation-max-items": "50"
+          }
+        }
+      }
+    },
+    "NetworkSkuSpec": {
+      "type": "object",
+      "description": "Specification of the network SKU, including its bandwidth and packets per second.\n",
+      "required": [
+        "bandwidth",
+        "packets"
+      ],
+      "properties": {
+        "bandwidth": {
+          "type": "integer",
+          "description": "The bandwidth in Mbps (Megabits per second).\n",
+          "minimum": 1,
+          "maximum": 800000,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-minimum": "1",
+            "x-kubebuilder-validation-maximum": "800000"
+          }
+        },
+        "packets": {
+          "type": "integer",
+          "description": "The number of packets per second (PPS) that the network SKU can handle.\n",
+          "minimum": 1,
+          "maximum": 200000000000,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-minimum": "1",
+            "x-kubebuilder-validation-maximum": "200000000000"
+          }
+        }
+      }
+    },
+    "NetworkSpec": {
+      "type": "object",
+      "description": "A Network represents a virtual network that can be used to isolate resources.\nKey network concepts:\n\n* Defines a range of IP addresses for compute resources (e.g. instances)\n* Enables network segmentation and isolation\n* Provides common performance configuration across the network using a SKU\n\nThe `cidr` is the base CIDR block for the network. Additional CIDR blocks can be\nadded to the network using the `additionalCidrs` field. The `additionalCidrs` can\nbe changed after the network is created in case they are not used. The main CIDR\nblock cannot be changed after the network is created. All cidrs must be non-overlapping.\nThe cidrs have to be part of the RFC 1918 address space in case of IPv4 and or RFC 4193.\n\nIn case the system should automatically assign IP addresses to the network cidrs\nonly the network prefix is required. E.g. to request a /16 IPv4 CIDR block the\nCIDR block would be `0.0.0.0/16` and for a /56 IPv6 CIDR block the CIDR block would\nbe `::/56`. Most CSP will not allow to use a different IPv6 prefix length than /56.\n\nRoute tables associated with this network automatically include local routes for\nall network CIDRs (including `additionalCidrs`). These network-local routes are\npresent by default and cannot be removed.\n",
+      "required": [
+        "cidr",
+        "skuRef"
+      ],
+      "properties": {
+        "cidr": {
+          "$ref": "#/$defs/cidr"
+        },
+        "additionalCidrs": {
+          "type": "array",
+          "x-go-type-skip-optional-pointer": true,
+          "maxItems": 32,
+          "items": {
+            "$ref": "#/$defs/cidr"
+          },
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-max-items": "32"
+          }
+        },
+        "skuRef": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Reference"
+            }
+          ],
+          "description": "Reference to the SKU used by default for all NIC in this Network.\nCan be overridden by the NIC. The SKU is immutable after the network is created.\nTo change the SKU, the network must be deleted and recreated with the new SKU reference.\n",
+          "x-oapi-codegen-extra-tags": {
+            "x-cel-rule-0": "self == oldSelf",
+            "x-cel-message-0": "spec.skuRef is immutable"
+          }
+        }
+      }
+    },
+    "NicIp": {
+      "type": "string",
+      "description": "IP address for the NIC. The IP is either IPv4 or IPv6. The IP\ncan be `0.0.0.0` or `::` to indicate that the IP needs to be assigned\nautomatically. The IP can also be a specific IP address.\nIf not provided, the mutate admission controller will populate this value using the default values for ipv4 and ipv6.\n",
+      "minLength": 1,
+      "maxLength": 39
+    },
+    "NicSpec": {
+      "type": "object",
+      "description": "Specification of the Network Interface Card\n\nThe referenced SKU overwrites the default. In case of different network SKU references\nthe highest possible network SKU reference is used. The network SKU reference\nmight be restricted by the instance size.\n",
+      "required": [
+        "addresses",
+        "subnetRef"
+      ],
+      "properties": {
+        "securityGroupRefs": {
+          "type": "array",
+          "x-go-type-skip-optional-pointer": true,
+          "maxItems": 16,
+          "description": "References to the security groups associated with this NIC.",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/Reference"
+              }
+            ],
+            "description": "Reference to a security group."
+          },
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-max-items": "16"
+          }
+        },
+        "addresses": {
+          "type": "array",
+          "description": "List of IP addresses for the NIC. A specific IP address needs to be in the\nCIDR range of the subnet and not used by any other NIC in the subnet. Multiple\nIP addresses can be assigned to a NIC. The number of IP addresses might be\nlimited by the CSP or the subnet size.\n",
+          "minItems": 1,
+          "maxItems": 32,
+          "items": {
+            "$ref": "#/$defs/NicIp"
+          },
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-items-min-length": "1",
+            "x-kubebuilder-validation-items-max-length": "39",
+            "x-kubebuilder-validation-min-items": "1",
+            "x-kubebuilder-validation-max-items": "32",
+            "x-cel-rule-0": "self.all(x, isIP(x))",
+            "x-cel-message-0": "all IP addresses must be valid IPv4 or IPv6 addresses"
+          }
+        },
+        "publicIpRefs": {
+          "type": "array",
+          "x-go-type-skip-optional-pointer": true,
+          "maxItems": 16,
+          "description": "References to public IP addresses associated with this NIC. The IP may be external\nand not directly visible on the server/NIC itself.\n",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/Reference"
+              }
+            ],
+            "description": "Reference to a public IP address associated with this NIC."
+          },
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-max-items": "16"
+          }
+        },
+        "skuRef": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Reference"
+            }
+          ],
+          "description": "Reference to the SKU of the NIC. The SKU is immutable after the NIC is created.\nTo change the SKU, the NIC must be deleted and recreated with the new SKU reference.\n",
+          "x-oapi-codegen-extra-tags": {
+            "x-cel-rule-0": "!oldSelf.hasValue() || self == oldSelf.value()",
+            "x-cel-message-0": "spec.skuRef is immutable"
+          }
+        },
+        "subnetRef": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Reference"
+            }
+          ],
+          "description": "Reference to the subnet used by the NIC connections."
+        }
+      }
+    },
+    "ObjectStorageAccountSpec": {
+      "type": "object",
+      "description": "The specification of an object storage account, including the region and zone.\n"
+    },
+    "Permission": {
+      "type": "object",
+      "description": "Permission specification, including providers, resources, and verbs.\nPermissions are used to define access control policies for user accounts.\n",
+      "required": [
+        "provider",
+        "resources",
+        "verb"
+      ],
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The provider for which the resource and verbs are defined.\n",
+          "minLength": 1,
+          "maxLength": 64,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-min-length": "1",
+            "x-kubebuilder-validation-max-length": "64"
+          }
+        },
+        "resources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "x-oapi-codegen-extra-tags": {
+              "x-kubebuilder-validation-max-length": "256"
+            }
+          },
+          "description": "The resources are the specific resources that the permission applies to.\nThe resource can be a wildcard `*` to represent all resources or a\nspecific resource type. For example, `images/my-image` or\n`images/*`.\n",
+          "maxItems": 256,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-items-min-length": "1",
+            "x-kubebuilder-validation-items-max-length": "256",
+            "x-kubebuilder-validation-min-items": "1",
+            "x-kubebuilder-validation-max-items": "256"
+          }
+        },
+        "verb": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 7,
+            "x-oapi-codegen-extra-tags": {
+              "x-kubebuilder-validation-max-length": "7"
+            }
+          },
+          "description": "The verb is a string that represents the action to be performed on a resource.\nThe standard operations are defined as `get`, `put`, `list`, `delete`. If the\nresource has additional actions they can to be permitted individually as\nverb and action in the form `<verb>:<action>`. For example, `post.start`,\n`post.stop`, `post.restart` or with a wildcard for all actions `post`.\n",
+          "maxItems": 16,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-items-min-length": "1",
+            "x-kubebuilder-validation-items-max-length": "7",
+            "x-kubebuilder-validation-min-items": "1",
+            "x-kubebuilder-validation-max-items": "16"
+          }
+        }
+      }
+    },
+    "PermissionMetadata": {
+      "type": "object",
+      "readOnly": true,
+      "description": "Metadata for permission management",
+      "required": [
+        "provider",
+        "resource",
+        "verb"
+      ],
+      "properties": {
+        "provider": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "resource": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "verb": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 7
+        }
+      }
+    },
+    "Port": {
+      "description": "A valid network port number.\nThe port number is a 16-bit unsigned integer ranging from 1 to 65535.\n",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 65535,
+      "x-oapi-codegen-extra-tags": {
+        "x-kubebuilder-validation-minimum": "1",
+        "x-kubebuilder-validation-maximum": "65535"
+      }
+    },
+    "Ports": {
+      "type": "object",
+      "description": "Defines a specific port list or port range for the rule.\nThe configuration allows specifying individual ports, ranges, or a combination of both.\n\nBehavior:\n- If only `from` is specified, the range is interpreted as a single port: `from` to `from`.\n- If only `to` is specified, the range is interpreted as a single port: `to` to `to`.\n- If both `from` and `to` are specified, the range spans from `from` to `to`.\n- The `list` property can be used to explicitly define additional individual ports.\n\nThe final result is a comprehensive list of ports and/or port ranges.\n",
+      "properties": {
+        "from": {
+          "x-go-type-skip-optional-pointer": true,
+          "allOf": [
+            {
+              "$ref": "#/$defs/Port"
+            }
+          ]
+        },
+        "to": {
+          "x-go-type-skip-optional-pointer": true,
+          "allOf": [
+            {
+              "$ref": "#/$defs/Port"
+            }
+          ]
+        },
+        "list": {
+          "type": "array",
+          "x-go-type-skip-optional-pointer": true,
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/Port"
+          },
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-items-minimum": "1",
+            "x-kubebuilder-validation-items-maximum": "65535",
+            "x-kubebuilder-validation-max-items": "100"
+          }
+        }
+      }
+    },
+    "PublicIpSpec": {
+      "type": "object",
+      "description": "Specification of the public IP.\n",
+      "required": [
+        "version"
+      ],
+      "properties": {
+        "version": {
+          "$ref": "#/$defs/IPVersion"
+        },
+        "address": {
+          "type": "string",
+          "x-go-type-skip-optional-pointer": true,
+          "description": "The public IP address in case of BYOIP.",
+          "maxLength": 39,
+          "x-oapi-codegen-extra-tags": {
+            "x-cel-rule-0": "self.size() == 0 || isIP(self)",
+            "x-cel-message-0": "spec.address must be a valid IPv4/IPv6 address",
+            "x-kubebuilder-validation-max-length": "39"
+          }
+        }
+      }
+    },
+    "Reference": {
+      "type": "object",
+      "description": "A reference to a resource using an object. The object contains the\nsame information as the ReferenceURN, but is represented as a structured object.\nThe advantage of this representation is that it can be used to reference\nresources in different workspaces or regions without the need to specify\nthe full URN.\n",
+      "required": [
+        "resource"
+      ],
+      "properties": {
+        "region": {
+          "type": "string",
+          "x-go-type-skip-optional-pointer": true,
+          "description": "Region of the resource. If not set, the region is inferred from the context.\n",
+          "maxLength": 64,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-max-length": "64"
+          }
+        },
+        "provider": {
+          "type": "string",
+          "x-go-type-skip-optional-pointer": true,
+          "description": "Provider of the resource. If not set, the provider is inferred from the context.\n",
+          "maxLength": 64,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-max-length": "64"
+          }
+        },
+        "tenant": {
+          "type": "string",
+          "x-go-type-skip-optional-pointer": true,
+          "description": "Tenant of the resource. If not set, the tenant is inferred from the context.\n",
+          "maxLength": 64,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-max-length": "64"
+          }
+        },
+        "workspace": {
+          "type": "string",
+          "x-go-type-skip-optional-pointer": true,
+          "description": "Workspace of the resource. If not set, the workspace is inferred from the context.\n",
+          "maxLength": 64,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-max-length": "64"
+          }
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource-specific path identifying the resource within its workspace context.\nThis is the segment of the full URN after the provider, version, tenant, and\nworkspace parts. For a flat resource it is `<type>/<name>`, and for hierarchical\n(nested) resources it includes the parent path segments:\n  `networks/<network-name>/route-tables/<rt-name>`\nThe provider, tenant, and workspace can be specified as separate fields in this\nobject; they do not need to be repeated here.\n",
+          "minLength": 1,
+          "maxLength": 256,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-min-length": "1",
+            "x-kubebuilder-validation-max-length": "256"
+          }
+        }
+      }
+    },
+    "ReferenceURN": {
+      "type": "string",
+      "minLength": 1,
+      "description": "A unique resource name (URN) used to identify and reference this resource.\n\nThe URN is NOT a URL — it does not contain a protocol scheme (http/https), a host,\nor any endpoint-specific prefix. It is a portable, transport-agnostic identifier.\nA configured SDK client — which knows the provider's base URL and endpoint mapping —\ncan derive a URL from a URN, but the URN alone cannot be turned into a URL without\nthat SDK configuration context. This separation keeps the URN portable across\nenvironments and CSP deployments.\n\nThe full URN format is:\n  `{provider}/{version}/tenants/{tenant}/workspaces/{workspace}/{type}/{name}`\n\nFor hierarchical (nested) resources, additional parent path segments are included:\n  `seca.network/v1/tenants/tn-1/workspaces/ws-1/networks/my-net/route-tables/my-rt`\n\n### Automatic Prefix Inference\n\nIn most cases, the prefix of the URN can be automatically derived in the given context.\nTo simplify usage, only the resource type and name might be specified as a reference\nusing the `<type>/<name>` notation. The suffix can be made more specific by adding\nadditional segments separated by slashes.\n\nThe prefix is automatically inferred from the context. For example, if the resource is a\nblock storage in the same workspace the reference can be specified as\n`block-storages/my-block-storage`. If the resource is a block storage in a different workspace, the\nreference can be specified as `workspaces/ws-1/block-storages/my-block-storage`.\n\nFor automatic prefix inference, the following rules apply:\n- the version is inferred from the current resource version\n- the workspace is inferred from the current workspace\n- the region is inferred from the current region\n- the provider is inferred from the type and context of the usage\n\nThe prefix inference is resolved on admission into the full URN format, which makes it\nmostly suitable for human use.\n",
+      "maxLength": 255
+    },
+    "RegionalMetadata": {
+      "type": "object",
+      "description": "Metadata for regional resources",
+      "readOnly": true,
+      "required": [
+        "region"
+      ],
+      "properties": {
+        "region": {
+          "type": "string",
+          "description": "Reference to the region where the resource is located",
+          "minLength": 1,
+          "maxLength": 64
+        }
+      }
+    },
+    "RegionalWorkspaceResourceMetadata": {
+      "description": "Metadata for regional resources with name, permission, modification, type, tenant and workspace and region information.\n",
+      "allOf": [
+        {
+          "$ref": "#/$defs/NameMetadata"
+        },
+        {
+          "$ref": "#/$defs/PermissionMetadata"
+        },
+        {
+          "$ref": "#/$defs/ModificationMetadata"
+        },
+        {
+          "$ref": "#/$defs/TypeMetadata"
+        },
+        {
+          "$ref": "#/$defs/TenantMetadata"
+        },
+        {
+          "$ref": "#/$defs/WorkspaceMetadata"
+        },
+        {
+          "$ref": "#/$defs/RegionalMetadata"
+        }
+      ]
+    },
+    "RequestObject": {
+      "type": "object",
+      "description": "Request object",
+      "properties": {
+        "verb": {
+          "type": "string",
+          "x-go-type-skip-optional-pointer": true,
+          "description": "Verb that describes the action to be performed on the resource.\nThe verb can be one of the following: get, list, put, delete, post, ..\n",
+          "maxLength": 7,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-max-length": "7"
+          }
+        },
+        "body": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/BlockStorageSpec"
+            },
+            {
+              "$ref": "#/$defs/InstanceSkuSpec"
+            },
+            {
+              "$ref": "#/$defs/InstanceSpec"
+            },
+            {
+              "$ref": "#/$defs/NetworkLoadBalancerSpec"
+            },
+            {
+              "$ref": "#/$defs/NetworkSkuSpec"
+            },
+            {
+              "$ref": "#/$defs/NetworkSpec"
+            },
+            {
+              "$ref": "#/$defs/NicSpec"
+            },
+            {
+              "$ref": "#/$defs/ObjectStorageAccountSpec"
+            },
+            {
+              "$ref": "#/$defs/PublicIpSpec"
+            },
+            {
+              "$ref": "#/$defs/RoleAssignmentSpec"
+            },
+            {
+              "$ref": "#/$defs/RoleSpec"
+            },
+            {
+              "$ref": "#/$defs/SecurityGroupSpec"
+            },
+            {
+              "$ref": "#/$defs/StorageSkuSpec"
+            },
+            {
+              "$ref": "#/$defs/SubnetSpec"
+            },
+            {
+              "$ref": "#/$defs/WorkspaceSpec"
+            }
+          ]
+        },
+        "resource": {
+          "type": "string",
+          "x-go-type-skip-optional-pointer": true,
+          "maxLength": 2000,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-max-length": "2000"
+          }
+        }
+      }
+    },
+    "ResponseMetadata": {
+      "description": "Metadata for response objects.\n",
+      "allOf": [
+        {
+          "$ref": "#/$defs/PermissionMetadata"
+        },
+        {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "skipToken": {
+              "type": "string",
+              "description": "Opaque cursor to get the next page. Field is omitted when there are no more pages available.",
+              "maxLength": 5
+            }
+          }
+        }
+      ]
+    },
+    "ResponseObject": {
+      "type": "object",
+      "description": "Response object",
+      "properties": {
+        "code": {
+          "type": "number",
+          "minimum": 100,
+          "maximum": 599,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-minimum": "100",
+            "x-kubebuilder-validation-maximum": "599"
+          }
+        }
+      }
+    },
+    "RoleAssignmentScope": {
+      "type": "object",
+      "description": "Role assignment scope, including the workspaces, regions and tenants.\n",
+      "properties": {
+        "tenants": {
+          "type": "array",
+          "x-go-type-skip-optional-pointer": true,
+          "maxItems": 64,
+          "description": "Optionally, can be opened to all tenants or restricted to a specific tenant.\nIf not specified, the role assignment is valid for the current tenant.\n",
+          "items": {
+            "type": "string",
+            "description": "Tenant ID for the role assignment. A `*` wildcard can be used\nto represent all tenants. This allows the role assignment to\nbe applied to other tenants if needed.\n",
+            "minLength": 1,
+            "maxLength": 64,
+            "x-oapi-codegen-extra-tags": {
+              "x-kubebuilder-validation-max-length": "64"
+            }
+          },
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-items-min-length": "1",
+            "x-kubebuilder-validation-items-max-length": "64",
+            "x-kubebuilder-validation-max-items": "64"
+          }
+        },
+        "regions": {
+          "type": "array",
+          "x-go-type-skip-optional-pointer": true,
+          "maxItems": 64,
+          "description": "Optionally, a restriction can be applied to the region\nwhere the role assignment is valid. If not specified,\nthe role assignment is valid for all regions.\n",
+          "items": {
+            "type": "string",
+            "description": "Region ID for the role assignment\n",
+            "minLength": 1,
+            "maxLength": 64,
+            "x-oapi-codegen-extra-tags": {
+              "x-kubebuilder-validation-max-length": "64"
+            }
+          },
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-items-min-length": "1",
+            "x-kubebuilder-validation-items-max-length": "64",
+            "x-kubebuilder-validation-max-items": "64"
+          }
+        },
+        "workspaces": {
+          "type": "array",
+          "x-go-type-skip-optional-pointer": true,
+          "maxItems": 256,
+          "description": "Optionally, a restriction can be applied to the workspace\nwhere the role assignment is valid. If not specified,\nthe role assignment is valid for all workspaces.\n",
+          "items": {
+            "type": "string",
+            "description": "Workspace ID for the role assignment.\n",
+            "minLength": 1,
+            "maxLength": 64,
+            "x-oapi-codegen-extra-tags": {
+              "x-kubebuilder-validation-max-length": "64"
+            }
+          },
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-items-min-length": "1",
+            "x-kubebuilder-validation-items-max-length": "64",
+            "x-kubebuilder-validation-max-items": "256"
+          }
+        }
+      }
+    },
+    "RoleAssignmentSpec": {
+      "type": "object",
+      "description": "Role assignment for a user account. The role is assigned to the user account in the context of the specified scopes.\n",
+      "required": [
+        "subs",
+        "scopes",
+        "roles"
+      ],
+      "properties": {
+        "subs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "x-oapi-codegen-extra-tags": {
+              "x-kubebuilder-validation-max-length": "128"
+            }
+          },
+          "description": "List of subject IDs (from JWT) to whom the roles are assigned,\nA wildcard `*` can be used to represent all users of the tenant scopes\n",
+          "maxItems": 256,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-items-min-length": "1",
+            "x-kubebuilder-validation-items-max-length": "128",
+            "x-kubebuilder-validation-min-items": "1",
+            "x-kubebuilder-validation-max-items": "256"
+          }
+        },
+        "scopes": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 256,
+          "items": {
+            "$ref": "#/$defs/RoleAssignmentScope"
+          },
+          "description": "List of scopes (e.g., tenant, workspace) for the role assignment",
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-min-items": "1",
+            "x-kubebuilder-validation-max-items": "256"
+          }
+        },
+        "roles": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "x-oapi-codegen-extra-tags": {
+              "x-kubebuilder-validation-max-length": "64"
+            }
+          },
+          "description": "List of assigned role names",
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-items-min-length": "1",
+            "x-kubebuilder-validation-items-max-length": "64",
+            "x-kubebuilder-validation-min-items": "1",
+            "x-kubebuilder-validation-max-items": "32"
+          }
+        }
+      }
+    },
+    "RoleSpec": {
+      "type": "object",
+      "description": "Role specification defined as a list of permissions.\nRoles are used to define access control policies for\na user account using a role assignment.\n",
+      "required": [
+        "permissions"
+      ],
+      "properties": {
+        "permissions": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 256,
+          "items": {
+            "$ref": "#/$defs/Permission"
+          },
+          "description": "List of permissions granted by this role",
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-min-items": "1",
+            "x-kubebuilder-validation-max-items": "256"
+          }
+        }
+      }
+    },
+    "SecurityGroupRuleSpec": {
+      "type": "object",
+      "description": "Specification of a security group rule defining network access permissions.\nIf no version is specified, any IP version will be allowed.\nIf no protocol is specified, any network protocol will be allowed.\n",
+      "required": [
+        "direction"
+      ],
+      "properties": {
+        "annotations": {
+          "$ref": "#/$defs/Annotations"
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "ingress",
+            "egress"
+          ],
+          "x-enumNames": [
+            "SecurityGroupRuleDirectionIngress",
+            "SecurityGroupRuleDirectionEgress"
+          ],
+          "description": "Direction of the traffic flow:\n* ingress: Only incoming traffic is allowed\n* egress: Only outgoing traffic is allowed\n",
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-enum": "ingress;egress",
+            "x-kubebuilder-validation-max-length": "7"
+          }
+        },
+        "version": {
+          "x-go-type-skip-optional-pointer": true,
+          "allOf": [
+            {
+              "$ref": "#/$defs/IPVersion"
+            }
+          ]
+        },
+        "protocol": {
+          "type": "string",
+          "x-go-type-skip-optional-pointer": true,
+          "description": "Network protocol for the rule",
+          "enum": [
+            "tcp",
+            "udp",
+            "tcp+udp",
+            "icmp"
+          ],
+          "x-enumNames": [
+            "SecurityGroupRuleProtocolTCP",
+            "SecurityGroupRuleProtocolUDP",
+            "SecurityGroupRuleProtocolTCPUDP",
+            "SecurityGroupRuleProtocolICMP"
+          ],
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-enum": "tcp;udp;tcp+udp;icmp",
+            "x-kubebuilder-validation-max-length": "7"
+          }
+        },
+        "ports": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Ports"
+            }
+          ],
+          "x-oapi-codegen-extra-tags": {
+            "x-cel-rule-0": "!has(self.from) || !has(self.to) || self.to >= self.from",
+            "x-cel-message-0": "ports.to must be greater than or equal to ports.from"
+          }
+        },
+        "icmp": {
+          "$ref": "#/$defs/IcmpConfig"
+        },
+        "sourceRef": {
+          "type": "array",
+          "x-go-type-skip-optional-pointer": true,
+          "maxItems": 32,
+          "description": "Reference to a CIDR block, IP address, gateway, instance or security group that is allowed to communicate\nwith the security group. If a security group is specified, all instances in that group are allowed.\nIf no sourceRef is specified, all traffic is allowed.\n",
+          "items": {
+            "$ref": "#/$defs/Reference"
+          },
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-max-items": "32"
+          }
+        }
+      }
+    },
+    "SecurityGroupSpec": {
+      "type": "object",
+      "description": "Specification of the security group",
+      "properties": {
+        "rules": {
+          "type": "array",
+          "x-go-type-skip-optional-pointer": true,
+          "maxItems": 500,
+          "description": "Network access rules defining communication between security groups and external networks.\n\nRule Evaluation:\n- Default behavior is to deny all traffic not explicitly allowed\n- Rules provide granular control over allowed traffic types, sources, and destinations\n",
+          "items": {
+            "$ref": "#/$defs/SecurityGroupRuleSpec"
+          },
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-max-items": "500",
+            "x-cel-rule-0": "self.all(x, !has(x.icmp) || !has(x.protocol) || x.protocol == 'icmp')",
+            "x-cel-message-0": "icmp is only allowed when protocol is icmp",
+            "x-cel-rule-1": "self.all(x, !has(x.ports) || !has(x.protocol) || x.protocol != 'icmp')",
+            "x-cel-message-1": "ports is not allowed when protocol is icmp"
+          }
+        },
+        "ruleRefs": {
+          "type": "array",
+          "x-go-type-skip-optional-pointer": true,
+          "maxItems": 500,
+          "description": "References to shared SecurityGroupRule resources.\nThese rules are applied in addition to the inline rules.\n",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/Reference"
+              }
+            ],
+            "description": "Reference to a SecurityGroupRule resource."
+          },
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-max-items": "500"
+          }
+        }
+      }
+    },
+    "StorageSkuSpec": {
+      "type": "object",
+      "description": "Specification of the storage SKU, including its capabilities and extensions.\n",
+      "required": [
+        "iops",
+        "type",
+        "minVolumeSize"
+      ],
+      "properties": {
+        "iops": {
+          "type": "integer",
+          "description": "The number of IOPS (Input/Output Operations Per Second) guaranteed for\nthe storage SKU.\n",
+          "minimum": 1,
+          "maximum": 45000,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-minimum": "1",
+            "x-kubebuilder-validation-maximum": "45000"
+          }
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of storage SKU. Can be one of the following:\n\n* `local-ephemeral`: Local storage is directly attached to the hypervisor\n  hosting the instance. In the event of a hypervisor failure or instance\n  restart, the data may either be lost or become unavailable. The failure\n  mode depends on the Cloud Service Provider (CSP).\n  Users of local storage should be aware of these risks and implement\n  a robust backup strategy or application level replication of the data.\n  Local storage is typically suited for high-performance workloads requiring\n  low latency and high throughput, where the application layer can handle\n  failures. It is not recommended for workloads demanding high availability\n  or data durability. Example use-cases include caching, temporary data\n  or immutable workloads such as operating system images without local data.\n* `local-durable`: Local durable storage is similar to local storage\n  but is designed to provide data durability while providing high-performance.\n  It is typically implemented using a redundant storage device or\n  replicated storage solution. Local durable storage is suitable for\n  workloads requiring high performance and low latency, while also\n  ensuring data durability at the cost of availability. The time to\n  restore data may vary depending on the CSP and the\n  will be significantly higher then using `remote-durable` storage.\n  Example use-cases include replicated paxos or raft based databases or\n  replicated databases using synchronous replication, in addition to\n  file storage.\n* `remote-durable`: Remote storage is a network-attached storage solution\n  designed to provide data redundancy and high availability. While\n  typically slower than local storage, remote storage offers the\n  advantage of being accessible by different hypervisors.\n  This means the storage can be used by different instances running\n  on separate hypervisors, but only one instance at a time. This\n  enabled the recreation of the instance with the same storage on a\n  different hypervisor and therefore greatly reduces the recovery\n  time in case of failure of the hypervisor. Remote storage cannot be\n  attached to multiple instances simultaneously.\n  Example use-cases include file storage or replicated databases\n  using asynchronous replication.\n",
+          "enum": [
+            "local-ephemeral",
+            "local-durable",
+            "remote-durable"
+          ],
+          "x-enumNames": [
+            "StorageSkuTypeLocalEphemeral",
+            "StorageSkuTypeLocalDurable",
+            "StorageSkuTypeRemoteDurable"
+          ],
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-enum": "local-ephemeral;local-durable;remote-durable"
+          }
+        },
+        "minVolumeSize": {
+          "type": "integer",
+          "description": "Minimum volume size for guaranteed performance, in GB.\n",
+          "minimum": 1,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-minimum": "1"
+          }
+        }
+      }
+    },
+    "SubnetSpec": {
+      "type": "object",
+      "description": "Detailed specification of the subnet. Automatic address\nassignment is supported, similar to the network configuration. The\nsubnet's prefix length must be smaller than the network's prefix\nlength, ensuring proper subdivision of the address space.\nThe first and last IP addresses in the subnet are reserved\nthe network address and broadcast address, respectively.\n\nMost CSP will not allow to use a different IPv6 prefix length than /64.\n",
+      "required": [
+        "cidr",
+        "zone",
+        "routeTableRef"
+      ],
+      "properties": {
+        "cidr": {
+          "$ref": "#/$defs/cidr"
+        },
+        "zone": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Zone"
+            }
+          ],
+          "description": "The zone in which the subnet is deployed. The zone is immutable after the subnet is created.\n",
+          "x-oapi-codegen-extra-tags": {
+            "x-cel-rule-0": "self == oldSelf",
+            "x-cel-message-0": "spec.zone is immutable",
+            "x-kubebuilder-validation-min-length": "1",
+            "x-kubebuilder-validation-max-length": "32"
+          }
+        },
+        "routeTableRef": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Reference"
+            }
+          ],
+          "description": "Reference to the route table used for all NICs in this Subnet.\n"
+        },
+        "skuRef": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Reference"
+            }
+          ],
+          "description": "Reference to the SKU used by default for all NICs in this Network.\nCan be overridden by the NIC. The SKU is immutable after the subnet is created.\n",
+          "x-oapi-codegen-extra-tags": {
+            "x-cel-rule-0": "!oldSelf.hasValue() || self == oldSelf.value()",
+            "x-cel-message-0": "spec.skuRef is immutable"
+          }
+        }
+      }
+    },
+    "TenantMetadata": {
+      "type": "object",
+      "description": "Metadata for resources with tenant constraints",
+      "readOnly": true,
+      "required": [
+        "tenant"
+      ],
+      "properties": {
+        "tenant": {
+          "type": "string",
+          "description": "Tenant identifier",
+          "minLength": 1,
+          "maxLength": 64
+        }
+      }
+    },
+    "TypeMetadata": {
+      "type": "object",
+      "readOnly": true,
+      "required": [
+        "apiVersion",
+        "kind",
+        "ref"
+      ],
+      "description": "Metadata for all resources with type information.\n",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "description": "API version of the resource",
+          "minLength": 1,
+          "maxLength": 16,
+          "default": "v1"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Type of the resource",
+          "enum": [
+            "activity-log",
+            "block-storage",
+            "image",
+            "instance",
+            "instance-sku",
+            "internet-gateway",
+            "network",
+            "network-load-balancer",
+            "network-sku",
+            "nic",
+            "object-storage-account",
+            "public-ip",
+            "region",
+            "role",
+            "role-assignment",
+            "routing-table",
+            "security-group",
+            "security-group-rule",
+            "storage-sku",
+            "subnet",
+            "workspace"
+          ],
+          "x-enumNames": [
+            "ResourceKindActivityLog",
+            "ResourceKindBlockStorage",
+            "ResourceKindImage",
+            "ResourceKindInstance",
+            "ResourceKindInstanceSku",
+            "ResourceKindInternetGateway",
+            "ResourceKindNetwork",
+            "ResourceKindNetworkLoadBalancer",
+            "ResourceKindNetworkSku",
+            "ResourceKindNic",
+            "ResourceKindObjectStorageAccount",
+            "ResourceKindPublicIP",
+            "ResourceKindRegion",
+            "ResourceKindRole",
+            "ResourceKindRoleAssignment",
+            "ResourceKindRoutingTable",
+            "ResourceKindSecurityGroup",
+            "ResourceKindSecurityGroupRule",
+            "ResourceKindStorageSku",
+            "ResourceKindSubnet",
+            "ResourceKindWorkspace"
+          ]
+        },
+        "ref": {
+          "$ref": "#/$defs/ReferenceURN"
+        }
+      }
+    },
+    "VolumeReference": {
+      "type": "object",
+      "description": "Represents a connection between a Block Storage and an a user of the block storage.",
+      "required": [
+        "deviceRef"
+      ],
+      "properties": {
+        "deviceRef": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Reference"
+            }
+          ],
+          "description": "Reference to the block storage used to store the volume."
+        },
+        "type": {
+          "type": "string",
+          "x-go-type-skip-optional-pointer": true,
+          "description": "The connection type depends on the type of device and type of block storage.",
+          "enum": [
+            "virtio"
+          ],
+          "default": "virtio",
+          "x-enumNames": [
+            "VolumeReferenceTypeVirtio"
+          ],
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-enum": "virtio",
+            "x-kubebuilder-validation-max-length": "7",
+            "x-kubebuilder-default": "virtio"
+          }
+        }
+      }
+    },
+    "WorkspaceMetadata": {
+      "type": "object",
+      "description": "Metadata for resources with workspace constraints",
+      "readOnly": true,
+      "required": [
+        "workspace"
+      ],
+      "properties": {
+        "workspace": {
+          "type": "string",
+          "description": "Workspace identifier",
+          "minLength": 1,
+          "maxLength": 64
+        }
+      }
+    },
+    "WorkspaceSpec": {
+      "type": "object",
+      "description": "Specification of the workspace, including its capabilities and extensions.\n"
+    },
+    "Zone": {
+      "type": "string",
+      "description": "Reference to a specific zone within a region",
+      "minLength": 1,
+      "maxLength": 32
+    },
+    "cidr": {
+      "type": "object",
+      "description": "Combined IPv4 and IPv6 CIDR block for a subnet. Depending on the network\nconfiguration, either the IPv4 or IPv6 range can be omitted. So the following\ncombinations are possible:\n\n* IPv4 only\n* IPv6 only\n* IPv4 and IPv6 (Dual Stack)\n",
+      "properties": {
+        "ipv4": {
+          "type": "string",
+          "x-go-type-skip-optional-pointer": true,
+          "description": "IPv4 CIDR block for the subnet.\n",
+          "minLength": 9,
+          "maxLength": 18,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-min-length": "9",
+            "x-kubebuilder-validation-max-length": "18",
+            "x-cel-rule-0": "self.size() == 0 || (isCIDR(self) && cidr(self).ip().family() == 4)",
+            "x-cel-message-0": "cidr.ipv4 must be a valid IPv4 CIDR block"
+          }
+        },
+        "ipv6": {
+          "type": "string",
+          "x-go-type-skip-optional-pointer": true,
+          "description": "IPv6 CIDR block for the subnet.\n",
+          "minLength": 4,
+          "maxLength": 43,
+          "x-oapi-codegen-extra-tags": {
+            "x-kubebuilder-validation-min-length": "4",
+            "x-kubebuilder-validation-max-length": "43",
+            "x-cel-rule-0": "self.size() == 0 || (isCIDR(self) && cidr(self).ip().family() == 6)",
+            "x-cel-message-0": "cidr.ipv6 must be a valid IPv6 CIDR block"
+          }
+        }
+      }
+    }
+  }
+}

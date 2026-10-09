@@ -1,0 +1,909 @@
+generated: '2026-10-09'
+method: derived
+status: candidate
+source: 'Derived from the 12 SECA OpenAPI files under openapi/ (one tool per operation). No official SECA MCP server was found:
+  web search on 2026-10-09 returned none, and the eu-sovereign-cloud GitHub org lists only spec, go-sdk, conformance, ecp,
+  .github, terraform-provider-seca and iam.'
+name: Sovereign European Cloud API (SECA) MCP server (candidate)
+deployment:
+  mode: none
+  auth: unknown
+  verified: derived
+auth:
+  note: Every SECA spec declares an HTTP bearerAuth scheme; tokens are issued by each implementing cloud provider, not by
+    a central SECA host.
+notes: SECA is a specification implemented by multiple European cloud providers, each on its own host; a candidate server
+  would need a per-provider base URL and bearer token. Tool names are our derivation, not published by anyone. Note listSkus/getSku
+  exist in compute, network and storage, so tool names are prefixed by API family.
+tool_count: 89
+tools:
+- name: activitylog_list_activity_logs
+  operationId: listActivityLogs
+  api: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml
+  method: GET
+  path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/activity-logs
+  description: List activity logs
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: kubernetes_list_clusters
+  operationId: listClusters
+  api: openapi/eu-sovereign-cloud-api-extensions-kubernetes-v1beta1-openapi.yml
+  method: GET
+  path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/clusters
+  description: List clusters
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: kubernetes_get_cluster
+  operationId: getCluster
+  api: openapi/eu-sovereign-cloud-api-extensions-kubernetes-v1beta1-openapi.yml
+  method: GET
+  path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/clusters/{name}
+  description: Get cluster
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: kubernetes_create_or_update_cluster
+  operationId: createOrUpdateCluster
+  api: openapi/eu-sovereign-cloud-api-extensions-kubernetes-v1beta1-openapi.yml
+  method: PUT
+  path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/clusters/{name}
+  description: Create or update cluster
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+    idempotentHint: true
+- name: kubernetes_delete_cluster
+  operationId: deleteCluster
+  api: openapi/eu-sovereign-cloud-api-extensions-kubernetes-v1beta1-openapi.yml
+  method: DELETE
+  path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/clusters/{name}
+  description: Delete cluster
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+    idempotentHint: true
+- name: kubernetes_list_node_pools
+  operationId: listNode-Pools
+  api: openapi/eu-sovereign-cloud-api-extensions-kubernetes-v1beta1-openapi.yml
+  method: GET
+  path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/clusters/{cluster}/node-pools
+  description: List node-pools
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: kubernetes_get_node_pool
+  operationId: getNode-Pool
+  api: openapi/eu-sovereign-cloud-api-extensions-kubernetes-v1beta1-openapi.yml
+  method: GET
+  path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/clusters/{cluster}/node-pools/{name}
+  description: Get node-pool
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: kubernetes_create_or_update_node_pool
+  operationId: createOrUpdateNode-Pool
+  api: openapi/eu-sovereign-cloud-api-extensions-kubernetes-v1beta1-openapi.yml
+  method: PUT
+  path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/clusters/{cluster}/node-pools/{name}
+  description: Create or update node-pool
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+    idempotentHint: true
+- name: kubernetes_delete_node_pool
+  operationId: deleteNode-Pool
+  api: openapi/eu-sovereign-cloud-api-extensions-kubernetes-v1beta1-openapi.yml
+  method: DELETE
+  path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/clusters/{cluster}/node-pools/{name}
+  description: Delete node-pool
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+    idempotentHint: true
+- name: loadbalancer_list_network_load_balancers
+  operationId: listNetworkLoadBalancers
+  api: openapi/eu-sovereign-cloud-api-extensions-loadbalancer-v1beta1-openapi.yml
+  method: GET
+  path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/network-load-balancers
+  description: List network load balancers
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: loadbalancer_get_network_load_balancer
+  operationId: getNetworkLoadBalancer
+  api: openapi/eu-sovereign-cloud-api-extensions-loadbalancer-v1beta1-openapi.yml
+  method: GET
+  path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/network-load-balancers/{name}
+  description: Get network load balancer
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: loadbalancer_create_or_update_network_load_balancer
+  operationId: createOrUpdateNetworkLoadBalancer
+  api: openapi/eu-sovereign-cloud-api-extensions-loadbalancer-v1beta1-openapi.yml
+  method: PUT
+  path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/network-load-balancers/{name}
+  description: Create or update network load balancer
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+    idempotentHint: true
+- name: loadbalancer_delete_network_load_balancer
+  operationId: deleteNetworkLoadBalancer
+  api: openapi/eu-sovereign-cloud-api-extensions-loadbalancer-v1beta1-openapi.yml
+  method: DELETE
+  path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/network-load-balancers/{name}
+  description: Delete network load balancer
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+    idempotentHint: true
+- name: natgateway_list_internet_nat_gateway_instances
+  operationId: listInternet-Nat-Gateway-Instances
+  api: openapi/eu-sovereign-cloud-api-extensions-natgateway-v1beta1-openapi.yml
+  method: GET
+  path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/internet-nat-gateway-instances
+  description: List internet-nat-gateway-instances
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: natgateway_get_internet_nat_gateway_instance
+  operationId: getInternetNatGatewayInstance
+  api: openapi/eu-sovereign-cloud-api-extensions-natgateway-v1beta1-openapi.yml
+  method: GET
+  path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/internet-nat-gateway-instances/{name}
+  description: Get internet nat gateway instance
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: natgateway_create_or_update_internet_nat_gateway_instance
+  operationId: createOrUpdateInternetNatGatewayInstance
+  api: openapi/eu-sovereign-cloud-api-extensions-natgateway-v1beta1-openapi.yml
+  method: PUT
+  path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/internet-nat-gateway-instances/{name}
+  description: Create or update internet nat gateway instance
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+    idempotentHint: true
+- name: natgateway_delete_internet_nat_gateway_instance
+  operationId: deleteInternetNatGatewayInstance
+  api: openapi/eu-sovereign-cloud-api-extensions-natgateway-v1beta1-openapi.yml
+  method: DELETE
+  path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/internet-nat-gateway-instances/{name}
+  description: Delete internet nat gateway instance
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+    idempotentHint: true
+- name: objectstorage_list_accounts
+  operationId: listAccounts
+  api: openapi/eu-sovereign-cloud-api-extensions-objectstorage-v1beta1-openapi.yml
+  method: GET
+  path: /v1beta1/tenants/{tenant}/accounts
+  description: List accounts
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: objectstorage_get_account
+  operationId: getAccount
+  api: openapi/eu-sovereign-cloud-api-extensions-objectstorage-v1beta1-openapi.yml
+  method: GET
+  path: /v1beta1/tenants/{tenant}/accounts/{name}
+  description: Get account
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: objectstorage_create_or_update_account
+  operationId: createOrUpdateAccount
+  api: openapi/eu-sovereign-cloud-api-extensions-objectstorage-v1beta1-openapi.yml
+  method: PUT
+  path: /v1beta1/tenants/{tenant}/accounts/{name}
+  description: Create or update account
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+    idempotentHint: true
+- name: objectstorage_delete_account
+  operationId: deleteAccount
+  api: openapi/eu-sovereign-cloud-api-extensions-objectstorage-v1beta1-openapi.yml
+  method: DELETE
+  path: /v1beta1/tenants/{tenant}/accounts/{name}
+  description: Delete account
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+    idempotentHint: true
+- name: wellknown_get_wellknown
+  operationId: getWellknown
+  api: openapi/eu-sovereign-cloud-api-extensions-wellknown-v1-openapi.yml
+  method: GET
+  path: /.wellknown/secapi
+  description: Get wellknown endpoints
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: authorization_list_roles
+  operationId: listRoles
+  api: openapi/eu-sovereign-cloud-api-foundation-authorization-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/roles
+  description: List roles
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: authorization_get_role
+  operationId: getRole
+  api: openapi/eu-sovereign-cloud-api-foundation-authorization-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/roles/{name}
+  description: Get role
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: authorization_create_or_update_role
+  operationId: createOrUpdateRole
+  api: openapi/eu-sovereign-cloud-api-foundation-authorization-v1-openapi.yml
+  method: PUT
+  path: /v1/tenants/{tenant}/roles/{name}
+  description: Create or update role
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+    idempotentHint: true
+- name: authorization_delete_role
+  operationId: deleteRole
+  api: openapi/eu-sovereign-cloud-api-foundation-authorization-v1-openapi.yml
+  method: DELETE
+  path: /v1/tenants/{tenant}/roles/{name}
+  description: Delete role
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+    idempotentHint: true
+- name: authorization_list_role_assignments
+  operationId: listRoleAssignments
+  api: openapi/eu-sovereign-cloud-api-foundation-authorization-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/role-assignments
+  description: List role assignments
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: authorization_get_role_assignment
+  operationId: getRoleAssignment
+  api: openapi/eu-sovereign-cloud-api-foundation-authorization-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/role-assignments/{name}
+  description: Get role assignment
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: authorization_create_or_update_role_assignment
+  operationId: createOrUpdateRoleAssignment
+  api: openapi/eu-sovereign-cloud-api-foundation-authorization-v1-openapi.yml
+  method: PUT
+  path: /v1/tenants/{tenant}/role-assignments/{name}
+  description: Create or update role assignment
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+    idempotentHint: true
+- name: authorization_delete_role_assignment
+  operationId: deleteRoleAssignment
+  api: openapi/eu-sovereign-cloud-api-foundation-authorization-v1-openapi.yml
+  method: DELETE
+  path: /v1/tenants/{tenant}/role-assignments/{name}
+  description: Delete role assignment
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+    idempotentHint: true
+- name: compute_list_skus
+  operationId: listSkus
+  api: openapi/eu-sovereign-cloud-api-foundation-compute-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/skus
+  description: List skus
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: compute_get_sku
+  operationId: getSku
+  api: openapi/eu-sovereign-cloud-api-foundation-compute-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/skus/{name}
+  description: Get sku
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: compute_list_instances
+  operationId: listInstances
+  api: openapi/eu-sovereign-cloud-api-foundation-compute-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/instances
+  description: List instances
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: compute_get_instance
+  operationId: getInstance
+  api: openapi/eu-sovereign-cloud-api-foundation-compute-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/instances/{name}
+  description: Get instance
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: compute_create_or_update_instance
+  operationId: createOrUpdateInstance
+  api: openapi/eu-sovereign-cloud-api-foundation-compute-v1-openapi.yml
+  method: PUT
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/instances/{name}
+  description: Create or update instance
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+    idempotentHint: true
+- name: compute_delete_instance
+  operationId: deleteInstance
+  api: openapi/eu-sovereign-cloud-api-foundation-compute-v1-openapi.yml
+  method: DELETE
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/instances/{name}
+  description: Delete instance
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+    idempotentHint: true
+- name: compute_start_instance
+  operationId: StartInstance
+  api: openapi/eu-sovereign-cloud-api-foundation-compute-v1-openapi.yml
+  method: POST
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/instances/{name}/start
+  description: start instance
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+    idempotentHint: false
+- name: compute_stop_instance
+  operationId: StopInstance
+  api: openapi/eu-sovereign-cloud-api-foundation-compute-v1-openapi.yml
+  method: POST
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/instances/{name}/stop
+  description: stop instance
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+    idempotentHint: false
+- name: compute_restart_instance
+  operationId: RestartInstance
+  api: openapi/eu-sovereign-cloud-api-foundation-compute-v1-openapi.yml
+  method: POST
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/instances/{name}/restart
+  description: restart instance
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+    idempotentHint: false
+- name: network_list_skus
+  operationId: listSkus
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/skus
+  description: List skus
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: network_get_sku
+  operationId: getSku
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/skus/{name}
+  description: Get sku
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: network_list_security_groups
+  operationId: listSecurity-Groups
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/security-groups
+  description: List security-groups
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: network_get_security_group
+  operationId: getSecurityGroup
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/security-groups/{name}
+  description: Get security group
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: network_create_or_update_security_group
+  operationId: createOrUpdateSecurityGroup
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: PUT
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/security-groups/{name}
+  description: Create or update security group
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+    idempotentHint: true
+- name: network_delete_security_group
+  operationId: deleteSecurityGroup
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: DELETE
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/security-groups/{name}
+  description: Delete security group
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+    idempotentHint: true
+- name: network_list_security_group_rules
+  operationId: listSecurity-Group-Rules
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/security-group-rules
+  description: List security-group-rules
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: network_get_security_group_rule
+  operationId: getSecurityGroupRule
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/security-group-rules/{name}
+  description: Get security group rule
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: network_create_or_update_security_group_rule
+  operationId: createOrUpdateSecurityGroupRule
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: PUT
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/security-group-rules/{name}
+  description: Create or update security group rule
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+    idempotentHint: true
+- name: network_delete_security_group_rule
+  operationId: deleteSecurityGroupRule
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: DELETE
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/security-group-rules/{name}
+  description: Delete security group rule
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+    idempotentHint: true
+- name: network_list_nics
+  operationId: listNics
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/nics
+  description: List nics
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: network_get_nic
+  operationId: getNic
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/nics/{name}
+  description: Get nic
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: network_create_or_update_nic
+  operationId: createOrUpdateNic
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: PUT
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/nics/{name}
+  description: Create or update nic
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+    idempotentHint: true
+- name: network_delete_nic
+  operationId: deleteNic
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: DELETE
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/nics/{name}
+  description: Delete nic
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+    idempotentHint: true
+- name: network_list_public_ips
+  operationId: listPublicIps
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/public-ips
+  description: List public ips
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: network_get_public_ip
+  operationId: getPublicIp
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/public-ips/{name}
+  description: Get public ip
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: network_create_or_update_public_ip
+  operationId: createOrUpdatePublicIp
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: PUT
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/public-ips/{name}
+  description: Create or update public ip
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+    idempotentHint: true
+- name: network_delete_public_ip
+  operationId: deletePublicIp
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: DELETE
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/public-ips/{name}
+  description: Delete public ip
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+    idempotentHint: true
+- name: network_list_networks
+  operationId: listNetworks
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/networks
+  description: List networks
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: network_get_network
+  operationId: getNetwork
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/networks/{name}
+  description: Get network
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: network_create_or_update_network
+  operationId: createOrUpdateNetwork
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: PUT
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/networks/{name}
+  description: Create or update network
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+    idempotentHint: true
+- name: network_delete_network
+  operationId: deleteNetwork
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: DELETE
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/networks/{name}
+  description: Delete network
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+    idempotentHint: true
+- name: network_list_internet_gateways
+  operationId: listInternetGateways
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/internet-gateways
+  description: List internet gateways
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: network_get_internet_gateway
+  operationId: getInternetGateway
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/internet-gateways/{name}
+  description: Get internet gateway
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: network_create_or_update_internet_gateway
+  operationId: createOrUpdateInternetGateway
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: PUT
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/internet-gateways/{name}
+  description: Create or update internet gateway
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+    idempotentHint: true
+- name: network_delete_internet_gateway
+  operationId: deleteInternetGateway
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: DELETE
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/internet-gateways/{name}
+  description: Delete internet gateway
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+    idempotentHint: true
+- name: network_list_subnets
+  operationId: listSubnets
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/networks/{network}/subnets
+  description: List subnets
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: network_get_subnet
+  operationId: getSubnet
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/networks/{network}/subnets/{name}
+  description: Get subnet
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: network_create_or_update_subnet
+  operationId: createOrUpdateSubnet
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: PUT
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/networks/{network}/subnets/{name}
+  description: Create or update subnet
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+    idempotentHint: true
+- name: network_delete_subnet
+  operationId: deleteSubnet
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: DELETE
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/networks/{network}/subnets/{name}
+  description: Delete subnet
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+    idempotentHint: true
+- name: network_list_route_tables
+  operationId: listRoute-Tables
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/networks/{network}/route-tables
+  description: List route-tables
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: network_get_route_table
+  operationId: getRoute-Table
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/networks/{network}/route-tables/{name}
+  description: Get route-table
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: network_create_or_update_route_table
+  operationId: createOrUpdateRoute-Table
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: PUT
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/networks/{network}/route-tables/{name}
+  description: Create or update route-table
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+    idempotentHint: true
+- name: network_delete_route_table
+  operationId: deleteRoute-Table
+  api: openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+  method: DELETE
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/networks/{network}/route-tables/{name}
+  description: Delete route-table
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+    idempotentHint: true
+- name: region_list_regions
+  operationId: listRegions
+  api: openapi/eu-sovereign-cloud-api-foundation-region-v1-openapi.yml
+  method: GET
+  path: /v1/regions
+  description: List regions
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: region_get_region
+  operationId: getRegion
+  api: openapi/eu-sovereign-cloud-api-foundation-region-v1-openapi.yml
+  method: GET
+  path: /v1/regions/{name}
+  description: Get region
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: storage_list_skus
+  operationId: listSkus
+  api: openapi/eu-sovereign-cloud-api-foundation-storage-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/skus
+  description: List skus
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: storage_get_sku
+  operationId: getSku
+  api: openapi/eu-sovereign-cloud-api-foundation-storage-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/skus/{name}
+  description: Get sku
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: storage_list_images
+  operationId: listImages
+  api: openapi/eu-sovereign-cloud-api-foundation-storage-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/images
+  description: List images
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: storage_get_image
+  operationId: getImage
+  api: openapi/eu-sovereign-cloud-api-foundation-storage-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/images/{name}
+  description: Get image
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: storage_create_or_update_image
+  operationId: createOrUpdateImage
+  api: openapi/eu-sovereign-cloud-api-foundation-storage-v1-openapi.yml
+  method: PUT
+  path: /v1/tenants/{tenant}/images/{name}
+  description: Create or update image
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+    idempotentHint: true
+- name: storage_delete_image
+  operationId: deleteImage
+  api: openapi/eu-sovereign-cloud-api-foundation-storage-v1-openapi.yml
+  method: DELETE
+  path: /v1/tenants/{tenant}/images/{name}
+  description: Delete image
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+    idempotentHint: true
+- name: storage_list_block_storages
+  operationId: listBlock-Storages
+  api: openapi/eu-sovereign-cloud-api-foundation-storage-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/block-storages
+  description: List block-storages
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: storage_get_block_storage
+  operationId: getBlock-Storage
+  api: openapi/eu-sovereign-cloud-api-foundation-storage-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/block-storages/{name}
+  description: Get block-storage
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: storage_create_or_update_block_storage
+  operationId: createOrUpdateBlock-Storage
+  api: openapi/eu-sovereign-cloud-api-foundation-storage-v1-openapi.yml
+  method: PUT
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/block-storages/{name}
+  description: Create or update block-storage
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+    idempotentHint: true
+- name: storage_delete_block_storage
+  operationId: deleteBlock-Storage
+  api: openapi/eu-sovereign-cloud-api-foundation-storage-v1-openapi.yml
+  method: DELETE
+  path: /v1/tenants/{tenant}/workspaces/{workspace}/block-storages/{name}
+  description: Delete block-storage
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+    idempotentHint: true
+- name: workspace_list_workspaces
+  operationId: listWorkspaces
+  api: openapi/eu-sovereign-cloud-api-foundation-workspace-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/workspaces
+  description: List workspaces
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: workspace_get_workspace
+  operationId: getWorkspace
+  api: openapi/eu-sovereign-cloud-api-foundation-workspace-v1-openapi.yml
+  method: GET
+  path: /v1/tenants/{tenant}/workspaces/{name}
+  description: Get workspace
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: workspace_create_or_update_workspace
+  operationId: createOrUpdateWorkspace
+  api: openapi/eu-sovereign-cloud-api-foundation-workspace-v1-openapi.yml
+  method: PUT
+  path: /v1/tenants/{tenant}/workspaces/{name}
+  description: Create or update workspace
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+    idempotentHint: true
+- name: workspace_delete_workspace
+  operationId: deleteWorkspace
+  api: openapi/eu-sovereign-cloud-api-foundation-workspace-v1-openapi.yml
+  method: DELETE
+  path: /v1/tenants/{tenant}/workspaces/{name}
+  description: Delete workspace
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+    idempotentHint: true

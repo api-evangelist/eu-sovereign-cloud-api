@@ -1,0 +1,92 @@
+generated: '2026-10-09'
+method: searched
+source: https://spec.secapi.cloud/docs/content/Conventions/http-semantics
+name: SECA Conventions
+docs:
+- https://spec.secapi.cloud/docs/content/Conventions/api-security
+- https://spec.secapi.cloud/docs/content/Conventions/http-semantics
+- https://spec.secapi.cloud/docs/content/Conventions/operations-and-http-methods
+- https://spec.secapi.cloud/docs/content/Conventions/asynchronous-operations
+- https://spec.secapi.cloud/docs/content/Conventions/versioning
+- https://spec.secapi.cloud/docs/content/Conventions/core-api-concepts
+auth:
+  style: Bearer JWT (securityScheme bearerAuth); authorization via RBAC roles
+  docs: https://spec.secapi.cloud/docs/content/Conventions/api-security
+  see: authentication/eu-sovereign-cloud-api-authentication.yml
+methods: PUT creates or replaces a named resource; GET reads; POST only for actions on an element (e.g. power-off);
+  DELETE removes. No PATCH.
+idempotency:
+  coverage: partial
+  mechanism: 'HTTP-method semantics, no idempotency key header. Docs: "Requests must be idempotent. If a client
+    sends the same PUT request multiple times, the results must always be the same".'
+  scope:
+  - createOrUpdateCluster
+  - createOrUpdateNode-Pool
+  - createOrUpdateNetworkLoadBalancer
+  - createOrUpdateInternetNatGatewayInstance
+  - createOrUpdateAccount
+  - createOrUpdateRole
+  - createOrUpdateRoleAssignment
+  - createOrUpdateInstance
+  - createOrUpdateSecurityGroup
+  - createOrUpdateSecurityGroupRule
+  - createOrUpdateNic
+  - createOrUpdatePublicIp
+  - createOrUpdateNetwork
+  - createOrUpdateInternetGateway
+  - createOrUpdateSubnet
+  - createOrUpdateRoute-Table
+  - createOrUpdateImage
+  - createOrUpdateBlock-Storage
+  - createOrUpdateWorkspace
+  not_covered:
+  - StartInstance
+  - StopInstance
+  - RestartInstance
+  docs: https://spec.secapi.cloud/docs/content/Conventions/operations-and-http-methods
+concurrency:
+  mechanism: if-unmodified-since request header compared against metadata.resourceVersion; 412 Precondition Failed
+    on mismatch
+  operations_with_header: 41
+async:
+  style: Mutations return 202 Accepted; clients poll GET for status.state and status.conditions
+  docs: https://spec.secapi.cloud/docs/content/Conventions/asynchronous-operations
+pagination:
+  style: cursor
+  request_params:
+  - limit
+  - skipToken
+  response_fields:
+  - metadata.skipToken
+  note: skipToken is omitted when there are no more pages; skipTokens do not guarantee consistency (spec parameter
+    description).
+filtering:
+  params:
+  - labels
+  note: 'label selector: key=value, key!=value, wildcards; comma-combined'
+deleted_resources: 'Accept: application/json; deleted=true includes deleted resources in list responses'
+casing: camelCase fields; kebab-case plural URI segments
+media_type: application/json only (415/406 on mismatch)
+errors:
+  envelope: 'RFC 7807 ProblemDetails: type, title, status, detail, instance, sources[{pointer, parameter}]'
+  see: errors/eu-sovereign-cloud-api-problem-types.yml
+rate_limit_signaling:
+  status: 429
+  headers:
+  - Retry-After
+  note: Docs say the 429 response "should include a Retry-After header"; no 429 response is declared in the contracts
+    and no limits are published.
+  see: rate-limits/eu-sovereign-cloud-api-rate-limits.yml
+versioning:
+  see: lifecycle/eu-sovereign-cloud-api-lifecycle.yml
+reversibility:
+  status: none
+  note: No reversal (undo/restore/rollback) operation is defined. DELETE removes the resource; composition children
+    are cascade-deleted with the parent (Core API Concepts). Lists can include deleted resources via Accept deleted=true
+    but no restore operation or retention window is documented. POST actions are instance power actions (start/stop/restart),
+    whose inverse is another action, with no stated window.
+  delete_operations: 19
+  docs: https://spec.secapi.cloud/docs/content/Conventions/core-api-concepts
+dry_run:
+  supported: false
+  note: No dry-run/validate-only mode documented.

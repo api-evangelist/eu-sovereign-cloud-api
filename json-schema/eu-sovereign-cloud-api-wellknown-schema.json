@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/eu-sovereign-cloud-api/main/json-schema/eu-sovereign-cloud-api-wellknown-schema.json",
+  "title": "Wellknown",
+  "description": "List of global endpoints related to the seca api.",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/eu-sovereign-cloud-api-extensions-wellknown-v1-openapi.yml#/components/schemas/Wellknown",
+  "type": "object",
+  "required": [
+    "version",
+    "endpoints"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Version of the the Wellknown data.",
+      "x-extensible-enum": [
+        "v1"
+      ]
+    },
+    "endpoints": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 64,
+      "description": "All global seca proviers and their endpoints.",
+      "items": {
+        "$ref": "#/$defs/WellknownEndpoint"
+      }
+    }
+  },
+  "$defs": {
+    "WellknownEndpoint": {
+      "type": "object",
+      "description": "Represents a global available seca providers and their endpoints.",
+      "required": [
+        "provider",
+        "url"
+      ],
+      "properties": {
+        "provider": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The provider that is available under the given URL."
+        },
+        "url": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The endpoint URL."
+        }
+      }
+    }
+  }
+}

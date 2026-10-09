@@ -1,0 +1,41 @@
+generated: '2026-10-09'
+method: searched
+source: https://spec.secapi.cloud/docs/content/Conventions/versioning
+name: SECA Lifecycle
+versioning:
+  scheme: 'Per-resource API versions inspired by Kubernetes: vXalphaY, vXbetaY, vX'
+  location: URL path (provider segment, e.g. seca.compute/v1)
+  stages:
+    alpha: early-stage features that are experimental ... subject to breaking changes, meaning they may change or
+      be removed entirely
+    beta: stable enough for more extensive testing but may still have breaking changes ... expected to stay around
+      for at least a few releases
+    stable: production-ready and highly stable. Changes here are rare, non-breaking, and backward-compatible.
+  current:
+    stable_v1:
+    - authorization
+    - compute
+    - network
+    - region
+    - storage
+    - workspace
+    - wellknown
+    beta_v1beta1:
+    - activitylog
+    - kubernetes
+    - loadbalancer
+    - natgateway
+    - objectstorage
+  breaking_change_definition: https://spec.secapi.cloud/docs/content/Conventions/versioning
+deprecation:
+  policy: Once an API reaches v1 or another stable version, breaking changes are avoided, though deprecation policies
+    apply to manage the gradual removal of older API versions.
+  stated_window: null
+  sunset_header: false
+  deprecated_operations: []
+  note: No deprecation window or Sunset/Deprecation header is documented; no operation in the bundled contracts
+    is marked deprecated.
+status_page: null
+sla: null
+note: SECA is a specification implemented by each cloud provider on its own host; status pages and SLAs, if any,
+  belong to implementers.

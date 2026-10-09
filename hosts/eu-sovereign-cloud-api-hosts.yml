@@ -1,0 +1,69 @@
+generated: '2026-10-09'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 4
+  own: 3
+  other_domain: 0
+  platform: 1
+  roles:
+  - api
+  - docs
+  - support
+  - website
+hosts:
+- host: api.secapi.cloud
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: secapi.cloud
+  role: api
+  relation: own
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHubOrganization
+  - GitHubRepository
+  - Support
+  - Contributing
+  - SpectralRules
+  serves: []
+  registrable_domain: github.com
+  role: support
+  relation: platform
+- host: spec.secapi.cloud
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - site-links
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - Documentation
+  - APIReference
+  - GettingStarted
+  serves:
+  - docs
+  - cdn
+  - hosting
+  vendor: fastly
+  registrable_domain: secapi.cloud
+  role: docs
+  relation: own
+- host: www.secapi.cloud
+  found_by:
+  - pointer
+  - probed
+  - contract-discovery
+  - well-known
+  types:
+  - Website
+  serves: []
+  registrable_domain: secapi.cloud
+  role: website
+  relation: own

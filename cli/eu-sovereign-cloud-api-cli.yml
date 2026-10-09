@@ -1,0 +1,19 @@
+generated: '2026-10-09'
+method: searched
+source: https://github.com/eu-sovereign-cloud/conformance/blob/main/README.md
+name: secatest (SECA conformance CLI)
+description: First-party conformance test CLI that validates a cloud provider implementation of the SECA API. Not
+  a resource-management CLI; resource management tooling is the Terraform provider and Go SDK (packages/).
+install:
+- method: source
+  command: make install
+  repository: https://github.com/eu-sovereign-cloud/conformance
+commands:
+- name: secatest run
+  description: Run conformance scenarios against provider endpoints (--provider.region.v1, --provider.authorization.v1,
+    --client.auth.token, --client.tenant, --client.region, --scenarios.filter, --report.results.path, retry flags)
+- name: secatest list
+  description: List available scenarios (referenced by --scenarios.filter)
+- name: secatest report
+  description: Open the Allure results report
+auth: '--client.auth.token / CLIENT_AUTH_TOKEN: valid JWT for the CSP APIs'

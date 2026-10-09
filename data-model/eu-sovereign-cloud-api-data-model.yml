@@ -1,0 +1,1229 @@
+generated: '2026-10-09'
+method: derived
+generator: derive-data-model.py
+source:
+- openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml
+- openapi/eu-sovereign-cloud-api-extensions-kubernetes-v1beta1-openapi.yml
+- openapi/eu-sovereign-cloud-api-extensions-loadbalancer-v1beta1-openapi.yml
+- openapi/eu-sovereign-cloud-api-extensions-natgateway-v1beta1-openapi.yml
+- openapi/eu-sovereign-cloud-api-extensions-objectstorage-v1beta1-openapi.yml
+- openapi/eu-sovereign-cloud-api-extensions-wellknown-v1-openapi.yml
+- openapi/eu-sovereign-cloud-api-foundation-authorization-v1-openapi.yml
+- openapi/eu-sovereign-cloud-api-foundation-compute-v1-openapi.yml
+- openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
+- openapi/eu-sovereign-cloud-api-foundation-region-v1-openapi.yml
+- openapi/eu-sovereign-cloud-api-foundation-storage-v1-openapi.yml
+- openapi/eu-sovereign-cloud-api-foundation-workspace-v1-openapi.yml
+notation: has_one = property $ref; has_many = array of $ref; belongs_to = <entity>_id field
+summary:
+  entities: 137
+  entities_in_spec: 137
+  relationships: 197
+entities:
+- name: AccountIterator
+  fields: 2
+  description: Iterator for accounts
+- name: ActivityLog
+  fields: 2
+  description: Activity log resource
+- name: ActivityLogIterator
+  fields: 2
+  description: Iterator for activity logs
+- name: ActivityLogSpec
+  fields: 3
+  description: Activity log specification
+- name: Annotations
+  fields: 0
+  description: User-defined key/value pairs that are mutable and can be used to add annotations.
+- name: Block-StorageIterator
+  fields: 2
+  description: Iterator for block-storages
+- name: BlockStorage
+  fields: 0
+  description: Represents a block storage resource.
+- name: BlockStorageSpec
+  fields: 3
+  description: References the SKU used for this block.
+- name: BlockStorageStatus
+  fields: 0
+  description: The status of the block storage.
+- name: ClusterIterator
+  fields: 2
+  description: Iterator for clusters
+- name: Error
+  fields: 7
+  description: A detailed error response see https://datatracker.ietf.org/doc/html/rfc7807.
+- name: Error400
+  fields: 0
+  description: A 400 Bad Request error response
+- name: Error401
+  fields: 0
+  description: A 401 Unauthorized error response
+- name: Error403
+  fields: 0
+  description: A 403 Forbidden error response
+- name: Error404
+  fields: 0
+  description: A 404 Not Found error response
+- name: Error409
+  fields: 0
+  description: A 409 Conflict error response
+- name: Error412
+  fields: 0
+  description: A 412 Precondition Failed error response
+- name: Error422
+  fields: 0
+  description: A 422 Unprocessable Entity error response
+- name: Error500
+  fields: 0
+  description: A 500 Internal Server Error error response
+- name: ErrorSource
+  fields: 2
+  description: An object containing references to the source of the error.
+- name: Extensions
+  fields: 0
+  description: User-defined key/value pairs that are mutable and can be used to add extensions.
+- name: GlobalResourceMetadata
+  fields: 0
+  description: Metadata for global resources with name, permission, modification and type information.
+- name: GlobalTenantResourceMetadata
+  fields: 0
+  description: Metadata for global resources with name, permission, modification, type, and tenant information.
+- name: IcmpConfig
+  fields: 2
+  description: ICMP specific rule configuration
+- name: Image
+  fields: 0
+  description: Represents an Image resource that can be used to create a virtual machine.
+- name: ImageIterator
+  fields: 2
+  description: Iterator for images
+- name: ImageSpec
+  fields: 4
+  description: Detailed specification of the Image resource.
+- name: ImageStatus
+  fields: 0
+  description: Status of the Image, including the size of the Image in MB.
+- name: Instance
+  fields: 0
+  description: Instance resource representing a virtual machine in the cloud provider's infrastructure.
+- name: InstanceIterator
+  fields: 2
+  description: Iterator for instances
+- name: InstanceSku
+  fields: 0
+  description: Represents a Stock Keeping Unit (SKU) for compute instances.
+- name: InstanceSkuGpuSpec
+  fields: 4
+  description: Specification of the GPU(s) attached to an instance SKU.
+- name: InstanceSkuSpec
+  fields: 4
+  description: Specification of the instance SKU, including its capabilities and extensions.
+- name: InstanceSpec
+  fields: 10
+  description: Specification of the instance, including its SKU, network configuration, and storage options.
+- name: InstanceStatus
+  fields: 0
+  description: Current status of the instance.
+- name: InternetGateway
+  fields: 0
+  description: An InternetGateway is a resource that provides internet access to a subnet.
+- name: InternetGatewayIterator
+  fields: 2
+  description: Iterator for internet gateways
+- name: InternetGatewaySpec
+  fields: 1
+  description: The internet gateway will use the reserved IP addres.
+- name: InternetNatGatewayInstance
+  fields: 0
+  description: An InternetNatGatewayInstance is a resource that provides internet access to a subnet
+- name: InternetNatGatewayInstanceIterator
+  fields: 2
+  description: Iterator for internet-nat-gateway-instances
+- name: InternetNatGatewayInstanceSpec
+  fields: 4
+  description: The internet gateway will allocate a public IPv4 address.
+- name: KubernetesCluster
+  fields: 0
+  description: Represents a kubernetes cluster resource. A cluster is
+- name: KubernetesClusterSpec
+  fields: 4
+  description: Specification of the  kubernetes cluster, including its configuration
+- name: KubernetesClusterStatus
+  fields: 0
+  description: Represents the status of the  kubernetes cluster.
+- name: KubernetesNodePool
+  fields: 0
+  description: Represents a Node Pool resource in a Kubernetes cluster. A Node Pool is a group of
+- name: KubernetesNodePoolSpec
+  fields: 3
+  description: Specification of the  kubernetes node pool, including its configuration
+- name: KubernetesNodePoolStatus
+  fields: 0
+  description: Represents the status of the  kubernetes node pool. The status
+- name: KubernetesNodeRootVolume
+  fields: 2
+  description: Root volume for the node. The root volume is used to store the operating
+- name: KubernetesNodeTaint
+  fields: 3
+  description: Represents a taint applied to the nodes in the node pool. Taints are used
+- name: KubernetesNodeTemplate
+  fields: 5
+  description: Template for creating nodes in the node pool. The template includes
+- name: Labels
+  fields: 0
+  description: User-defined key/value pairs that are mutable and can be used to
+- name: LoadBalancerHealthCheck
+  fields: 4
+  description: Optional port health check. It probes the port with protocol.
+- name: LoadBalancerTarget
+  fields: 5
+  description: The target of the LoadBalancer. It can be a set of instances nics. The port can be different from
+    the frontend port, if omitted it will be the same. If no health check is specified, the LoadBalancer w
+- name: ModificationMetadata
+  fields: 4
+  description: Base metadata for all resources with optional region references
+- name: NameMetadata
+  fields: 1
+  description: Metadata for resource names
+- name: Network
+  fields: 0
+  description: A Network represents a virtual network that can be used to isolate resources.
+- name: NetworkIterator
+  fields: 2
+  description: Iterator for networks
+- name: NetworkLoadBalancer
+  fields: 0
+  description: Represents a Network Load Balancer resource. It is used to distribute incoming network traffic
+- name: NetworkLoadBalancerFrontend
+  fields: 3
+  description: Represents the frontend configuration of the LoadBalancer. Each frontend
+- name: NetworkLoadBalancerIterator
+  fields: 2
+  description: Iterator for network load balancers
+- name: NetworkLoadBalancerSpec
+  fields: 5
+  description: Defines the specification for a Network Load Balancer. A Load Balancer can have multiple
+- name: NetworkLoadBalancerStatus
+  fields: 0
+  description: Represents the status of the Network Load Balancer. It provides information about
+- name: NetworkMetadata
+  fields: 1
+  description: Metadata for resources with network constraints
+- name: NetworkSku
+  fields: 0
+  description: Represents a Stock Keeping Unit (SKU) for network resources.
+- name: NetworkSkuSpec
+  fields: 2
+  description: Specification of the network SKU, including its bandwidth and packets per second.
+- name: NetworkSpec
+  fields: 3
+  description: A Network represents a virtual network that can be used to isolate resources.
+- name: NetworkStatus
+  fields: 0
+  description: The status of the network. The status is read-only and will be set by the
+- name: Nic
+  fields: 0
+  description: The Network Interface Card (NIC) represents a network interface for a compute resource.
+- name: NicIterator
+  fields: 2
+  description: Iterator for nics
+- name: NicSpec
+  fields: 5
+  description: Specification of the Network Interface Card
+- name: NicStatus
+  fields: 0
+  description: Status of the Network Interface Card (NIC). The status includes the current state
+- name: Node-PoolIterator
+  fields: 2
+  description: Iterator for node-pools
+- name: ObjectStorageAccount
+  fields: 0
+  description: An object storage account resource, which includes metadata, specification, and status.
+- name: ObjectStorageAccountSpec
+  fields: 0
+  description: The specification of an object storage account, including the region and zone.
+- name: ObjectStorageAccountStatus
+  fields: 0
+  description: The status of an object storage account, including the access key, secret key, and canonical user
+    ID.
+- name: Permission
+  fields: 3
+  description: Permission specification, including providers, resources, and verbs.
+- name: PermissionMetadata
+  fields: 3
+  description: Metadata for permission management
+- name: Ports
+  fields: 3
+  description: Defines a specific port list or port range for the rule.
+- name: Provider
+  fields: 3
+  description: A provider of cloud services
+- name: PublicIp
+  fields: 0
+  description: Public IP resource.
+- name: PublicIpIterator
+  fields: 2
+  description: Iterator for public ips
+- name: PublicIpSpec
+  fields: 2
+  description: Specification of the public IP.
+- name: PublicIpStatus
+  fields: 0
+  description: Status of the public IP.
+- name: Reference
+  fields: 5
+  description: A reference to a resource using an object. The object contains the
+- name: Region
+  fields: 2
+  description: Represents a region, which is a geographical location
+- name: RegionIterator
+  fields: 2
+  description: Iterator for regions
+- name: RegionSpec
+  fields: 2
+  description: The specification of a region, including the available zones and providers.
+- name: RegionalMetadata
+  fields: 1
+  description: Metadata for regional resources
+- name: RegionalNetworkResourceMetadata
+  fields: 0
+  description: Metadata for regional resources with name, permission, modification, type, tenant, workspace, network
+    and region information.
+- name: RegionalResourceMetadata
+  fields: 0
+  description: Metadata for regional resources with name, permission, modification, type, tenant and region information.
+- name: RegionalWorkspaceResourceMetadata
+  fields: 0
+  description: Metadata for regional resources with name, permission, modification, type, tenant and workspace and
+    region information.
+- name: RequestObject
+  fields: 3
+  description: Request object
+- name: ResponseMetadata
+  fields: 0
+  description: Metadata for response objects.
+- name: ResponseObject
+  fields: 1
+  description: Response object
+- name: Role
+  fields: 0
+  description: Role represents a set of permissions that can be assigned to users.
+- name: RoleAssignment
+  fields: 0
+  description: Role assignment for a user account. The role is assigned to the user account in the context of the
+    specified scopes.
+- name: RoleAssignmentIterator
+  fields: 2
+  description: Iterator for role assignments
+- name: RoleAssignmentScope
+  fields: 3
+  description: Role assignment scope, including the workspaces, regions and tenants.
+- name: RoleAssignmentSpec
+  fields: 3
+  description: Role assignment for a user account. The role is assigned to the user account in the context of the
+    specified scopes.
+- name: RoleIterator
+  fields: 2
+  description: Iterator for roles
+- name: RoleSpec
+  fields: 1
+  description: Role specification defined as a list of permissions.
+- name: Route-TableIterator
+  fields: 2
+  description: Iterator for route-tables
+- name: RouteSpec
+  fields: 2
+  description: The target reference can be an instance,
+- name: RouteStatus
+  fields: 0
+  description: The status of the route. The status is read-only and will be set by the
+- name: RouteTable
+  fields: 0
+  description: The RouteTable resource defines a set of routes that can be associated with a network.
+- name: RouteTableSpec
+  fields: 1
+  description: The RouteTableSpec defines the routes that are associated with the route table.
+- name: RouteTableStatus
+  fields: 0
+  description: The status of the route table. The status is read-only and will be set by the
+- name: SecurityGroup
+  fields: 0
+  description: The SecurityGroup resource defines a set of rules for controlling network access to and from compute
+    instances.
+- name: SecurityGroupIterator
+  fields: 2
+  description: Iterator for security-groups
+- name: SecurityGroupRule
+  fields: 0
+  description: The SecurityGroupRule resource defines a reusable network access rule.
+- name: SecurityGroupRuleIterator
+  fields: 2
+  description: Iterator for security-group-rules
+- name: SecurityGroupRuleSpec
+  fields: 7
+  description: Specification of a security group rule defining network access permissions.
+- name: SecurityGroupSpec
+  fields: 2
+  description: Specification of the security group
+- name: SecurityGroupStatus
+  fields: 0
+  description: Status of the security group, including the status of its rules.
+- name: SkuIterator
+  fields: 2
+  description: Iterator for skus
+- name: SkuResourceMetadata
+  fields: 0
+  description: Metadata for SKU resources with name, permission, type, tenant and region information.
+- name: Status
+  fields: 2
+  description: Current status of the resource
+- name: StatusCondition
+  fields: 5
+  description: StatusCondition describes the state of a resource at a certain point.
+- name: StorageSku
+  fields: 0
+  description: Represents a Stock Keeping Unit (SKU) for  storage resources.
+- name: StorageSkuSpec
+  fields: 3
+  description: Specification of the storage SKU, including its capabilities and extensions.
+- name: Subnet
+  fields: 0
+  description: A Subnet is a logical subdivision of a Network's IP address space.
+- name: SubnetIterator
+  fields: 2
+  description: Iterator for subnets
+- name: SubnetSpec
+  fields: 4
+  description: Detailed specification of the subnet. Automatic address
+- name: SubnetStatus
+  fields: 0
+  description: The status of the subnet, including the current state and any
+- name: SystemResourceMetadata
+  fields: 3
+  description: Metadata for user-defined resource properties
+- name: TenantMetadata
+  fields: 1
+  description: Metadata for resources with tenant constraints
+- name: TypeMetadata
+  fields: 3
+  description: Metadata for all resources with type information.
+- name: UserResourceMetadata
+  fields: 3
+  description: Metadata for user-defined resource properties
+- name: VolumeReference
+  fields: 2
+  description: Represents a connection between a Block Storage and an a user of the block storage.
+- name: Wellknown
+  fields: 2
+  description: List of global endpoints related to the seca api.
+- name: WellknownEndpoint
+  fields: 2
+  description: Represents a global available seca providers and their endpoints.
+- name: Workspace
+  fields: 0
+  description: A workspace is a collection of resources.
+- name: WorkspaceIterator
+  fields: 2
+  description: Iterator for workspaces
+- name: WorkspaceMetadata
+  fields: 1
+  description: Metadata for resources with workspace constraints
+- name: WorkspaceSpec
+  fields: 0
+  description: Specification of the workspace, including its capabilities and extensions.
+- name: WorkspaceStatus
+  fields: 0
+  description: Status of the workspace, including the number of resources in the workspace.
+- name: cidr
+  fields: 2
+  description: Combined IPv4 and IPv6 CIDR block for a subnet. Depending on the network
+relationships:
+- from: ActivityLogIterator
+  to: ActivityLog
+  type: has_many
+  via: items
+- from: ActivityLogIterator
+  to: ResponseMetadata
+  type: has_one
+  via: metadata
+- from: BlockStorageSpec
+  to: Reference
+  type: has_one
+  via: skuRef
+- from: BlockStorageSpec
+  to: Reference
+  type: has_one
+  via: sourceImageRef
+- from: InstanceSkuSpec
+  to: InstanceSkuGpuSpec
+  type: has_one
+  via: gpu
+- from: VolumeReference
+  to: Reference
+  type: has_one
+  via: deviceRef
+- from: InstanceSpec
+  to: Reference
+  type: has_one
+  via: skuRef
+- from: InstanceSpec
+  to: Reference
+  type: has_one
+  via: primaryNicRef
+- from: InstanceSpec
+  to: Reference
+  type: has_many
+  via: additionalNicRefs
+- from: InstanceSpec
+  to: Reference
+  type: has_one
+  via: securityGroupRef
+- from: InstanceSpec
+  to: VolumeReference
+  type: has_one
+  via: bootVolume
+- from: InstanceSpec
+  to: VolumeReference
+  type: has_many
+  via: dataVolumes
+- from: LoadBalancerTarget
+  to: Reference
+  type: has_many
+  via: members
+- from: LoadBalancerTarget
+  to: LoadBalancerHealthCheck
+  type: has_one
+  via: healthCheck
+- from: NetworkLoadBalancerFrontend
+  to: LoadBalancerTarget
+  type: has_one
+  via: target
+- from: NetworkLoadBalancerSpec
+  to: Reference
+  type: has_one
+  via: nicRef
+- from: NetworkLoadBalancerSpec
+  to: Reference
+  type: has_one
+  via: securityGroupRef
+- from: NetworkLoadBalancerSpec
+  to: NetworkLoadBalancerFrontend
+  type: has_many
+  via: frontends
+- from: NetworkSpec
+  to: cidr
+  type: has_one
+  via: cidr
+- from: NetworkSpec
+  to: cidr
+  type: has_many
+  via: additionalCidrs
+- from: NetworkSpec
+  to: Reference
+  type: has_one
+  via: skuRef
+- from: NicSpec
+  to: Reference
+  type: has_many
+  via: securityGroupRefs
+- from: NicSpec
+  to: Reference
+  type: has_many
+  via: publicIpRefs
+- from: NicSpec
+  to: Reference
+  type: has_one
+  via: skuRef
+- from: NicSpec
+  to: Reference
+  type: has_one
+  via: subnetRef
+- from: RoleAssignmentSpec
+  to: RoleAssignmentScope
+  type: has_many
+  via: scopes
+- from: RoleSpec
+  to: Permission
+  type: has_many
+  via: permissions
+- from: SecurityGroupRuleSpec
+  to: Annotations
+  type: has_one
+  via: annotations
+- from: SecurityGroupRuleSpec
+  to: Ports
+  type: has_one
+  via: ports
+- from: SecurityGroupRuleSpec
+  to: IcmpConfig
+  type: has_one
+  via: icmp
+- from: SecurityGroupRuleSpec
+  to: Reference
+  type: has_many
+  via: sourceRef
+- from: SecurityGroupSpec
+  to: SecurityGroupRuleSpec
+  type: has_many
+  via: rules
+- from: SecurityGroupSpec
+  to: Reference
+  type: has_many
+  via: ruleRefs
+- from: SubnetSpec
+  to: cidr
+  type: has_one
+  via: cidr
+- from: SubnetSpec
+  to: Reference
+  type: has_one
+  via: routeTableRef
+- from: SubnetSpec
+  to: Reference
+  type: has_one
+  via: skuRef
+- from: RequestObject
+  to: BlockStorageSpec
+  type: has_one
+  via: body
+- from: RequestObject
+  to: InstanceSkuSpec
+  type: has_one
+  via: body
+- from: RequestObject
+  to: InstanceSpec
+  type: has_one
+  via: body
+- from: RequestObject
+  to: NetworkLoadBalancerSpec
+  type: has_one
+  via: body
+- from: RequestObject
+  to: NetworkSkuSpec
+  type: has_one
+  via: body
+- from: RequestObject
+  to: NetworkSpec
+  type: has_one
+  via: body
+- from: RequestObject
+  to: NicSpec
+  type: has_one
+  via: body
+- from: RequestObject
+  to: ObjectStorageAccountSpec
+  type: has_one
+  via: body
+- from: RequestObject
+  to: PublicIpSpec
+  type: has_one
+  via: body
+- from: RequestObject
+  to: RoleAssignmentSpec
+  type: has_one
+  via: body
+- from: RequestObject
+  to: RoleSpec
+  type: has_one
+  via: body
+- from: RequestObject
+  to: SecurityGroupSpec
+  type: has_one
+  via: body
+- from: RequestObject
+  to: StorageSkuSpec
+  type: has_one
+  via: body
+- from: RequestObject
+  to: SubnetSpec
+  type: has_one
+  via: body
+- from: RequestObject
+  to: WorkspaceSpec
+  type: has_one
+  via: body
+- from: ActivityLogSpec
+  to: RequestObject
+  type: has_one
+  via: request
+- from: ActivityLogSpec
+  to: ResponseObject
+  type: has_one
+  via: response
+- from: ActivityLog
+  to: RegionalWorkspaceResourceMetadata
+  type: has_one
+  via: metadata
+- from: ActivityLog
+  to: ActivityLogSpec
+  type: has_one
+  via: spec
+- from: Error
+  to: ErrorSource
+  type: has_many
+  via: sources
+- from: ClusterIterator
+  to: KubernetesCluster
+  type: has_many
+  via: items
+- from: ClusterIterator
+  to: ResponseMetadata
+  type: has_one
+  via: metadata
+- from: Node-PoolIterator
+  to: KubernetesNodePool
+  type: has_many
+  via: items
+- from: Node-PoolIterator
+  to: ResponseMetadata
+  type: has_one
+  via: metadata
+- from: UserResourceMetadata
+  to: Labels
+  type: has_one
+  via: labels
+- from: UserResourceMetadata
+  to: Annotations
+  type: has_one
+  via: annotations
+- from: UserResourceMetadata
+  to: Extensions
+  type: has_one
+  via: extensions
+- from: KubernetesClusterSpec
+  to: Reference
+  type: has_one
+  via: skuRef
+- from: Status
+  to: StatusCondition
+  type: has_many
+  via: conditions
+- from: KubernetesCluster
+  to: RegionalWorkspaceResourceMetadata
+  type: has_one
+  via: metadata
+- from: KubernetesCluster
+  to: KubernetesClusterSpec
+  type: has_one
+  via: spec
+- from: KubernetesCluster
+  to: KubernetesClusterStatus
+  type: has_one
+  via: status
+- from: KubernetesNodeRootVolume
+  to: Reference
+  type: has_one
+  via: skuRef
+- from: KubernetesNodeTemplate
+  to: Reference
+  type: has_one
+  via: skuRef
+- from: KubernetesNodeTemplate
+  to: Reference
+  type: has_one
+  via: subnetRef
+- from: KubernetesNodeTemplate
+  to: Reference
+  type: has_one
+  via: securityGroupRef
+- from: KubernetesNodeTemplate
+  to: KubernetesNodeRootVolume
+  type: has_one
+  via: rootVolume
+- from: KubernetesNodePoolSpec
+  to: KubernetesNodeTemplate
+  type: has_one
+  via: nodeTemplate
+- from: KubernetesNodePoolSpec
+  to: KubernetesNodeTaint
+  type: has_many
+  via: taints
+- from: KubernetesNodePoolStatus
+  to: Reference
+  type: has_many
+  via: nodes
+- from: KubernetesNodePool
+  to: RegionalWorkspaceResourceMetadata
+  type: has_one
+  via: metadata
+- from: KubernetesNodePool
+  to: KubernetesNodePoolSpec
+  type: has_one
+  via: spec
+- from: KubernetesNodePool
+  to: KubernetesNodePoolStatus
+  type: has_one
+  via: status
+- from: NetworkLoadBalancerIterator
+  to: NetworkLoadBalancer
+  type: has_many
+  via: items
+- from: NetworkLoadBalancerIterator
+  to: ResponseMetadata
+  type: has_one
+  via: metadata
+- from: NetworkLoadBalancerStatus
+  to: Reference
+  type: has_many
+  via: healthyMembers
+- from: NetworkLoadBalancer
+  to: RegionalWorkspaceResourceMetadata
+  type: has_one
+  via: metadata
+- from: NetworkLoadBalancer
+  to: NetworkLoadBalancerSpec
+  type: has_one
+  via: spec
+- from: NetworkLoadBalancer
+  to: NetworkLoadBalancerStatus
+  type: has_one
+  via: status
+- from: InternetNatGatewayInstanceIterator
+  to: InternetNatGatewayInstance
+  type: has_many
+  via: items
+- from: InternetNatGatewayInstanceIterator
+  to: ResponseMetadata
+  type: has_one
+  via: metadata
+- from: InternetNatGatewayInstanceSpec
+  to: Reference
+  type: has_one
+  via: publicIpRef
+- from: InternetNatGatewayInstanceSpec
+  to: Reference
+  type: has_one
+  via: nicRef
+- from: InternetNatGatewayInstanceSpec
+  to: Reference
+  type: has_one
+  via: securityGroupRef
+- from: InternetNatGatewayInstance
+  to: RegionalWorkspaceResourceMetadata
+  type: has_one
+  via: metadata
+- from: InternetNatGatewayInstance
+  to: InternetNatGatewayInstanceSpec
+  type: has_one
+  via: spec
+- from: InternetNatGatewayInstance
+  to: Status
+  type: has_one
+  via: status
+- from: AccountIterator
+  to: ObjectStorageAccount
+  type: has_many
+  via: items
+- from: AccountIterator
+  to: ResponseMetadata
+  type: has_one
+  via: metadata
+- from: ObjectStorageAccount
+  to: GlobalTenantResourceMetadata
+  type: has_one
+  via: metadata
+- from: ObjectStorageAccount
+  to: ObjectStorageAccountSpec
+  type: has_one
+  via: spec
+- from: ObjectStorageAccount
+  to: ObjectStorageAccountStatus
+  type: has_one
+  via: status
+- from: Wellknown
+  to: WellknownEndpoint
+  type: has_many
+  via: endpoints
+- from: RoleIterator
+  to: Role
+  type: has_many
+  via: items
+- from: RoleIterator
+  to: ResponseMetadata
+  type: has_one
+  via: metadata
+- from: RoleAssignmentIterator
+  to: RoleAssignment
+  type: has_many
+  via: items
+- from: RoleAssignmentIterator
+  to: ResponseMetadata
+  type: has_one
+  via: metadata
+- from: Role
+  to: GlobalTenantResourceMetadata
+  type: has_one
+  via: metadata
+- from: Role
+  to: RoleSpec
+  type: has_one
+  via: spec
+- from: Role
+  to: Status
+  type: has_one
+  via: status
+- from: RoleAssignment
+  to: GlobalTenantResourceMetadata
+  type: has_one
+  via: metadata
+- from: RoleAssignment
+  to: RoleAssignmentSpec
+  type: has_one
+  via: spec
+- from: RoleAssignment
+  to: Status
+  type: has_one
+  via: status
+- from: SkuIterator
+  to: InstanceSku
+  type: has_many
+  via: items
+- from: SkuIterator
+  to: ResponseMetadata
+  type: has_one
+  via: metadata
+- from: InstanceIterator
+  to: Instance
+  type: has_many
+  via: items
+- from: InstanceIterator
+  to: ResponseMetadata
+  type: has_one
+  via: metadata
+- from: SystemResourceMetadata
+  to: Labels
+  type: has_one
+  via: labels
+- from: SystemResourceMetadata
+  to: Annotations
+  type: has_one
+  via: annotations
+- from: SystemResourceMetadata
+  to: Extensions
+  type: has_one
+  via: extensions
+- from: InstanceSku
+  to: SkuResourceMetadata
+  type: has_one
+  via: metadata
+- from: InstanceSku
+  to: InstanceSkuSpec
+  type: has_one
+  via: spec
+- from: Instance
+  to: RegionalWorkspaceResourceMetadata
+  type: has_one
+  via: metadata
+- from: Instance
+  to: InstanceSpec
+  type: has_one
+  via: spec
+- from: Instance
+  to: InstanceStatus
+  type: has_one
+  via: status
+- from: SecurityGroupIterator
+  to: SecurityGroup
+  type: has_many
+  via: items
+- from: SecurityGroupIterator
+  to: ResponseMetadata
+  type: has_one
+  via: metadata
+- from: SecurityGroupRuleIterator
+  to: SecurityGroupRule
+  type: has_many
+  via: items
+- from: SecurityGroupRuleIterator
+  to: ResponseMetadata
+  type: has_one
+  via: metadata
+- from: NicIterator
+  to: Nic
+  type: has_many
+  via: items
+- from: NicIterator
+  to: ResponseMetadata
+  type: has_one
+  via: metadata
+- from: PublicIpIterator
+  to: PublicIp
+  type: has_many
+  via: items
+- from: PublicIpIterator
+  to: ResponseMetadata
+  type: has_one
+  via: metadata
+- from: NetworkIterator
+  to: Network
+  type: has_many
+  via: items
+- from: NetworkIterator
+  to: ResponseMetadata
+  type: has_one
+  via: metadata
+- from: InternetGatewayIterator
+  to: InternetGateway
+  type: has_many
+  via: items
+- from: InternetGatewayIterator
+  to: ResponseMetadata
+  type: has_one
+  via: metadata
+- from: SubnetIterator
+  to: Subnet
+  type: has_many
+  via: items
+- from: SubnetIterator
+  to: ResponseMetadata
+  type: has_one
+  via: metadata
+- from: Route-TableIterator
+  to: RouteTable
+  type: has_many
+  via: items
+- from: Route-TableIterator
+  to: ResponseMetadata
+  type: has_one
+  via: metadata
+- from: NetworkSku
+  to: SkuResourceMetadata
+  type: has_one
+  via: metadata
+- from: NetworkSku
+  to: NetworkSkuSpec
+  type: has_one
+  via: spec
+- from: SecurityGroupStatus
+  to: Status
+  type: has_many
+  via: rules
+- from: SecurityGroup
+  to: RegionalWorkspaceResourceMetadata
+  type: has_one
+  via: metadata
+- from: SecurityGroup
+  to: SecurityGroupSpec
+  type: has_one
+  via: spec
+- from: SecurityGroup
+  to: SecurityGroupStatus
+  type: has_one
+  via: status
+- from: SecurityGroupRule
+  to: RegionalWorkspaceResourceMetadata
+  type: has_one
+  via: metadata
+- from: SecurityGroupRule
+  to: SecurityGroupRuleSpec
+  type: has_one
+  via: spec
+- from: SecurityGroupRule
+  to: Status
+  type: has_one
+  via: status
+- from: NicStatus
+  to: Reference
+  type: has_many
+  via: publicIpRefs
+- from: Nic
+  to: RegionalWorkspaceResourceMetadata
+  type: has_one
+  via: metadata
+- from: Nic
+  to: NicSpec
+  type: has_one
+  via: spec
+- from: Nic
+  to: NicStatus
+  type: has_one
+  via: status
+- from: PublicIpStatus
+  to: Reference
+  type: has_one
+  via: attachedTo
+- from: PublicIp
+  to: RegionalWorkspaceResourceMetadata
+  type: has_one
+  via: metadata
+- from: PublicIp
+  to: PublicIpSpec
+  type: has_one
+  via: spec
+- from: PublicIp
+  to: PublicIpStatus
+  type: has_one
+  via: status
+- from: NetworkStatus
+  to: cidr
+  type: has_one
+  via: cidr
+- from: NetworkStatus
+  to: cidr
+  type: has_many
+  via: additionalCidrs
+- from: Network
+  to: RegionalWorkspaceResourceMetadata
+  type: has_one
+  via: metadata
+- from: Network
+  to: NetworkSpec
+  type: has_one
+  via: spec
+- from: Network
+  to: NetworkStatus
+  type: has_one
+  via: status
+- from: InternetGateway
+  to: RegionalWorkspaceResourceMetadata
+  type: has_one
+  via: metadata
+- from: InternetGateway
+  to: InternetGatewaySpec
+  type: has_one
+  via: spec
+- from: InternetGateway
+  to: Status
+  type: has_one
+  via: status
+- from: SubnetStatus
+  to: cidr
+  type: has_one
+  via: cidr
+- from: SubnetStatus
+  to: Reference
+  type: has_one
+  via: routeTableRef
+- from: Subnet
+  to: RegionalNetworkResourceMetadata
+  type: has_one
+  via: metadata
+- from: Subnet
+  to: SubnetSpec
+  type: has_one
+  via: spec
+- from: Subnet
+  to: SubnetStatus
+  type: has_one
+  via: status
+- from: RouteSpec
+  to: Reference
+  type: has_one
+  via: targetRef
+- from: RouteTableSpec
+  to: RouteSpec
+  type: has_many
+  via: routes
+- from: RouteTableStatus
+  to: RouteStatus
+  type: has_many
+  via: routes
+- from: RouteTable
+  to: RegionalNetworkResourceMetadata
+  type: has_one
+  via: metadata
+- from: RouteTable
+  to: RouteTableSpec
+  type: has_one
+  via: spec
+- from: RouteTable
+  to: RouteTableStatus
+  type: has_one
+  via: status
+- from: RegionIterator
+  to: Region
+  type: has_many
+  via: items
+- from: RegionIterator
+  to: ResponseMetadata
+  type: has_one
+  via: metadata
+- from: RegionSpec
+  to: Provider
+  type: has_many
+  via: providers
+- from: Region
+  to: GlobalResourceMetadata
+  type: has_one
+  via: metadata
+- from: Region
+  to: RegionSpec
+  type: has_one
+  via: spec
+- from: ImageIterator
+  to: Image
+  type: has_many
+  via: items
+- from: ImageIterator
+  to: ResponseMetadata
+  type: has_one
+  via: metadata
+- from: Block-StorageIterator
+  to: BlockStorage
+  type: has_many
+  via: items
+- from: Block-StorageIterator
+  to: ResponseMetadata
+  type: has_one
+  via: metadata
+- from: StorageSku
+  to: SkuResourceMetadata
+  type: has_one
+  via: metadata
+- from: StorageSku
+  to: StorageSkuSpec
+  type: has_one
+  via: spec
+- from: ImageSpec
+  to: Reference
+  type: has_one
+  via: blockStorageRef
+- from: Image
+  to: RegionalResourceMetadata
+  type: has_one
+  via: metadata
+- from: Image
+  to: ImageSpec
+  type: has_one
+  via: spec
+- from: Image
+  to: ImageStatus
+  type: has_one
+  via: status
+- from: BlockStorageStatus
+  to: Reference
+  type: has_one
+  via: attachedTo
+- from: BlockStorage
+  to: RegionalWorkspaceResourceMetadata
+  type: has_one
+  via: metadata
+- from: BlockStorage
+  to: BlockStorageSpec
+  type: has_one
+  via: spec
+- from: BlockStorage
+  to: BlockStorageStatus
+  type: has_one
+  via: status
+- from: WorkspaceIterator
+  to: Workspace
+  type: has_many
+  via: items
+- from: WorkspaceIterator
+  to: ResponseMetadata
+  type: has_one
+  via: metadata
+- from: Workspace
+  to: RegionalResourceMetadata
+  type: has_one
+  via: metadata
+- from: Workspace
+  to: WorkspaceSpec
+  type: has_one
+  via: spec
+- from: Workspace
+  to: WorkspaceStatus
+  type: has_one
+  via: status

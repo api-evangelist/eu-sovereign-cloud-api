@@ -1,0 +1,58 @@
+generated: '2026-10-09'
+method: searched
+probe: true
+source: https://www.secapi.cloud/
+notes: >-
+  SECA is an open API specification (Aruba, IONOS, Dynamo), not a hosted service, and www.secapi.cloud
+  publishes no privacy policy, terms, DPA or trust page of its own. Its only legal link is the footer
+  "Cookie policy", which goes to https://www.aruba.it/en/cookie-policy.aspx, a page on another company's
+  host. /privacy-policy/ and /legal/ both returned 404 on 2026-10-09. The preflight dossier carried no
+  legal_pages. The signals below come from the project homepage, so they describe what the standard intends
+  and are not contractual commitments by any operator.
+signals:
+  data_residency:
+    url: https://www.secapi.cloud/
+    section: Become part of SECA
+    evidence:
+    - source: https://www.secapi.cloud/
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: >-
+        The certification will cover several critical aspects, including legal immunity from third-party
+        country interference or executive orders, independence of software supply chains from external legal
+        jurisdictions, and a firm commitment to upholding API specification standards.
+    - source: https://www.secapi.cloud/
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: >-
+        SECA is open to all genuinely European cloud service providers. API certification offers complete
+        assurance of true sovereignty. To guarantee the integrity of the SECA API, a rigorous certification
+        process will be implemented.
+    note: >-
+      This is about jurisdiction, not data location. The project plans a certification for implementing
+      providers that would test immunity from non-EU legal reach. It is written in the future tense ("will be
+      implemented"), and the page names no criteria document, no certified providers and no physical
+      data-location requirement.
+  exit_assistance:
+    url: https://www.secapi.cloud/
+    section: Vendor choice
+    evidence:
+    - source: https://www.secapi.cloud/
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: >-
+        SECA is the opposite of vendor lock-in, fringed by low migration costs and enhanced response speed to
+        market changes, ending out in a seamless provider switching, allowing for faster cloud provider
+        comparison and easier testing.
+    - source: https://www.secapi.cloud/
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: >-
+        Uncomplicated access to a unified pool of virtual infrastructure/platform resources, a low entry
+        barrier for new participating cloud providers, without effort in training and learning, or expensive
+        provider-related certifications, provide the level of interoperability, reversibility, and control
+        required.
+    note: >-
+      Switching and reversibility are what the standard is designed to deliver, because every provider
+      exposes the same API. No provider commits here to any exit-assistance service, timeline or data-export
+      obligation. Read this as portability by design, not a contractual exit clause.

@@ -1,0 +1,14 @@
+generated: '2026-10-09'
+method: none
+source: https://www.secapi.cloud/
+name: SECA Plans
+audience: unclear
+pricing_basis: none
+published: false
+plan_count: 0
+plans: []
+delivery:
+  mode: unclear
+  evidence: null
+note: 'SECA is an open API specification, not a hosted service; no pricing page is published (identity module: no
+  pricing page on secapi.cloud). Pricing is set by each implementing provider (Aruba, IONOS, Dynamo).'

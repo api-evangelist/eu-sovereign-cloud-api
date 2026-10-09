@@ -1,0 +1,1158 @@
+generated: '2026-10-09'
+method: generated
+source: openapi/eu-sovereign-cloud-api-extensions-activitylog-v1beta1-openapi.yml, openapi/eu-sovereign-cloud-api-extensions-kubernetes-v1beta1-openapi.yml,
+  openapi/eu-sovereign-cloud-api-extensions-loadbalancer-v1beta1-openapi.yml, openapi/eu-sovereign-cloud-api-extensions-natgateway-v1beta1-openapi.yml,
+  openapi/eu-sovereign-cloud-api-extensions-objectstorage-v1beta1-openapi.yml, openapi/eu-sovereign-cloud-api-extensions-wellknown-v1-openapi.yml,
+  openapi/eu-sovereign-cloud-api-foundation-authorization-v1-openapi.yml, openapi/eu-sovereign-cloud-api-foundation-compute-v1-openapi.yml,
+  openapi/eu-sovereign-cloud-api-foundation-network-v1-openapi.yml, openapi/eu-sovereign-cloud-api-foundation-region-v1-openapi.yml,
+  openapi/eu-sovereign-cloud-api-foundation-storage-v1-openapi.yml, openapi/eu-sovereign-cloud-api-foundation-workspace-v1-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 89
+  by_action_class:
+    connected: 48
+    acting: 41
+  by_consequence:
+    read: 48
+    write: 40
+    safety-critical: 1
+  human_in_the_loop_required: 1
+operations:
+- path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/activity-logs
+  method: get
+  operationId: listActivityLogs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/clusters
+  method: get
+  operationId: listClusters
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/clusters/{name}
+  method: get
+  operationId: getCluster
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/clusters/{name}
+  method: put
+  operationId: createOrUpdateCluster
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/clusters/{name}
+  method: delete
+  operationId: deleteCluster
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/clusters/{cluster}/node-pools
+  method: get
+  operationId: listNode-Pools
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/clusters/{cluster}/node-pools/{name}
+  method: get
+  operationId: getNode-Pool
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/clusters/{cluster}/node-pools/{name}
+  method: put
+  operationId: createOrUpdateNode-Pool
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/clusters/{cluster}/node-pools/{name}
+  method: delete
+  operationId: deleteNode-Pool
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/network-load-balancers
+  method: get
+  operationId: listNetworkLoadBalancers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/network-load-balancers/{name}
+  method: get
+  operationId: getNetworkLoadBalancer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/network-load-balancers/{name}
+  method: put
+  operationId: createOrUpdateNetworkLoadBalancer
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/network-load-balancers/{name}
+  method: delete
+  operationId: deleteNetworkLoadBalancer
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/internet-nat-gateway-instances
+  method: get
+  operationId: listInternet-Nat-Gateway-Instances
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/internet-nat-gateway-instances/{name}
+  method: get
+  operationId: getInternetNatGatewayInstance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/internet-nat-gateway-instances/{name}
+  method: put
+  operationId: createOrUpdateInternetNatGatewayInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1beta1/tenants/{tenant}/workspaces/{workspace}/internet-nat-gateway-instances/{name}
+  method: delete
+  operationId: deleteInternetNatGatewayInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1beta1/tenants/{tenant}/accounts
+  method: get
+  operationId: listAccounts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1beta1/tenants/{tenant}/accounts/{name}
+  method: get
+  operationId: getAccount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1beta1/tenants/{tenant}/accounts/{name}
+  method: put
+  operationId: createOrUpdateAccount
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1beta1/tenants/{tenant}/accounts/{name}
+  method: delete
+  operationId: deleteAccount
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /.wellknown/secapi
+  method: get
+  operationId: getWellknown
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/roles
+  method: get
+  operationId: listRoles
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/roles/{name}
+  method: get
+  operationId: getRole
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/roles/{name}
+  method: put
+  operationId: createOrUpdateRole
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/roles/{name}
+  method: delete
+  operationId: deleteRole
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/role-assignments
+  method: get
+  operationId: listRoleAssignments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/role-assignments/{name}
+  method: get
+  operationId: getRoleAssignment
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/role-assignments/{name}
+  method: put
+  operationId: createOrUpdateRoleAssignment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/role-assignments/{name}
+  method: delete
+  operationId: deleteRoleAssignment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/skus
+  method: get
+  operationId: listSkus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/skus/{name}
+  method: get
+  operationId: getSku
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/instances
+  method: get
+  operationId: listInstances
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/instances/{name}
+  method: get
+  operationId: getInstance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/instances/{name}
+  method: put
+  operationId: createOrUpdateInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/instances/{name}
+  method: delete
+  operationId: deleteInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/instances/{name}/start
+  method: post
+  operationId: StartInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/instances/{name}/stop
+  method: post
+  operationId: StopInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/instances/{name}/restart
+  method: post
+  operationId: RestartInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/skus
+  method: get
+  operationId: listSkus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/skus/{name}
+  method: get
+  operationId: getSku
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/security-groups
+  method: get
+  operationId: listSecurity-Groups
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/security-groups/{name}
+  method: get
+  operationId: getSecurityGroup
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/security-groups/{name}
+  method: put
+  operationId: createOrUpdateSecurityGroup
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/security-groups/{name}
+  method: delete
+  operationId: deleteSecurityGroup
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/security-group-rules
+  method: get
+  operationId: listSecurity-Group-Rules
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/security-group-rules/{name}
+  method: get
+  operationId: getSecurityGroupRule
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/security-group-rules/{name}
+  method: put
+  operationId: createOrUpdateSecurityGroupRule
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/security-group-rules/{name}
+  method: delete
+  operationId: deleteSecurityGroupRule
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/nics
+  method: get
+  operationId: listNics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/nics/{name}
+  method: get
+  operationId: getNic
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/nics/{name}
+  method: put
+  operationId: createOrUpdateNic
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/nics/{name}
+  method: delete
+  operationId: deleteNic
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/public-ips
+  method: get
+  operationId: listPublicIps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/public-ips/{name}
+  method: get
+  operationId: getPublicIp
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/public-ips/{name}
+  method: put
+  operationId: createOrUpdatePublicIp
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/public-ips/{name}
+  method: delete
+  operationId: deletePublicIp
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/networks
+  method: get
+  operationId: listNetworks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/networks/{name}
+  method: get
+  operationId: getNetwork
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/networks/{name}
+  method: put
+  operationId: createOrUpdateNetwork
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/networks/{name}
+  method: delete
+  operationId: deleteNetwork
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/internet-gateways
+  method: get
+  operationId: listInternetGateways
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/internet-gateways/{name}
+  method: get
+  operationId: getInternetGateway
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/internet-gateways/{name}
+  method: put
+  operationId: createOrUpdateInternetGateway
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/internet-gateways/{name}
+  method: delete
+  operationId: deleteInternetGateway
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/networks/{network}/subnets
+  method: get
+  operationId: listSubnets
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/networks/{network}/subnets/{name}
+  method: get
+  operationId: getSubnet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/networks/{network}/subnets/{name}
+  method: put
+  operationId: createOrUpdateSubnet
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/networks/{network}/subnets/{name}
+  method: delete
+  operationId: deleteSubnet
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/networks/{network}/route-tables
+  method: get
+  operationId: listRoute-Tables
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/networks/{network}/route-tables/{name}
+  method: get
+  operationId: getRoute-Table
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/networks/{network}/route-tables/{name}
+  method: put
+  operationId: createOrUpdateRoute-Table
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/networks/{network}/route-tables/{name}
+  method: delete
+  operationId: deleteRoute-Table
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/regions
+  method: get
+  operationId: listRegions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/regions/{name}
+  method: get
+  operationId: getRegion
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/skus
+  method: get
+  operationId: listSkus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/skus/{name}
+  method: get
+  operationId: getSku
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/images
+  method: get
+  operationId: listImages
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/images/{name}
+  method: get
+  operationId: getImage
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/images/{name}
+  method: put
+  operationId: createOrUpdateImage
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/images/{name}
+  method: delete
+  operationId: deleteImage
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/block-storages
+  method: get
+  operationId: listBlock-Storages
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/block-storages/{name}
+  method: get
+  operationId: getBlock-Storage
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/block-storages/{name}
+  method: put
+  operationId: createOrUpdateBlock-Storage
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/workspaces/{workspace}/block-storages/{name}
+  method: delete
+  operationId: deleteBlock-Storage
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/workspaces
+  method: get
+  operationId: listWorkspaces
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/workspaces/{name}
+  method: get
+  operationId: getWorkspace
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tenants/{tenant}/workspaces/{name}
+  method: put
+  operationId: createOrUpdateWorkspace
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/tenants/{tenant}/workspaces/{name}
+  method: delete
+  operationId: deleteWorkspace
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
