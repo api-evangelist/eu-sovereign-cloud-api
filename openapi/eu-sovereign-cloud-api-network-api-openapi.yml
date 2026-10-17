@@ -1,8 +1,10 @@
 openapi: 3.2.0
 info:
-  title: Eu Sovereign Cloud Network API
+  title: Network API
   version: v1
-  description: 'Operations tagged Network across 2 of this provider''s published API definitions: foundation.network.v1.yaml, eu-sovereign-cloud-api-foundation-network-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'The Network Foundation API provides access to network resources, including Networks, NICs, security groups, subnets, and routing tables.
+
+    This API is part of the Sovereign European Cloud API.'
 servers:
 - url: https://demo.secapi.cloud/providers/seca.network
   description: Path Schema
@@ -45,11 +47,6 @@ paths:
           $ref: '#/components/responses/Error403'
         '500':
           $ref: '#/components/responses/Error500'
-    servers:
-    - url: https://demo.secapi.cloud/providers/seca.network
-      description: Path Schema
-    - url: https://network.seca.demo.secapi.cloud
-      description: DNS Schema
   /v1/tenants/{tenant}/workspaces/{workspace}/networks/{name}:
     get:
       tags:
@@ -186,119 +183,96 @@ paths:
           $ref: '#/components/responses/Error412'
         '500':
           $ref: '#/components/responses/Error500'
-    servers:
-    - url: https://demo.secapi.cloud/providers/seca.network
-      description: Path Schema
-    - url: https://network.seca.demo.secapi.cloud
-      description: DNS Schema
 components:
-  responses:
-    Error409:
-      description: Conflict
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error409'
-          example:
-            status: 409
-            type: http://secapi.cloud/errors/resource-conflict
-            title: Conflict
-            detail: The request could not be completed due to a conflict with the current state of the resource.
-            instance: /errors/409
-            sources: []
-    Error400:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error400'
-          example:
-            status: 400
-            type: http://secapi.cloud/errors/invalid-request
-            title: Bad Request
-            detail: The request was invalid or cannot be served.
-            instance: /errors/400
-            sources: []
-    Error412:
-      description: Precondition Failed
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error412'
-          example:
-            status: 412
-            type: http://secapi.cloud/errors/precondition-failed
-            title: Precondition Failed
-            detail: The precondition given in the If-Match header failed.
-            instance: /errors/412
-            sources: []
-    Error401:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error401'
-          example:
-            status: 401
-            type: http://secapi.cloud/errors/unauthorized
-            title: Unauthorized
-            detail: Authentication is required and has failed or has not been provided.
-            instance: /errors/401
-            sources: []
-    Error500:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error500'
-          example:
-            status: 500
-            type: http://secapi.cloud/errors/internal-server-error
-            title: Internal Server Error
-            detail: The server encountered an unexpected condition that prevented it from fulfilling the request.
-            instance: /errors/500
-            sources: []
-    Error422:
-      description: Unprocessable Entity
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error422'
-          example:
-            status: 422
-            type: http://secapi.cloud/errors/validation-error
-            title: Unprocessable Entity
-            detail: The subnetRef is not correctly formatted.
-            sources:
-            - pointer: /spec/subnetRef
-              parameter: subnet
-            instance: /errors/422
-    Error404:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error404'
-          example:
-            status: 404
-            type: http://secapi.cloud/errors/resource-not-found
-            title: Not Found
-            detail: The requested resource could not be found.
-            instance: /errors/404
-            sources: []
-    Error403:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error403'
-          example:
-            status: 403
-            type: http://secapi.cloud/errors/forbidden
-            title: Forbidden
-            detail: The request was valid, but the server is refusing action.
-            instance: /errors/403
-            sources: []
+  parameters:
+    labelSelector:
+      in: query
+      name: labels
+      description: "Filter resources by their labels. Multiple filters are combined with comma.\nFilter syntax:\n  - Equals: key=value\n  - Not equals: key!=value\n  - Wildcards: \\*key\\*=\\*value\\* - substring (contains) match on both key and value. Each `*` can appear at start, end or in the middle to mean \"any characters\". Example: \\*env\\*=\\*prod\\* matches a label key containing \"env\" whose value contains \"prod\".\n  - Numeric: key>value, key<value, key>=value, key<=value\n  - Namespaced key examples: 'monitoring:alert-level=high' or 'billing:team=platform'\n"
+      required: false
+      schema:
+        type: string
+        example: cloud:region=us-east-1,billing:team=platform,tier!=dev
+    ifUnmodifiedSince:
+      in: header
+      name: if-unmodified-since
+      schema:
+        type: integer
+      required: false
+      description: 'Returns resources only if they have not been modified since the specified version.
+
+        Uses metadata.resourceVersion for comparison.
+
+        '
+    resourcePathParam:
+      name: name
+      in: path
+      required: true
+      schema:
+        type: string
+        maxLength: 128
+        minLength: 1
+        pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
+      description: Resource name
+    tenantPathParam:
+      name: tenant
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+      description: Tenant ID
+    limitParam:
+      in: query
+      name: limit
+      description: Maximum number of resources to return in the response
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 10000
+        default: 1000
+    acceptHeader:
+      in: header
+      name: Accept
+      schema:
+        type: string
+        default: application/json
+        example: application/json; deleted=true
+        enum:
+        - application/json
+        - application/json; deleted=true
+        - application/json; deleted=only
+        x-enumNames:
+        - AcceptHeaderJson
+        - AcceptHeaderJsonDeletedTrue
+        - AcceptHeaderJsonDeletedOnly
+      description: 'Controls whether deleted resources are included:
+
+        - `"application/json"`: Returns only non-deleted resources
+
+        - `"application/json; deleted=true"`: Returns both deleted and non-deleted resources
+
+        - `"application/json; deleted=only"`: Returns only deleted resources
+
+        '
+    workspacePathParam:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+      description: Workspace name
+    skipTokenParam:
+      in: query
+      name: skipToken
+      description: Opaque cursor for pagination. Use the skipToken from the previous response to get the next page of results. Note that skipTokens do not guarantee consistency across pages if the underlying data changes between requests
+      required: false
+      schema:
+        type: string
   schemas:
     Labels:
       x-go-type-skip-optional-pointer: true
@@ -315,6 +289,188 @@ components:
         maxLength: 63
       example:
         env: production
+    Error404:
+      allOf:
+      - $ref: '#/components/schemas/Error'
+      description: A 404 Not Found error response
+      example:
+        status: 404
+        type: http://secapi.cloud/errors/resource-not-found
+        title: Not Found
+        detail: The requested resource could not be found.
+        instance: /errors/404
+        sources: []
+    TypeMetadata:
+      type: object
+      readOnly: true
+      required:
+      - apiVersion
+      - kind
+      - ref
+      description: 'Metadata for all resources with type information.
+
+        '
+      properties:
+        apiVersion:
+          type: string
+          description: API version of the resource
+          minLength: 1
+          maxLength: 16
+          default: v1
+        kind:
+          type: string
+          description: Type of the resource
+          enum:
+          - activity-log
+          - block-storage
+          - image
+          - instance
+          - instance-sku
+          - internet-gateway
+          - network
+          - network-load-balancer
+          - network-sku
+          - nic
+          - object-storage-account
+          - public-ip
+          - region
+          - role
+          - role-assignment
+          - routing-table
+          - security-group
+          - security-group-rule
+          - storage-sku
+          - subnet
+          - workspace
+          x-enumNames:
+          - ResourceKindActivityLog
+          - ResourceKindBlockStorage
+          - ResourceKindImage
+          - ResourceKindInstance
+          - ResourceKindInstanceSku
+          - ResourceKindInternetGateway
+          - ResourceKindNetwork
+          - ResourceKindNetworkLoadBalancer
+          - ResourceKindNetworkSku
+          - ResourceKindNic
+          - ResourceKindObjectStorageAccount
+          - ResourceKindPublicIP
+          - ResourceKindRegion
+          - ResourceKindRole
+          - ResourceKindRoleAssignment
+          - ResourceKindRoutingTable
+          - ResourceKindSecurityGroup
+          - ResourceKindSecurityGroupRule
+          - ResourceKindStorageSku
+          - ResourceKindSubnet
+          - ResourceKindWorkspace
+        ref:
+          $ref: '#/components/schemas/ReferenceURN'
+    Status:
+      type: object
+      readOnly: true
+      description: Current status of the resource
+      required:
+      - conditions
+      properties:
+        state:
+          x-go-type-skip-optional-pointer: true
+          allOf:
+          - $ref: '#/components/schemas/ResourceState'
+        conditions:
+          type: array
+          description: 'History of state transitions, ordered newest-first, complementing the
+
+            current snapshot in `state`.
+
+            '
+          maxItems: 32
+          items:
+            $ref: '#/components/schemas/StatusCondition'
+          x-oapi-codegen-extra-tags:
+            x-kubebuilder-validation-max-items: '32'
+    Error412:
+      allOf:
+      - $ref: '#/components/schemas/Error'
+      description: A 412 Precondition Failed error response
+      example:
+        status: 412
+        type: http://secapi.cloud/errors/precondition-failed
+        title: Precondition Failed
+        detail: The precondition given in the If-Match header failed.
+        instance: /errors/412
+        sources: []
+    UserResourceMetadata:
+      type: object
+      description: Metadata for user-defined resource properties
+      properties:
+        labels:
+          $ref: '#/components/schemas/Labels'
+        annotations:
+          $ref: '#/components/schemas/Annotations'
+        extensions:
+          $ref: '#/components/schemas/Extensions'
+    NetworkIterator:
+      description: Iterator for networks
+      type: object
+      required:
+      - items
+      - metadata
+      properties:
+        items:
+          description: List of networks
+          type: array
+          items:
+            $ref: '#/components/schemas/Network'
+        metadata:
+          $ref: '#/components/schemas/ResponseMetadata'
+    WorkspaceMetadata:
+      type: object
+      description: Metadata for resources with workspace constraints
+      readOnly: true
+      required:
+      - workspace
+      properties:
+        workspace:
+          type: string
+          description: Workspace identifier
+          minLength: 1
+          maxLength: 64
+    RegionalWorkspaceResourceMetadata:
+      description: 'Metadata for regional resources with name, permission, modification, type, tenant and workspace and region information.
+
+        '
+      allOf:
+      - $ref: '#/components/schemas/NameMetadata'
+      - $ref: '#/components/schemas/PermissionMetadata'
+      - $ref: '#/components/schemas/ModificationMetadata'
+      - $ref: '#/components/schemas/TypeMetadata'
+      - $ref: '#/components/schemas/TenantMetadata'
+      - $ref: '#/components/schemas/WorkspaceMetadata'
+      - $ref: '#/components/schemas/RegionalMetadata'
+    Extensions:
+      x-go-type-skip-optional-pointer: true
+      type: object
+      description: 'User-defined key/value pairs that are mutable and can be used to add extensions.
+
+        Extensions are subject to validation by the CSP, and any value that is not accepted will be rejected during admission.
+
+        '
+      additionalProperties:
+        type: string
+    Annotations:
+      x-go-type-skip-optional-pointer: true
+      type: object
+      description: 'User-defined key/value pairs that are mutable and can be used to add annotations.
+
+        The number of annotations is eventually limited by the CSP.
+
+        '
+      additionalProperties:
+        type: string
+        maxLength: 1024
+      example:
+        description: Human readable description
     NetworkStatus:
       description: 'The status of the network. The status is read-only and will be set by the
 
@@ -359,6 +515,153 @@ components:
           cidr:
             ipv4: 10.100.0.0/16
             ipv6: 2001:239:203:2400::/56
+    ReferenceURN:
+      type: string
+      minLength: 1
+      description: "A unique resource name (URN) used to identify and reference this resource.\n\nThe URN is NOT a URL — it does not contain a protocol scheme (http/https), a host,\nor any endpoint-specific prefix. It is a portable, transport-agnostic identifier.\nA configured SDK client — which knows the provider's base URL and endpoint mapping —\ncan derive a URL from a URN, but the URN alone cannot be turned into a URL without\nthat SDK configuration context. This separation keeps the URN portable across\nenvironments and CSP deployments.\n\nThe full URN format is:\n  `{provider}/{version}/tenants/{tenant}/workspaces/{workspace}/{type}/{name}`\n\nFor hierarchical (nested) resources, additional parent path segments are included:\n  `seca.network/v1/tenants/tn-1/workspaces/ws-1/networks/my-net/route-tables/my-rt`\n\n### Automatic Prefix Inference\n\nIn most cases, the prefix of the URN can be automatically derived in the given context.\nTo simplify usage, only the resource type and name might be specified as a reference\nusing the `<type>/<name>` notation. The suffix can be made more specific by adding\nadditional segments separated by slashes.\n\nThe prefix is automatically inferred from the context. For example, if the resource is a\nblock storage in the same workspace the reference can be specified as\n`block-storages/my-block-storage`. If the resource is a block storage in a different workspace, the\nreference can be specified as `workspaces/ws-1/block-storages/my-block-storage`.\n\nFor automatic prefix inference, the following rules apply:\n- the version is inferred from the current resource version\n- the workspace is inferred from the current workspace\n- the region is inferred from the current region\n- the provider is inferred from the type and context of the usage\n\nThe prefix inference is resolved on admission into the full URN format, which makes it\nmostly suitable for human use.\n"
+      maxLength: 255
+      example: seca.compute/v1/tenants/tn-1/workspaces/ws-1/instances/my-server
+    ResponseMetadata:
+      description: 'Metadata for response objects.
+
+        '
+      allOf:
+      - $ref: '#/components/schemas/PermissionMetadata'
+      - type: object
+        readOnly: true
+        properties:
+          skipToken:
+            type: string
+            description: Opaque cursor to get the next page. Field is omitted when there are no more pages available.
+            maxLength: 5
+      example:
+        skipToken: 'false'
+        provider: seca.compute/v1
+        resource: tenants/tn-1/workspaces/ws-1/instances/my-server
+        verb: get
+    Reference:
+      type: object
+      description: 'A reference to a resource using an object. The object contains the
+
+        same information as the ReferenceURN, but is represented as a structured object.
+
+        The advantage of this representation is that it can be used to reference
+
+        resources in different workspaces or regions without the need to specify
+
+        the full URN.
+
+        '
+      required:
+      - resource
+      properties:
+        region:
+          type: string
+          x-go-type-skip-optional-pointer: true
+          description: 'Region of the resource. If not set, the region is inferred from the context.
+
+            '
+          maxLength: 64
+          example: eu-central-1
+          x-oapi-codegen-extra-tags:
+            x-kubebuilder-validation-max-length: '64'
+        provider:
+          type: string
+          x-go-type-skip-optional-pointer: true
+          description: 'Provider of the resource. If not set, the provider is inferred from the context.
+
+            '
+          maxLength: 64
+          example: seca.compute/v1
+          x-oapi-codegen-extra-tags:
+            x-kubebuilder-validation-max-length: '64'
+        tenant:
+          type: string
+          x-go-type-skip-optional-pointer: true
+          description: 'Tenant of the resource. If not set, the tenant is inferred from the context.
+
+            '
+          maxLength: 64
+          example: tenant-1
+          x-oapi-codegen-extra-tags:
+            x-kubebuilder-validation-max-length: '64'
+        workspace:
+          type: string
+          x-go-type-skip-optional-pointer: true
+          description: 'Workspace of the resource. If not set, the workspace is inferred from the context.
+
+            '
+          maxLength: 64
+          example: workspace-1
+          x-oapi-codegen-extra-tags:
+            x-kubebuilder-validation-max-length: '64'
+        resource:
+          type: string
+          description: "Resource-specific path identifying the resource within its workspace context.\nThis is the segment of the full URN after the provider, version, tenant, and\nworkspace parts. For a flat resource it is `<type>/<name>`, and for hierarchical\n(nested) resources it includes the parent path segments:\n  `networks/<network-name>/route-tables/<rt-name>`\nThe provider, tenant, and workspace can be specified as separate fields in this\nobject; they do not need to be repeated here.\n"
+          minLength: 1
+          maxLength: 256
+          example: instances/my-server
+          x-oapi-codegen-extra-tags:
+            x-kubebuilder-validation-min-length: '1'
+            x-kubebuilder-validation-max-length: '256'
+    RegionalMetadata:
+      type: object
+      description: Metadata for regional resources
+      readOnly: true
+      required:
+      - region
+      properties:
+        region:
+          type: string
+          description: Reference to the region where the resource is located
+          minLength: 1
+          maxLength: 64
+          example: eu-central-1
+    cidr:
+      type: object
+      description: 'Combined IPv4 and IPv6 CIDR block for a subnet. Depending on the network
+
+        configuration, either the IPv4 or IPv6 range can be omitted. So the following
+
+        combinations are possible:
+
+
+        * IPv4 only
+
+        * IPv6 only
+
+        * IPv4 and IPv6 (Dual Stack)
+
+        '
+      properties:
+        ipv4:
+          type: string
+          x-go-type-skip-optional-pointer: true
+          description: 'IPv4 CIDR block for the subnet.
+
+            '
+          minLength: 9
+          maxLength: 18
+          example: 10.0.100.0/24
+          x-oapi-codegen-extra-tags:
+            x-kubebuilder-validation-min-length: '9'
+            x-kubebuilder-validation-max-length: '18'
+            x-cel-rule-0: self.size() == 0 || (isCIDR(self) && cidr(self).ip().family() == 4)
+            x-cel-message-0: cidr.ipv4 must be a valid IPv4 CIDR block
+        ipv6:
+          type: string
+          x-go-type-skip-optional-pointer: true
+          description: 'IPv6 CIDR block for the subnet.
+
+            '
+          minLength: 4
+          maxLength: 43
+          example: 2001:db8::/32
+          x-oapi-codegen-extra-tags:
+            x-kubebuilder-validation-min-length: '4'
+            x-kubebuilder-validation-max-length: '43'
+            x-cel-rule-0: self.size() == 0 || (isCIDR(self) && cidr(self).ip().family() == 6)
+            x-cel-message-0: cidr.ipv6 must be a valid IPv6 CIDR block
     NetworkSpec:
       type: object
       description: 'A Network represents a virtual network that can be used to isolate resources.
@@ -435,116 +738,6 @@ components:
         cidr:
           ipv4: 0.0.0.0/16
           ipv6: ::/56
-    UserResourceMetadata:
-      type: object
-      description: Metadata for user-defined resource properties
-      properties:
-        labels:
-          $ref: '#/components/schemas/Labels'
-        annotations:
-          $ref: '#/components/schemas/Annotations'
-        extensions:
-          $ref: '#/components/schemas/Extensions'
-    Error409:
-      allOf:
-      - $ref: '#/components/schemas/Error'
-      description: A 409 Conflict error response
-      example:
-        status: 409
-        type: http://secapi.cloud/errors/resource-conflict
-        title: Conflict
-        detail: The request could not be completed due to a conflict with the current state of the resource.
-        instance: /errors/409
-        sources: []
-    Error403:
-      allOf:
-      - $ref: '#/components/schemas/Error'
-      description: A 403 Forbidden error response
-      example:
-        status: 403
-        type: http://secapi.cloud/errors/forbidden
-        title: Forbidden
-        detail: The request was valid, but the server is refusing action.
-        instance: /errors/403
-        sources: []
-    Status:
-      type: object
-      readOnly: true
-      description: Current status of the resource
-      required:
-      - conditions
-      properties:
-        state:
-          x-go-type-skip-optional-pointer: true
-          allOf:
-          - $ref: '#/components/schemas/ResourceState'
-        conditions:
-          type: array
-          description: 'History of state transitions, ordered newest-first, complementing the
-
-            current snapshot in `state`.
-
-            '
-          maxItems: 32
-          items:
-            $ref: '#/components/schemas/StatusCondition'
-          x-oapi-codegen-extra-tags:
-            x-kubebuilder-validation-max-items: '32'
-    WorkspaceMetadata:
-      type: object
-      description: Metadata for resources with workspace constraints
-      readOnly: true
-      required:
-      - workspace
-      properties:
-        workspace:
-          type: string
-          description: Workspace identifier
-          minLength: 1
-          maxLength: 64
-    Error422:
-      allOf:
-      - $ref: '#/components/schemas/Error'
-      description: A 422 Unprocessable Entity error response
-      example:
-        status: 422
-        type: http://secapi.cloud/errors/validation-error
-        title: Unprocessable Entity
-        detail: The request was well-formed but was unable to be followed due to semantic errors.
-        sources:
-        - pointer: /data/attributes/username
-          parameter: username
-        instance: /errors/422
-    NameMetadata:
-      type: object
-      readOnly: true
-      required:
-      - name
-      description: Metadata for resource names
-      properties:
-        name:
-          type: string
-          description: 'Resource identifier in dash-case (kebab-case) format. Must start and end with an alphanumeric character.
-
-            Can contain lowercase letters, numbers, and hyphens. Multiple segments can be joined with dots.
-
-            Each segment follows the same rules.
-
-            '
-          minLength: 1
-          maxLength: 128
-          pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
-          example: resource-name
-    Extensions:
-      x-go-type-skip-optional-pointer: true
-      type: object
-      description: 'User-defined key/value pairs that are mutable and can be used to add extensions.
-
-        Extensions are subject to validation by the CSP, and any value that is not accepted will be rejected during admission.
-
-        '
-      additionalProperties:
-        type: string
     PermissionMetadata:
       type: object
       readOnly: true
@@ -573,6 +766,68 @@ components:
         provider: seca.compute/v1
         resource: tenants/tn-1/workspaces/ws-1/instances/my-server
         verb: get
+    ModificationMetadata:
+      type: object
+      readOnly: true
+      description: Base metadata for all resources with optional region references
+      required:
+      - createdAt
+      - lastModifiedAt
+      - resourceVersion
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+          description: Indicates the time when the resource was created. The field is set by the provider and should not be modified by the user.
+        deletedAt:
+          type: string
+          format: date-time
+          description: If set, indicates the time when the resource was marked for deletion. Resources with this field set are considered pending deletion.
+        lastModifiedAt:
+          type: string
+          format: date-time
+          description: Indicates the time when the resource was created or last modified. Field is used for "If-Unmodified-Since" logic for concurrency control. The provider guarantees that a modification on a single resource can happen only once every millisecond.
+        resourceVersion:
+          type: integer
+          description: Incremented on every modification of the resource. Used for optimistic concurrency control.
+          minimum: 1
+          format: int64
+    Error409:
+      allOf:
+      - $ref: '#/components/schemas/Error'
+      description: A 409 Conflict error response
+      example:
+        status: 409
+        type: http://secapi.cloud/errors/resource-conflict
+        title: Conflict
+        detail: The request could not be completed due to a conflict with the current state of the resource.
+        instance: /errors/409
+        sources: []
+    Network:
+      description: 'A Network represents a virtual network that can be used to isolate resources.
+
+        Key network concepts:
+
+
+        * Defines a range of IP addresses for compute resources (e.g. instances)
+
+        * Enables network segmentation and isolation
+
+        * Provides common performance configuration across the network using a SKU
+
+        '
+      allOf:
+      - $ref: '#/components/schemas/UserResourceMetadata'
+      - type: object
+        required:
+        - spec
+        properties:
+          metadata:
+            $ref: '#/components/schemas/RegionalWorkspaceResourceMetadata'
+          spec:
+            $ref: '#/components/schemas/NetworkSpec'
+          status:
+            $ref: '#/components/schemas/NetworkStatus'
     Error:
       type: object
       description: 'A detailed error response see https://datatracker.ietf.org/doc/html/rfc7807.
@@ -637,24 +892,6 @@ components:
         meta:
           type: object
           description: A meta object containing non-standard meta-information about the error.
-    ResponseMetadata:
-      description: 'Metadata for response objects.
-
-        '
-      allOf:
-      - $ref: '#/components/schemas/PermissionMetadata'
-      - type: object
-        readOnly: true
-        properties:
-          skipToken:
-            type: string
-            description: Opaque cursor to get the next page. Field is omitted when there are no more pages available.
-            maxLength: 5
-      example:
-        skipToken: 'false'
-        provider: seca.compute/v1
-        resource: tenants/tn-1/workspaces/ws-1/instances/my-server
-        verb: get
     Error500:
       allOf:
       - $ref: '#/components/schemas/Error'
@@ -666,51 +903,55 @@ components:
         detail: The server encountered an unexpected condition that prevented it from fulfilling the request.
         instance: /errors/500
         sources: []
-    cidr:
-      type: object
-      description: 'Combined IPv4 and IPv6 CIDR block for a subnet. Depending on the network
+    ResourceState:
+      type: string
+      description: 'Current phase of the resource:
 
-        configuration, either the IPv4 or IPv6 range can be omitted. So the following
+        - pending: not available, waiting for other resources
 
-        combinations are possible:
+        - creating: not available, creation started
 
+        - active: available for data layer usage
 
-        * IPv4 only
+        - updating: available for data layer usage
 
-        * IPv6 only
+        - deleting: maybe still available for data layer user, can fail any moment
 
-        * IPv4 and IPv6 (Dual Stack)
+        - error: failed to fulfill the request; would be related to provider issue or customer related input.
 
         '
+      enum:
+      - pending
+      - creating
+      - active
+      - updating
+      - deleting
+      - error
+      x-enumNames:
+      - ResourceStatePending
+      - ResourceStateCreating
+      - ResourceStateActive
+      - ResourceStateUpdating
+      - ResourceStateDeleting
+      - ResourceStateError
+      example: active
+    ErrorSource:
+      type: object
+      description: An object containing references to the source of the error.
+      required:
+      - pointer
+      - parameter
       properties:
-        ipv4:
+        pointer:
           type: string
-          x-go-type-skip-optional-pointer: true
-          description: 'IPv4 CIDR block for the subnet.
-
-            '
-          minLength: 9
-          maxLength: 18
-          example: 10.0.100.0/24
-          x-oapi-codegen-extra-tags:
-            x-kubebuilder-validation-min-length: '9'
-            x-kubebuilder-validation-max-length: '18'
-            x-cel-rule-0: self.size() == 0 || (isCIDR(self) && cidr(self).ip().family() == 4)
-            x-cel-message-0: cidr.ipv4 must be a valid IPv4 CIDR block
-        ipv6:
+          description: A JSON Pointer [RFC6901] to the associated entity in the request document.
+          minLength: 1
+          maxLength: 256
+        parameter:
           type: string
-          x-go-type-skip-optional-pointer: true
-          description: 'IPv6 CIDR block for the subnet.
-
-            '
-          minLength: 4
-          maxLength: 43
-          example: 2001:db8::/32
-          x-oapi-codegen-extra-tags:
-            x-kubebuilder-validation-min-length: '4'
-            x-kubebuilder-validation-max-length: '43'
-            x-cel-rule-0: self.size() == 0 || (isCIDR(self) && cidr(self).ip().family() == 6)
-            x-cel-message-0: cidr.ipv6 must be a valid IPv6 CIDR block
+          description: A string indicating which URI query parameter caused the error.
+          minLength: 1
+          maxLength: 64
     StatusCondition:
       type: object
       description: 'StatusCondition describes the state of a resource at a certain point.
@@ -773,95 +1014,47 @@ components:
       example:
         state: active
         lastTransitionAt: '2024-11-21T14:39:22Z'
-    Reference:
-      type: object
-      description: 'A reference to a resource using an object. The object contains the
-
-        same information as the ReferenceURN, but is represented as a structured object.
-
-        The advantage of this representation is that it can be used to reference
-
-        resources in different workspaces or regions without the need to specify
-
-        the full URN.
-
-        '
-      required:
-      - resource
-      properties:
-        region:
-          type: string
-          x-go-type-skip-optional-pointer: true
-          description: 'Region of the resource. If not set, the region is inferred from the context.
-
-            '
-          maxLength: 64
-          example: eu-central-1
-          x-oapi-codegen-extra-tags:
-            x-kubebuilder-validation-max-length: '64'
-        provider:
-          type: string
-          x-go-type-skip-optional-pointer: true
-          description: 'Provider of the resource. If not set, the provider is inferred from the context.
-
-            '
-          maxLength: 64
-          example: seca.compute/v1
-          x-oapi-codegen-extra-tags:
-            x-kubebuilder-validation-max-length: '64'
-        tenant:
-          type: string
-          x-go-type-skip-optional-pointer: true
-          description: 'Tenant of the resource. If not set, the tenant is inferred from the context.
-
-            '
-          maxLength: 64
-          example: tenant-1
-          x-oapi-codegen-extra-tags:
-            x-kubebuilder-validation-max-length: '64'
-        workspace:
-          type: string
-          x-go-type-skip-optional-pointer: true
-          description: 'Workspace of the resource. If not set, the workspace is inferred from the context.
-
-            '
-          maxLength: 64
-          example: workspace-1
-          x-oapi-codegen-extra-tags:
-            x-kubebuilder-validation-max-length: '64'
-        resource:
-          type: string
-          description: "Resource-specific path identifying the resource within its workspace context.\nThis is the segment of the full URN after the provider, version, tenant, and\nworkspace parts. For a flat resource it is `<type>/<name>`, and for hierarchical\n(nested) resources it includes the parent path segments:\n  `networks/<network-name>/route-tables/<rt-name>`\nThe provider, tenant, and workspace can be specified as separate fields in this\nobject; they do not need to be repeated here.\n"
-          minLength: 1
-          maxLength: 256
-          example: instances/my-server
-          x-oapi-codegen-extra-tags:
-            x-kubebuilder-validation-min-length: '1'
-            x-kubebuilder-validation-max-length: '256'
-    NetworkIterator:
-      description: Iterator for networks
-      type: object
-      required:
-      - items
-      - metadata
-      properties:
-        items:
-          description: List of networks
-          type: array
-          items:
-            $ref: '#/components/schemas/Network'
-        metadata:
-          $ref: '#/components/schemas/ResponseMetadata'
-    Error412:
+    Error401:
       allOf:
       - $ref: '#/components/schemas/Error'
-      description: A 412 Precondition Failed error response
+      description: A 401 Unauthorized error response
       example:
-        status: 412
-        type: http://secapi.cloud/errors/precondition-failed
-        title: Precondition Failed
-        detail: The precondition given in the If-Match header failed.
-        instance: /errors/412
+        status: 401
+        type: http://secapi.cloud/errors/unauthorized
+        title: Unauthorized
+        detail: Authentication is required and has failed or has not been provided.
+        instance: /errors/401
+        sources: []
+    NameMetadata:
+      type: object
+      readOnly: true
+      required:
+      - name
+      description: Metadata for resource names
+      properties:
+        name:
+          type: string
+          description: 'Resource identifier in dash-case (kebab-case) format. Must start and end with an alphanumeric character.
+
+            Can contain lowercase letters, numbers, and hyphens. Multiple segments can be joined with dots.
+
+            Each segment follows the same rules.
+
+            '
+          minLength: 1
+          maxLength: 128
+          pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
+          example: resource-name
+    Error403:
+      allOf:
+      - $ref: '#/components/schemas/Error'
+      description: A 403 Forbidden error response
+      example:
+        status: 403
+        type: http://secapi.cloud/errors/forbidden
+        title: Forbidden
+        detail: The request was valid, but the server is refusing action.
+        instance: /errors/403
         sources: []
     Error400:
       allOf:
@@ -874,169 +1067,19 @@ components:
         detail: The request was invalid or cannot be served.
         instance: /errors/400
         sources: []
-    Error404:
+    Error422:
       allOf:
       - $ref: '#/components/schemas/Error'
-      description: A 404 Not Found error response
+      description: A 422 Unprocessable Entity error response
       example:
-        status: 404
-        type: http://secapi.cloud/errors/resource-not-found
-        title: Not Found
-        detail: The requested resource could not be found.
-        instance: /errors/404
-        sources: []
-    ModificationMetadata:
-      type: object
-      readOnly: true
-      description: Base metadata for all resources with optional region references
-      required:
-      - createdAt
-      - lastModifiedAt
-      - resourceVersion
-      properties:
-        createdAt:
-          type: string
-          format: date-time
-          description: Indicates the time when the resource was created. The field is set by the provider and should not be modified by the user.
-        deletedAt:
-          type: string
-          format: date-time
-          description: If set, indicates the time when the resource was marked for deletion. Resources with this field set are considered pending deletion.
-        lastModifiedAt:
-          type: string
-          format: date-time
-          description: Indicates the time when the resource was created or last modified. Field is used for "If-Unmodified-Since" logic for concurrency control. The provider guarantees that a modification on a single resource can happen only once every millisecond.
-        resourceVersion:
-          type: integer
-          description: Incremented on every modification of the resource. Used for optimistic concurrency control.
-          minimum: 1
-          format: int64
-    ReferenceURN:
-      type: string
-      minLength: 1
-      description: "A unique resource name (URN) used to identify and reference this resource.\n\nThe URN is NOT a URL — it does not contain a protocol scheme (http/https), a host,\nor any endpoint-specific prefix. It is a portable, transport-agnostic identifier.\nA configured SDK client — which knows the provider's base URL and endpoint mapping —\ncan derive a URL from a URN, but the URN alone cannot be turned into a URL without\nthat SDK configuration context. This separation keeps the URN portable across\nenvironments and CSP deployments.\n\nThe full URN format is:\n  `{provider}/{version}/tenants/{tenant}/workspaces/{workspace}/{type}/{name}`\n\nFor hierarchical (nested) resources, additional parent path segments are included:\n  `seca.network/v1/tenants/tn-1/workspaces/ws-1/networks/my-net/route-tables/my-rt`\n\n### Automatic Prefix Inference\n\nIn most cases, the prefix of the URN can be automatically derived in the given context.\nTo simplify usage, only the resource type and name might be specified as a reference\nusing the `<type>/<name>` notation. The suffix can be made more specific by adding\nadditional segments separated by slashes.\n\nThe prefix is automatically inferred from the context. For example, if the resource is a\nblock storage in the same workspace the reference can be specified as\n`block-storages/my-block-storage`. If the resource is a block storage in a different workspace, the\nreference can be specified as `workspaces/ws-1/block-storages/my-block-storage`.\n\nFor automatic prefix inference, the following rules apply:\n- the version is inferred from the current resource version\n- the workspace is inferred from the current workspace\n- the region is inferred from the current region\n- the provider is inferred from the type and context of the usage\n\nThe prefix inference is resolved on admission into the full URN format, which makes it\nmostly suitable for human use.\n"
-      maxLength: 255
-      example: seca.compute/v1/tenants/tn-1/workspaces/ws-1/instances/my-server
-    Annotations:
-      x-go-type-skip-optional-pointer: true
-      type: object
-      description: 'User-defined key/value pairs that are mutable and can be used to add annotations.
-
-        The number of annotations is eventually limited by the CSP.
-
-        '
-      additionalProperties:
-        type: string
-        maxLength: 1024
-      example:
-        description: Human readable description
-    ErrorSource:
-      type: object
-      description: An object containing references to the source of the error.
-      required:
-      - pointer
-      - parameter
-      properties:
-        pointer:
-          type: string
-          description: A JSON Pointer [RFC6901] to the associated entity in the request document.
-          minLength: 1
-          maxLength: 256
-        parameter:
-          type: string
-          description: A string indicating which URI query parameter caused the error.
-          minLength: 1
-          maxLength: 64
-    TypeMetadata:
-      type: object
-      readOnly: true
-      required:
-      - apiVersion
-      - kind
-      - ref
-      description: 'Metadata for all resources with type information.
-
-        '
-      properties:
-        apiVersion:
-          type: string
-          description: API version of the resource
-          minLength: 1
-          maxLength: 16
-          default: v1
-        kind:
-          type: string
-          description: Type of the resource
-          enum:
-          - activity-log
-          - block-storage
-          - image
-          - instance
-          - instance-sku
-          - internet-gateway
-          - network
-          - network-load-balancer
-          - network-sku
-          - nic
-          - object-storage-account
-          - public-ip
-          - region
-          - role
-          - role-assignment
-          - routing-table
-          - security-group
-          - security-group-rule
-          - storage-sku
-          - subnet
-          - workspace
-          x-enumNames:
-          - ResourceKindActivityLog
-          - ResourceKindBlockStorage
-          - ResourceKindImage
-          - ResourceKindInstance
-          - ResourceKindInstanceSku
-          - ResourceKindInternetGateway
-          - ResourceKindNetwork
-          - ResourceKindNetworkLoadBalancer
-          - ResourceKindNetworkSku
-          - ResourceKindNic
-          - ResourceKindObjectStorageAccount
-          - ResourceKindPublicIP
-          - ResourceKindRegion
-          - ResourceKindRole
-          - ResourceKindRoleAssignment
-          - ResourceKindRoutingTable
-          - ResourceKindSecurityGroup
-          - ResourceKindSecurityGroupRule
-          - ResourceKindStorageSku
-          - ResourceKindSubnet
-          - ResourceKindWorkspace
-        ref:
-          $ref: '#/components/schemas/ReferenceURN'
-    Error401:
-      allOf:
-      - $ref: '#/components/schemas/Error'
-      description: A 401 Unauthorized error response
-      example:
-        status: 401
-        type: http://secapi.cloud/errors/unauthorized
-        title: Unauthorized
-        detail: Authentication is required and has failed or has not been provided.
-        instance: /errors/401
-        sources: []
-    RegionalMetadata:
-      type: object
-      description: Metadata for regional resources
-      readOnly: true
-      required:
-      - region
-      properties:
-        region:
-          type: string
-          description: Reference to the region where the resource is located
-          minLength: 1
-          maxLength: 64
-          example: eu-central-1
+        status: 422
+        type: http://secapi.cloud/errors/validation-error
+        title: Unprocessable Entity
+        detail: The request was well-formed but was unable to be followed due to semantic errors.
+        sources:
+        - pointer: /data/attributes/username
+          parameter: username
+        instance: /errors/422
     TenantMetadata:
       type: object
       description: Metadata for resources with tenant constraints
@@ -1049,164 +1092,113 @@ components:
           description: Tenant identifier
           minLength: 1
           maxLength: 64
-    Network:
-      description: 'A Network represents a virtual network that can be used to isolate resources.
-
-        Key network concepts:
-
-
-        * Defines a range of IP addresses for compute resources (e.g. instances)
-
-        * Enables network segmentation and isolation
-
-        * Provides common performance configuration across the network using a SKU
-
-        '
-      allOf:
-      - $ref: '#/components/schemas/UserResourceMetadata'
-      - type: object
-        required:
-        - spec
-        properties:
-          metadata:
-            $ref: '#/components/schemas/RegionalWorkspaceResourceMetadata'
-          spec:
-            $ref: '#/components/schemas/NetworkSpec'
-          status:
-            $ref: '#/components/schemas/NetworkStatus'
-    ResourceState:
-      type: string
-      description: 'Current phase of the resource:
-
-        - pending: not available, waiting for other resources
-
-        - creating: not available, creation started
-
-        - active: available for data layer usage
-
-        - updating: available for data layer usage
-
-        - deleting: maybe still available for data layer user, can fail any moment
-
-        - error: failed to fulfill the request; would be related to provider issue or customer related input.
-
-        '
-      enum:
-      - pending
-      - creating
-      - active
-      - updating
-      - deleting
-      - error
-      x-enumNames:
-      - ResourceStatePending
-      - ResourceStateCreating
-      - ResourceStateActive
-      - ResourceStateUpdating
-      - ResourceStateDeleting
-      - ResourceStateError
-      example: active
-    RegionalWorkspaceResourceMetadata:
-      description: 'Metadata for regional resources with name, permission, modification, type, tenant and workspace and region information.
-
-        '
-      allOf:
-      - $ref: '#/components/schemas/NameMetadata'
-      - $ref: '#/components/schemas/PermissionMetadata'
-      - $ref: '#/components/schemas/ModificationMetadata'
-      - $ref: '#/components/schemas/TypeMetadata'
-      - $ref: '#/components/schemas/TenantMetadata'
-      - $ref: '#/components/schemas/WorkspaceMetadata'
-      - $ref: '#/components/schemas/RegionalMetadata'
-  parameters:
-    tenantPathParam:
-      name: tenant
-      in: path
-      required: true
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 64
-      description: Tenant ID
-    skipTokenParam:
-      in: query
-      name: skipToken
-      description: Opaque cursor for pagination. Use the skipToken from the previous response to get the next page of results. Note that skipTokens do not guarantee consistency across pages if the underlying data changes between requests
-      required: false
-      schema:
-        type: string
-    ifUnmodifiedSince:
-      in: header
-      name: if-unmodified-since
-      schema:
-        type: integer
-      required: false
-      description: 'Returns resources only if they have not been modified since the specified version.
-
-        Uses metadata.resourceVersion for comparison.
-
-        '
-    limitParam:
-      in: query
-      name: limit
-      description: Maximum number of resources to return in the response
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 10000
-        default: 1000
-    resourcePathParam:
-      name: name
-      in: path
-      required: true
-      schema:
-        type: string
-        maxLength: 128
-        minLength: 1
-        pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
-      description: Resource name
-    workspacePathParam:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 64
-      description: Workspace name
-    acceptHeader:
-      in: header
-      name: Accept
-      schema:
-        type: string
-        default: application/json
-        example: application/json; deleted=true
-        enum:
-        - application/json
-        - application/json; deleted=true
-        - application/json; deleted=only
-        x-enumNames:
-        - AcceptHeaderJson
-        - AcceptHeaderJsonDeletedTrue
-        - AcceptHeaderJsonDeletedOnly
-      description: 'Controls whether deleted resources are included:
-
-        - `"application/json"`: Returns only non-deleted resources
-
-        - `"application/json; deleted=true"`: Returns both deleted and non-deleted resources
-
-        - `"application/json; deleted=only"`: Returns only deleted resources
-
-        '
-    labelSelector:
-      in: query
-      name: labels
-      description: "Filter resources by their labels. Multiple filters are combined with comma.\nFilter syntax:\n  - Equals: key=value\n  - Not equals: key!=value\n  - Wildcards: \\*key\\*=\\*value\\* - substring (contains) match on both key and value. Each `*` can appear at start, end or in the middle to mean \"any characters\". Example: \\*env\\*=\\*prod\\* matches a label key containing \"env\" whose value contains \"prod\".\n  - Numeric: key>value, key<value, key>=value, key<=value\n  - Namespaced key examples: 'monitoring:alert-level=high' or 'billing:team=platform'\n"
-      required: false
-      schema:
-        type: string
-        example: cloud:region=us-east-1,billing:team=platform,tier!=dev
+  responses:
+    Error500:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error500'
+          example:
+            status: 500
+            type: http://secapi.cloud/errors/internal-server-error
+            title: Internal Server Error
+            detail: The server encountered an unexpected condition that prevented it from fulfilling the request.
+            instance: /errors/500
+            sources: []
+    Error401:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error401'
+          example:
+            status: 401
+            type: http://secapi.cloud/errors/unauthorized
+            title: Unauthorized
+            detail: Authentication is required and has failed or has not been provided.
+            instance: /errors/401
+            sources: []
+    Error412:
+      description: Precondition Failed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error412'
+          example:
+            status: 412
+            type: http://secapi.cloud/errors/precondition-failed
+            title: Precondition Failed
+            detail: The precondition given in the If-Match header failed.
+            instance: /errors/412
+            sources: []
+    Error409:
+      description: Conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error409'
+          example:
+            status: 409
+            type: http://secapi.cloud/errors/resource-conflict
+            title: Conflict
+            detail: The request could not be completed due to a conflict with the current state of the resource.
+            instance: /errors/409
+            sources: []
+    Error403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403'
+          example:
+            status: 403
+            type: http://secapi.cloud/errors/forbidden
+            title: Forbidden
+            detail: The request was valid, but the server is refusing action.
+            instance: /errors/403
+            sources: []
+    Error400:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error400'
+          example:
+            status: 400
+            type: http://secapi.cloud/errors/invalid-request
+            title: Bad Request
+            detail: The request was invalid or cannot be served.
+            instance: /errors/400
+            sources: []
+    Error404:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404'
+          example:
+            status: 404
+            type: http://secapi.cloud/errors/resource-not-found
+            title: Not Found
+            detail: The requested resource could not be found.
+            instance: /errors/404
+            sources: []
+    Error422:
+      description: Unprocessable Entity
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error422'
+          example:
+            status: 422
+            type: http://secapi.cloud/errors/validation-error
+            title: Unprocessable Entity
+            detail: The subnetRef is not correctly formatted.
+            sources:
+            - pointer: /spec/subnetRef
+              parameter: subnet
+            instance: /errors/422
   securitySchemes:
     bearerAuth:
       type: http
@@ -1217,6 +1209,3 @@ components:
         and policies (RBAC, ABAC, or hybrid) determine authorization.
 
         '
-x-refined-from:
-- foundation.network.v1.yaml
-- eu-sovereign-cloud-api-foundation-network-v1-openapi.yml

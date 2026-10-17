@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Eu Sovereign Cloud Sku API
   version: v1
-  description: 'Operations tagged Sku across 6 of this provider''s published API definitions: foundation.compute.v1.yaml, foundation.network.v1.yaml, foundation.storage.v1.yaml, eu-sovereign-cloud-api-foundation-compute-v1-openapi.yml, eu-sovereign-cloud-api-foundation-network-v1-openapi.yml, eu-sovereign-cloud-api-foundation-storage-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Sku across 3 of this provider''s published API definitions: eu-sovereign-cloud-api-foundation-compute-v1-openapi.yml, eu-sovereign-cloud-api-foundation-network-v1-openapi.yml, eu-sovereign-cloud-api-foundation-storage-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://demo.secapi.cloud/providers/seca.compute
   description: Path Schema
@@ -474,6 +474,75 @@ paths:
     - url: https://compute.seca.demo.secapi.cloud
       description: DNS Schema
 components:
+  parameters:
+    labelSelector:
+      in: query
+      name: labels
+      description: "Filter resources by their labels. Multiple filters are combined with comma.\nFilter syntax:\n  - Equals: key=value\n  - Not equals: key!=value\n  - Wildcards: \\*key\\*=\\*value\\* - substring (contains) match on both key and value. Each `*` can appear at start, end or in the middle to mean \"any characters\". Example: \\*env\\*=\\*prod\\* matches a label key containing \"env\" whose value contains \"prod\".\n  - Numeric: key>value, key<value, key>=value, key<=value\n  - Namespaced key examples: 'monitoring:alert-level=high' or 'billing:team=platform'\n"
+      required: false
+      schema:
+        type: string
+        example: cloud:region=us-east-1,billing:team=platform,tier!=dev
+    resourcePathParam:
+      name: name
+      in: path
+      required: true
+      schema:
+        type: string
+        maxLength: 128
+        minLength: 1
+        pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
+      description: Resource name
+    tenantPathParam:
+      name: tenant
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+      description: Tenant ID
+    limitParam:
+      in: query
+      name: limit
+      description: Maximum number of resources to return in the response
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 10000
+        default: 1000
+    acceptHeader:
+      in: header
+      name: Accept
+      schema:
+        type: string
+        default: application/json
+        example: application/json; deleted=true
+        enum:
+        - application/json
+        - application/json; deleted=true
+        - application/json; deleted=only
+        x-enumNames:
+        - AcceptHeaderJson
+        - AcceptHeaderJsonDeletedTrue
+        - AcceptHeaderJsonDeletedOnly
+      description: 'Controls whether deleted resources are included:
+
+        - `"application/json"`: Returns only non-deleted resources
+
+        - `"application/json; deleted=true"`: Returns both deleted and non-deleted resources
+
+        - `"application/json; deleted=only"`: Returns only deleted resources
+
+        '
+    skipTokenParam:
+      in: query
+      name: skipToken
+      description: Opaque cursor for pagination. Use the skipToken from the previous response to get the next page of results. Note that skipTokens do not guarantee consistency across pages if the underlying data changes between requests
+      required: false
+      schema:
+        type: string
   schemas:
     Labels:
       x-go-type-skip-optional-pointer: true
@@ -490,108 +559,95 @@ components:
         maxLength: 63
       example:
         env: production
-    InstanceSkuGpuSpec:
-      type: object
-      description: 'Specification of the GPU(s) attached to an instance SKU.
-
-        '
-      required:
-      - count
-      - vendor
-      - model
-      - ram
-      properties:
-        count:
-          type: integer
-          description: 'The number of GPUs allocated to the instance SKU.
-
-            '
-          minimum: 1
-          maximum: 16
-          example: 1
-          x-oapi-codegen-extra-tags:
-            x-kubebuilder-validation-minimum: '1'
-            x-kubebuilder-validation-maximum: '16'
-        vendor:
-          type: string
-          description: 'The GPU vendor. An instance created with this SKU can only use images
-
-            and drivers built for the same vendor.
-
-            '
-          enum:
-          - nvidia
-          - amd
-          - intel
-          x-enumNames:
-          - InstanceSkuGpuSpecVendorNvidia
-          - InstanceSkuGpuSpecVendorAmd
-          - InstanceSkuGpuSpecVendorIntel
-          example: nvidia
-          x-oapi-codegen-extra-tags:
-            x-kubebuilder-validation-enum: nvidia;amd;intel
-        model:
-          type: string
-          description: 'The GPU model name, as reported by the vendor (e.g. "H100", "MI300X",
-
-            "L40S"). Free-form, since GPU model names change frequently as new
-
-            hardware is released, unlike vendor, which is a small, stable set.
-
-            '
-          minLength: 1
-          maxLength: 64
-          example: H100
-          x-oapi-codegen-extra-tags:
-            x-kubebuilder-validation-min-length: '1'
-            x-kubebuilder-validation-max-length: '64'
-        ram:
-          type: integer
-          description: 'The amount of dedicated video memory (VRAM) per GPU, in GiB (gibibytes).
-
-            '
-          minimum: 1
-          maximum: 256
-          example: 80
-          x-oapi-codegen-extra-tags:
-            x-kubebuilder-validation-minimum: '1'
-            x-kubebuilder-validation-maximum: '256'
-      example:
-        count: 1
-        vendor: nvidia
-        model: H100
-        ram: 80
-    Error403:
+    Error404:
       allOf:
       - $ref: '#/components/schemas/Error'
-      description: A 403 Forbidden error response
+      description: A 404 Not Found error response
       example:
-        status: 403
-        type: http://secapi.cloud/errors/forbidden
-        title: Forbidden
-        detail: The request was valid, but the server is refusing action.
-        instance: /errors/403
+        status: 404
+        type: http://secapi.cloud/errors/resource-not-found
+        title: Not Found
+        detail: The requested resource could not be found.
+        instance: /errors/404
         sources: []
-    NameMetadata:
+    TypeMetadata:
       type: object
       readOnly: true
       required:
-      - name
-      description: Metadata for resource names
+      - apiVersion
+      - kind
+      - ref
+      description: 'Metadata for all resources with type information.
+
+        '
       properties:
-        name:
+        apiVersion:
           type: string
-          description: 'Resource identifier in dash-case (kebab-case) format. Must start and end with an alphanumeric character.
-
-            Can contain lowercase letters, numbers, and hyphens. Multiple segments can be joined with dots.
-
-            Each segment follows the same rules.
-
-            '
+          description: API version of the resource
           minLength: 1
-          maxLength: 128
-          pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
-          example: resource-name
+          maxLength: 16
+          default: v1
+        kind:
+          type: string
+          description: Type of the resource
+          enum:
+          - activity-log
+          - block-storage
+          - image
+          - instance
+          - instance-sku
+          - internet-gateway
+          - network
+          - network-load-balancer
+          - network-sku
+          - nic
+          - object-storage-account
+          - public-ip
+          - region
+          - role
+          - role-assignment
+          - routing-table
+          - security-group
+          - security-group-rule
+          - storage-sku
+          - subnet
+          - workspace
+          x-enumNames:
+          - ResourceKindActivityLog
+          - ResourceKindBlockStorage
+          - ResourceKindImage
+          - ResourceKindInstance
+          - ResourceKindInstanceSku
+          - ResourceKindInternetGateway
+          - ResourceKindNetwork
+          - ResourceKindNetworkLoadBalancer
+          - ResourceKindNetworkSku
+          - ResourceKindNic
+          - ResourceKindObjectStorageAccount
+          - ResourceKindPublicIP
+          - ResourceKindRegion
+          - ResourceKindRole
+          - ResourceKindRoleAssignment
+          - ResourceKindRoutingTable
+          - ResourceKindSecurityGroup
+          - ResourceKindSecurityGroupRule
+          - ResourceKindStorageSku
+          - ResourceKindSubnet
+          - ResourceKindWorkspace
+        ref:
+          $ref: '#/components/schemas/ReferenceURN'
+    InstanceSku:
+      description: 'Represents a Stock Keeping Unit (SKU) for compute instances.
+
+        '
+      allOf:
+      - $ref: '#/components/schemas/SystemResourceMetadata'
+      - type: object
+        properties:
+          metadata:
+            $ref: '#/components/schemas/SkuResourceMetadata'
+          spec:
+            $ref: '#/components/schemas/InstanceSkuSpec'
     Extensions:
       x-go-type-skip-optional-pointer: true
       type: object
@@ -602,6 +658,66 @@ components:
         '
       additionalProperties:
         type: string
+    SkuResourceMetadata:
+      description: 'Metadata for SKU resources with name, permission, type, tenant and region information.
+
+        '
+      allOf:
+      - $ref: '#/components/schemas/NameMetadata'
+      - $ref: '#/components/schemas/PermissionMetadata'
+      - $ref: '#/components/schemas/TypeMetadata'
+      - $ref: '#/components/schemas/TenantMetadata'
+      - $ref: '#/components/schemas/RegionalMetadata'
+    Annotations:
+      x-go-type-skip-optional-pointer: true
+      type: object
+      description: 'User-defined key/value pairs that are mutable and can be used to add annotations.
+
+        The number of annotations is eventually limited by the CSP.
+
+        '
+      additionalProperties:
+        type: string
+        maxLength: 1024
+      example:
+        description: Human readable description
+    ReferenceURN:
+      type: string
+      minLength: 1
+      description: "A unique resource name (URN) used to identify and reference this resource.\n\nThe URN is NOT a URL — it does not contain a protocol scheme (http/https), a host,\nor any endpoint-specific prefix. It is a portable, transport-agnostic identifier.\nA configured SDK client — which knows the provider's base URL and endpoint mapping —\ncan derive a URL from a URN, but the URN alone cannot be turned into a URL without\nthat SDK configuration context. This separation keeps the URN portable across\nenvironments and CSP deployments.\n\nThe full URN format is:\n  `{provider}/{version}/tenants/{tenant}/workspaces/{workspace}/{type}/{name}`\n\nFor hierarchical (nested) resources, additional parent path segments are included:\n  `seca.network/v1/tenants/tn-1/workspaces/ws-1/networks/my-net/route-tables/my-rt`\n\n### Automatic Prefix Inference\n\nIn most cases, the prefix of the URN can be automatically derived in the given context.\nTo simplify usage, only the resource type and name might be specified as a reference\nusing the `<type>/<name>` notation. The suffix can be made more specific by adding\nadditional segments separated by slashes.\n\nThe prefix is automatically inferred from the context. For example, if the resource is a\nblock storage in the same workspace the reference can be specified as\n`block-storages/my-block-storage`. If the resource is a block storage in a different workspace, the\nreference can be specified as `workspaces/ws-1/block-storages/my-block-storage`.\n\nFor automatic prefix inference, the following rules apply:\n- the version is inferred from the current resource version\n- the workspace is inferred from the current workspace\n- the region is inferred from the current region\n- the provider is inferred from the type and context of the usage\n\nThe prefix inference is resolved on admission into the full URN format, which makes it\nmostly suitable for human use.\n"
+      maxLength: 255
+      example: seca.compute/v1/tenants/tn-1/workspaces/ws-1/instances/my-server
+    ResponseMetadata:
+      description: 'Metadata for response objects.
+
+        '
+      allOf:
+      - $ref: '#/components/schemas/PermissionMetadata'
+      - type: object
+        readOnly: true
+        properties:
+          skipToken:
+            type: string
+            description: Opaque cursor to get the next page. Field is omitted when there are no more pages available.
+            maxLength: 5
+      example:
+        skipToken: 'false'
+        provider: seca.compute/v1
+        resource: tenants/tn-1/workspaces/ws-1/instances/my-server
+        verb: get
+    RegionalMetadata:
+      type: object
+      description: Metadata for regional resources
+      readOnly: true
+      required:
+      - region
+      properties:
+        region:
+          type: string
+          description: Reference to the region where the resource is located
+          minLength: 1
+          maxLength: 64
+          example: eu-central-1
     PermissionMetadata:
       type: object
       readOnly: true
@@ -694,24 +810,6 @@ components:
         meta:
           type: object
           description: A meta object containing non-standard meta-information about the error.
-    ResponseMetadata:
-      description: 'Metadata for response objects.
-
-        '
-      allOf:
-      - $ref: '#/components/schemas/PermissionMetadata'
-      - type: object
-        readOnly: true
-        properties:
-          skipToken:
-            type: string
-            description: Opaque cursor to get the next page. Field is omitted when there are no more pages available.
-            maxLength: 5
-      example:
-        skipToken: 'false'
-        provider: seca.compute/v1
-        resource: tenants/tn-1/workspaces/ws-1/instances/my-server
-        verb: get
     Error500:
       allOf:
       - $ref: '#/components/schemas/Error'
@@ -723,6 +821,77 @@ components:
         detail: The server encountered an unexpected condition that prevented it from fulfilling the request.
         instance: /errors/500
         sources: []
+    InstanceSkuGpuSpec:
+      type: object
+      description: 'Specification of the GPU(s) attached to an instance SKU.
+
+        '
+      required:
+      - count
+      - vendor
+      - model
+      - ram
+      properties:
+        count:
+          type: integer
+          description: 'The number of GPUs allocated to the instance SKU.
+
+            '
+          minimum: 1
+          maximum: 16
+          example: 1
+          x-oapi-codegen-extra-tags:
+            x-kubebuilder-validation-minimum: '1'
+            x-kubebuilder-validation-maximum: '16'
+        vendor:
+          type: string
+          description: 'The GPU vendor. An instance created with this SKU can only use images
+
+            and drivers built for the same vendor.
+
+            '
+          enum:
+          - nvidia
+          - amd
+          - intel
+          x-enumNames:
+          - InstanceSkuGpuSpecVendorNvidia
+          - InstanceSkuGpuSpecVendorAmd
+          - InstanceSkuGpuSpecVendorIntel
+          example: nvidia
+          x-oapi-codegen-extra-tags:
+            x-kubebuilder-validation-enum: nvidia;amd;intel
+        model:
+          type: string
+          description: 'The GPU model name, as reported by the vendor (e.g. "H100", "MI300X",
+
+            "L40S"). Free-form, since GPU model names change frequently as new
+
+            hardware is released, unlike vendor, which is a small, stable set.
+
+            '
+          minLength: 1
+          maxLength: 64
+          example: H100
+          x-oapi-codegen-extra-tags:
+            x-kubebuilder-validation-min-length: '1'
+            x-kubebuilder-validation-max-length: '64'
+        ram:
+          type: integer
+          description: 'The amount of dedicated video memory (VRAM) per GPU, in GiB (gibibytes).
+
+            '
+          minimum: 1
+          maximum: 256
+          example: 80
+          x-oapi-codegen-extra-tags:
+            x-kubebuilder-validation-minimum: '1'
+            x-kubebuilder-validation-maximum: '256'
+      example:
+        count: 1
+        vendor: nvidia
+        model: H100
+        ram: 80
     SkuIterator:
       description: Iterator for skus
       type: object
@@ -737,18 +906,98 @@ components:
             $ref: '#/components/schemas/InstanceSku'
         metadata:
           $ref: '#/components/schemas/ResponseMetadata'
-    InstanceSku:
-      description: 'Represents a Stock Keeping Unit (SKU) for compute instances.
-
-        '
+    ErrorSource:
+      type: object
+      description: An object containing references to the source of the error.
+      required:
+      - pointer
+      - parameter
+      properties:
+        pointer:
+          type: string
+          description: A JSON Pointer [RFC6901] to the associated entity in the request document.
+          minLength: 1
+          maxLength: 256
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error.
+          minLength: 1
+          maxLength: 64
+    Error401:
       allOf:
-      - $ref: '#/components/schemas/SystemResourceMetadata'
-      - type: object
-        properties:
-          metadata:
-            $ref: '#/components/schemas/SkuResourceMetadata'
-          spec:
-            $ref: '#/components/schemas/InstanceSkuSpec'
+      - $ref: '#/components/schemas/Error'
+      description: A 401 Unauthorized error response
+      example:
+        status: 401
+        type: http://secapi.cloud/errors/unauthorized
+        title: Unauthorized
+        detail: Authentication is required and has failed or has not been provided.
+        instance: /errors/401
+        sources: []
+    NameMetadata:
+      type: object
+      readOnly: true
+      required:
+      - name
+      description: Metadata for resource names
+      properties:
+        name:
+          type: string
+          description: 'Resource identifier in dash-case (kebab-case) format. Must start and end with an alphanumeric character.
+
+            Can contain lowercase letters, numbers, and hyphens. Multiple segments can be joined with dots.
+
+            Each segment follows the same rules.
+
+            '
+          minLength: 1
+          maxLength: 128
+          pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
+          example: resource-name
+    Error403:
+      allOf:
+      - $ref: '#/components/schemas/Error'
+      description: A 403 Forbidden error response
+      example:
+        status: 403
+        type: http://secapi.cloud/errors/forbidden
+        title: Forbidden
+        detail: The request was valid, but the server is refusing action.
+        instance: /errors/403
+        sources: []
+    SystemResourceMetadata:
+      type: object
+      description: Metadata for user-defined resource properties
+      properties:
+        labels:
+          $ref: '#/components/schemas/Labels'
+        annotations:
+          $ref: '#/components/schemas/Annotations'
+        extensions:
+          $ref: '#/components/schemas/Extensions'
+    Error400:
+      allOf:
+      - $ref: '#/components/schemas/Error'
+      description: A 400 Bad Request error response
+      example:
+        status: 400
+        type: http://secapi.cloud/errors/invalid-request
+        title: Bad Request
+        detail: The request was invalid or cannot be served.
+        instance: /errors/400
+        sources: []
+    TenantMetadata:
+      type: object
+      description: Metadata for resources with tenant constraints
+      readOnly: true
+      required:
+      - tenant
+      properties:
+        tenant:
+          type: string
+          description: Tenant identifier
+          minLength: 1
+          maxLength: 64
     InstanceSkuSpec:
       type: object
       description: 'Specification of the instance SKU, including its capabilities and extensions.
@@ -813,186 +1062,6 @@ components:
             without a GPU.
 
             '
-    Error400:
-      allOf:
-      - $ref: '#/components/schemas/Error'
-      description: A 400 Bad Request error response
-      example:
-        status: 400
-        type: http://secapi.cloud/errors/invalid-request
-        title: Bad Request
-        detail: The request was invalid or cannot be served.
-        instance: /errors/400
-        sources: []
-    Error404:
-      allOf:
-      - $ref: '#/components/schemas/Error'
-      description: A 404 Not Found error response
-      example:
-        status: 404
-        type: http://secapi.cloud/errors/resource-not-found
-        title: Not Found
-        detail: The requested resource could not be found.
-        instance: /errors/404
-        sources: []
-    ReferenceURN:
-      type: string
-      minLength: 1
-      description: "A unique resource name (URN) used to identify and reference this resource.\n\nThe URN is NOT a URL — it does not contain a protocol scheme (http/https), a host,\nor any endpoint-specific prefix. It is a portable, transport-agnostic identifier.\nA configured SDK client — which knows the provider's base URL and endpoint mapping —\ncan derive a URL from a URN, but the URN alone cannot be turned into a URL without\nthat SDK configuration context. This separation keeps the URN portable across\nenvironments and CSP deployments.\n\nThe full URN format is:\n  `{provider}/{version}/tenants/{tenant}/workspaces/{workspace}/{type}/{name}`\n\nFor hierarchical (nested) resources, additional parent path segments are included:\n  `seca.network/v1/tenants/tn-1/workspaces/ws-1/networks/my-net/route-tables/my-rt`\n\n### Automatic Prefix Inference\n\nIn most cases, the prefix of the URN can be automatically derived in the given context.\nTo simplify usage, only the resource type and name might be specified as a reference\nusing the `<type>/<name>` notation. The suffix can be made more specific by adding\nadditional segments separated by slashes.\n\nThe prefix is automatically inferred from the context. For example, if the resource is a\nblock storage in the same workspace the reference can be specified as\n`block-storages/my-block-storage`. If the resource is a block storage in a different workspace, the\nreference can be specified as `workspaces/ws-1/block-storages/my-block-storage`.\n\nFor automatic prefix inference, the following rules apply:\n- the version is inferred from the current resource version\n- the workspace is inferred from the current workspace\n- the region is inferred from the current region\n- the provider is inferred from the type and context of the usage\n\nThe prefix inference is resolved on admission into the full URN format, which makes it\nmostly suitable for human use.\n"
-      maxLength: 255
-      example: seca.compute/v1/tenants/tn-1/workspaces/ws-1/instances/my-server
-    SkuResourceMetadata:
-      description: 'Metadata for SKU resources with name, permission, type, tenant and region information.
-
-        '
-      allOf:
-      - $ref: '#/components/schemas/NameMetadata'
-      - $ref: '#/components/schemas/PermissionMetadata'
-      - $ref: '#/components/schemas/TypeMetadata'
-      - $ref: '#/components/schemas/TenantMetadata'
-      - $ref: '#/components/schemas/RegionalMetadata'
-    Annotations:
-      x-go-type-skip-optional-pointer: true
-      type: object
-      description: 'User-defined key/value pairs that are mutable and can be used to add annotations.
-
-        The number of annotations is eventually limited by the CSP.
-
-        '
-      additionalProperties:
-        type: string
-        maxLength: 1024
-      example:
-        description: Human readable description
-    ErrorSource:
-      type: object
-      description: An object containing references to the source of the error.
-      required:
-      - pointer
-      - parameter
-      properties:
-        pointer:
-          type: string
-          description: A JSON Pointer [RFC6901] to the associated entity in the request document.
-          minLength: 1
-          maxLength: 256
-        parameter:
-          type: string
-          description: A string indicating which URI query parameter caused the error.
-          minLength: 1
-          maxLength: 64
-    TypeMetadata:
-      type: object
-      readOnly: true
-      required:
-      - apiVersion
-      - kind
-      - ref
-      description: 'Metadata for all resources with type information.
-
-        '
-      properties:
-        apiVersion:
-          type: string
-          description: API version of the resource
-          minLength: 1
-          maxLength: 16
-          default: v1
-        kind:
-          type: string
-          description: Type of the resource
-          enum:
-          - activity-log
-          - block-storage
-          - image
-          - instance
-          - instance-sku
-          - internet-gateway
-          - network
-          - network-load-balancer
-          - network-sku
-          - nic
-          - object-storage-account
-          - public-ip
-          - region
-          - role
-          - role-assignment
-          - routing-table
-          - security-group
-          - security-group-rule
-          - storage-sku
-          - subnet
-          - workspace
-          x-enumNames:
-          - ResourceKindActivityLog
-          - ResourceKindBlockStorage
-          - ResourceKindImage
-          - ResourceKindInstance
-          - ResourceKindInstanceSku
-          - ResourceKindInternetGateway
-          - ResourceKindNetwork
-          - ResourceKindNetworkLoadBalancer
-          - ResourceKindNetworkSku
-          - ResourceKindNic
-          - ResourceKindObjectStorageAccount
-          - ResourceKindPublicIP
-          - ResourceKindRegion
-          - ResourceKindRole
-          - ResourceKindRoleAssignment
-          - ResourceKindRoutingTable
-          - ResourceKindSecurityGroup
-          - ResourceKindSecurityGroupRule
-          - ResourceKindStorageSku
-          - ResourceKindSubnet
-          - ResourceKindWorkspace
-        ref:
-          $ref: '#/components/schemas/ReferenceURN'
-    SystemResourceMetadata:
-      type: object
-      description: Metadata for user-defined resource properties
-      properties:
-        labels:
-          $ref: '#/components/schemas/Labels'
-        annotations:
-          $ref: '#/components/schemas/Annotations'
-        extensions:
-          $ref: '#/components/schemas/Extensions'
-    Error401:
-      allOf:
-      - $ref: '#/components/schemas/Error'
-      description: A 401 Unauthorized error response
-      example:
-        status: 401
-        type: http://secapi.cloud/errors/unauthorized
-        title: Unauthorized
-        detail: Authentication is required and has failed or has not been provided.
-        instance: /errors/401
-        sources: []
-    RegionalMetadata:
-      type: object
-      description: Metadata for regional resources
-      readOnly: true
-      required:
-      - region
-      properties:
-        region:
-          type: string
-          description: Reference to the region where the resource is located
-          minLength: 1
-          maxLength: 64
-          example: eu-central-1
-    TenantMetadata:
-      type: object
-      description: Metadata for resources with tenant constraints
-      readOnly: true
-      required:
-      - tenant
-      properties:
-        tenant:
-          type: string
-          description: Tenant identifier
-          minLength: 1
-          maxLength: 64
     NetworkSku:
       description: 'Represents a Stock Keeping Unit (SKU) for network resources.
 
@@ -1010,20 +1079,6 @@ components:
             $ref: '#/components/schemas/SkuResourceMetadata'
           spec:
             $ref: '#/components/schemas/NetworkSkuSpec'
-    SkuIterator_2:
-      description: Iterator for skus
-      type: object
-      required:
-      - items
-      - metadata
-      properties:
-        items:
-          description: List of skus
-          type: array
-          items:
-            $ref: '#/components/schemas/NetworkSku'
-        metadata:
-          $ref: '#/components/schemas/ResponseMetadata'
     NetworkSkuSpec:
       type: object
       description: 'Specification of the network SKU, including its bandwidth and packets per second.
@@ -1055,6 +1110,53 @@ components:
           x-oapi-codegen-extra-tags:
             x-kubebuilder-validation-minimum: '1'
             x-kubebuilder-validation-maximum: '200000000000'
+    SkuIterator_2:
+      description: Iterator for skus
+      type: object
+      required:
+      - items
+      - metadata
+      properties:
+        items:
+          description: List of skus
+          type: array
+          items:
+            $ref: '#/components/schemas/NetworkSku'
+        metadata:
+          $ref: '#/components/schemas/ResponseMetadata'
+    StorageSku:
+      description: 'Represents a Stock Keeping Unit (SKU) for  storage resources.
+
+
+        Storage SKUs define performance tiers for storage IOPS and characteristics.
+
+        Properties, capabilities, and extensions can be found in the metadata.labels sections.
+
+        Searchable with namespaces like "properties.", "capabilities.", and "extensions.".
+
+        '
+      allOf:
+      - $ref: '#/components/schemas/SystemResourceMetadata'
+      - type: object
+        properties:
+          metadata:
+            $ref: '#/components/schemas/SkuResourceMetadata'
+          spec:
+            $ref: '#/components/schemas/StorageSkuSpec'
+    SkuIterator_3:
+      description: Iterator for skus
+      type: object
+      required:
+      - items
+      - metadata
+      properties:
+        items:
+          description: List of skus
+          type: array
+          items:
+            $ref: '#/components/schemas/StorageSku'
+        metadata:
+          $ref: '#/components/schemas/ResponseMetadata'
     StorageSkuSpec:
       type: object
       description: 'Specification of the storage SKU, including its capabilities and extensions.
@@ -1102,149 +1204,19 @@ components:
         iops: 100
         type: remote-durable
         minVolumeSize: 50
-    StorageSku:
-      description: 'Represents a Stock Keeping Unit (SKU) for  storage resources.
-
-
-        Storage SKUs define performance tiers for storage IOPS and characteristics.
-
-        Properties, capabilities, and extensions can be found in the metadata.labels sections.
-
-        Searchable with namespaces like "properties.", "capabilities.", and "extensions.".
-
-        '
-      allOf:
-      - $ref: '#/components/schemas/SystemResourceMetadata'
-      - type: object
-        properties:
-          metadata:
-            $ref: '#/components/schemas/SkuResourceMetadata'
-          spec:
-            $ref: '#/components/schemas/StorageSkuSpec'
-    SkuIterator_3:
-      description: Iterator for skus
-      type: object
-      required:
-      - items
-      - metadata
-      properties:
-        items:
-          description: List of skus
-          type: array
-          items:
-            $ref: '#/components/schemas/StorageSku'
-        metadata:
-          $ref: '#/components/schemas/ResponseMetadata'
-    SkuIterator_4:
-      description: Iterator for skus
-      type: object
-      required:
-      - items
-      - metadata
-      properties:
-        items:
-          description: List of skus
-          type: array
-          items:
-            $ref: '#/components/schemas/NetworkSku'
-        metadata:
-          $ref: '#/components/schemas/ResponseMetadata'
-    SkuIterator_5:
-      description: Iterator for skus
-      type: object
-      required:
-      - items
-      - metadata
-      properties:
-        items:
-          description: List of skus
-          type: array
-          items:
-            $ref: '#/components/schemas/StorageSku'
-        metadata:
-          $ref: '#/components/schemas/ResponseMetadata'
-  parameters:
-    tenantPathParam:
-      name: tenant
-      in: path
-      required: true
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 64
-      description: Tenant ID
-    skipTokenParam:
-      in: query
-      name: skipToken
-      description: Opaque cursor for pagination. Use the skipToken from the previous response to get the next page of results. Note that skipTokens do not guarantee consistency across pages if the underlying data changes between requests
-      required: false
-      schema:
-        type: string
-    limitParam:
-      in: query
-      name: limit
-      description: Maximum number of resources to return in the response
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 10000
-        default: 1000
-    resourcePathParam:
-      name: name
-      in: path
-      required: true
-      schema:
-        type: string
-        maxLength: 128
-        minLength: 1
-        pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
-      description: Resource name
-    acceptHeader:
-      in: header
-      name: Accept
-      schema:
-        type: string
-        default: application/json
-        example: application/json; deleted=true
-        enum:
-        - application/json
-        - application/json; deleted=true
-        - application/json; deleted=only
-        x-enumNames:
-        - AcceptHeaderJson
-        - AcceptHeaderJsonDeletedTrue
-        - AcceptHeaderJsonDeletedOnly
-      description: 'Controls whether deleted resources are included:
-
-        - `"application/json"`: Returns only non-deleted resources
-
-        - `"application/json; deleted=true"`: Returns both deleted and non-deleted resources
-
-        - `"application/json; deleted=only"`: Returns only deleted resources
-
-        '
-    labelSelector:
-      in: query
-      name: labels
-      description: "Filter resources by their labels. Multiple filters are combined with comma.\nFilter syntax:\n  - Equals: key=value\n  - Not equals: key!=value\n  - Wildcards: \\*key\\*=\\*value\\* - substring (contains) match on both key and value. Each `*` can appear at start, end or in the middle to mean \"any characters\". Example: \\*env\\*=\\*prod\\* matches a label key containing \"env\" whose value contains \"prod\".\n  - Numeric: key>value, key<value, key>=value, key<=value\n  - Namespaced key examples: 'monitoring:alert-level=high' or 'billing:team=platform'\n"
-      required: false
-      schema:
-        type: string
-        example: cloud:region=us-east-1,billing:team=platform,tier!=dev
   responses:
-    Error400:
-      description: Bad Request
+    Error500:
+      description: Internal Server Error
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error400'
+            $ref: '#/components/schemas/Error500'
           example:
-            status: 400
-            type: http://secapi.cloud/errors/invalid-request
-            title: Bad Request
-            detail: The request was invalid or cannot be served.
-            instance: /errors/400
+            status: 500
+            type: http://secapi.cloud/errors/internal-server-error
+            title: Internal Server Error
+            detail: The server encountered an unexpected condition that prevented it from fulfilling the request.
+            instance: /errors/500
             sources: []
     Error401:
       description: Unauthorized
@@ -1259,18 +1231,31 @@ components:
             detail: Authentication is required and has failed or has not been provided.
             instance: /errors/401
             sources: []
-    Error500:
-      description: Internal Server Error
+    Error403:
+      description: Forbidden
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error500'
+            $ref: '#/components/schemas/Error403'
           example:
-            status: 500
-            type: http://secapi.cloud/errors/internal-server-error
-            title: Internal Server Error
-            detail: The server encountered an unexpected condition that prevented it from fulfilling the request.
-            instance: /errors/500
+            status: 403
+            type: http://secapi.cloud/errors/forbidden
+            title: Forbidden
+            detail: The request was valid, but the server is refusing action.
+            instance: /errors/403
+            sources: []
+    Error400:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error400'
+          example:
+            status: 400
+            type: http://secapi.cloud/errors/invalid-request
+            title: Bad Request
+            detail: The request was invalid or cannot be served.
+            instance: /errors/400
             sources: []
     Error404:
       description: Not Found
@@ -1285,19 +1270,6 @@ components:
             detail: The requested resource could not be found.
             instance: /errors/404
             sources: []
-    Error403:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error403'
-          example:
-            status: 403
-            type: http://secapi.cloud/errors/forbidden
-            title: Forbidden
-            detail: The request was valid, but the server is refusing action.
-            instance: /errors/403
-            sources: []
   securitySchemes:
     bearerAuth:
       type: http
@@ -1309,9 +1281,6 @@ components:
 
         '
 x-refined-from:
-- foundation.compute.v1.yaml
-- foundation.network.v1.yaml
-- foundation.storage.v1.yaml
 - eu-sovereign-cloud-api-foundation-compute-v1-openapi.yml
 - eu-sovereign-cloud-api-foundation-network-v1-openapi.yml
 - eu-sovereign-cloud-api-foundation-storage-v1-openapi.yml
