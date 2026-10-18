@@ -31,6 +31,16 @@ tags:
 - Cloud Infrastructure
 - Sovereignty
 - Europe
+- Open Standard
+- Multi-Cloud
+- Interoperability
+- OpenAPI
+tags_raw:
+- Company
+- Cloud
+- Cloud Infrastructure
+- Sovereignty
+- Europe
 - Open Standards
 - Multi-Cloud
 - Interoperability
@@ -272,6 +282,8 @@ apis:
   description: Block-Storage management
   humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
   tags:
+  - Block Storage
+  tags_raw:
   - Block-Storage
   properties:
   - type: OpenAPI
@@ -746,6 +758,8 @@ apis:
   description: Network management
   humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
   tags:
+  - Networks
+  tags_raw:
   - Network
   properties:
   - type: OpenAPI
@@ -1457,6 +1471,8 @@ apis:
   description: Security Group management
   humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
   tags:
+  - SecurityGroup
+  tags_raw:
   - Security Group
   properties:
   - type: OpenAPI
@@ -1615,6 +1631,8 @@ apis:
   description: Sku management
   humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
   tags:
+  - SKU
+  tags_raw:
   - Sku
   properties:
   - type: OpenAPI
@@ -1773,6 +1791,8 @@ apis:
   description: Wellknown management
   humanURL: https://spec.secapi.cloud/docs/api/Extensions/Activitylog-v1beta1/activity-log/
   tags:
+  - .well Known
+  tags_raw:
   - Wellknown
   properties:
   - type: OpenAPI
